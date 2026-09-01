@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <title>Product | Winicious</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/product.css">
+</head>
+<body class="nav__dark">
+    <!-- ==================================================
+         NAVIGATION
+    ================================================== -->
+    <div id="navbar-placeholder"></div>
+<main>
+    <!-- ==================================================
+         BREADCRUMB
+    ================================================== -->
+    <div class="container">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+            <a href="shop.html">Shop</a>
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            <span id="breadcrumbProduct">Product</span>
+        </nav>
+    </div>
+
+    <!-- ==================================================
+         PRODUCT DETAIL (acts as the hero)
+    ================================================== -->
+    <section class="product-detail section">
+        <div class="container">
+            <div class="product-detail__layout" id="productDetail">
+                <!-- Loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================================================
+         PRODUCT INFORMATION
+    ================================================== -->
+    <section class="product-information section">
+        <div class="container">
+            <div class="product-information__layout">
+                <div class="product-information__intro">
+                    <p class="eyebrow">DETAILS</p>
+                    <h2>
+                        Made To Be<br>
+                        Loved.
+                    </h2>
+                </div>
+
+                <div class="product-information__content">
+                    <div class="product-info-block">
+                        <h3>About This Product</h3>
+                        <p id="productDescription"></p>
+                    </div>
+
+                    <div class="product-info-block">
+                        <h3>Delivery</h3>
+                        <p>
+                            We currently estimate delivery within
+                            <strong>2–4 working days</strong>
+                            after your order has been confirmed.
+                        </p>
+                        <p class="delivery-estimate">
+                            Estimated arrival:
+                            <strong id="deliveryDate">Calculating...</strong>
+                        </p>
+                    </div>
+
+                    <div class="product-info-block">
+                        <h3>Need Help?</h3>
+                        <p>
+                            Have a question about this product,
+                            sizing, availability or delivery?
+                        </p>
+                        <a href="contact.html" class="text-link">
+                            Contact Us
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================================================
+         REVIEWS
+    ================================================== -->
+    <section class="product-reviews section">
+        <div class="container">
+            <div class="product-reviews__header">
+                <div class="section-heading">
+                    <p class="eyebrow">CUSTOMER LOVE</p>
+                    <h2>Reviews.</h2>
+                </div>
+                <div class="review-summary" id="reviewSummary"></div>
+            </div>
+
+            <div class="reviews-list" id="reviewsList"></div>
+        </div>
+    </section>
+
+    <!-- ==================================================
+         RELATED PRODUCTS
+    ================================================== -->
+    <section class="related-products section">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">KEEP EXPLORING</p>
+                <h2>You May Also Like.</h2>
+            </div>
+
+            <div class="related-products__grid" id="relatedProducts">
+                <!-- Loaded by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================================================
+         FINAL CTA
+    ================================================== -->
+    <section class="booking-cta section">
+        <div class="container">
+            <div class="section-heading">
+                <p class="eyebrow">NEED SOMETHING ELSE?</p>
+                <h2>
+                    Explore The<br>
+                    Full Collection.
+                </h2>
+                <a href="shop.html" class="btn btn--primary">
+                    Back To Shop
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+    <!-- ==================================================
+         CART DRAWER
+    ================================================== -->
+    <aside
+        class="cart-drawer"
+        id="cartDrawer"
+        aria-hidden="true"
+    >
+        <div
+            class="cart-drawer__overlay"
+            id="closeCart"
+        ></div>
+        <div class="cart-drawer__panel">
+            <div class="cart-drawer__header">
+                <div>
+                    <p class="eyebrow">
+                        YOUR BAG
+                    </p>
+                    <h2>
+                        Shopping Bag
+                    </h2>
+                </div>
+                <button
+                    class="cart-close"
+                    type="button"
+                    id="closeCartButton"
+                    aria-label="Close shopping cart"
+                >
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div
+                class="cart-items"
+                id="cartItems"
+            ></div>
+            <div
+                class="cart-empty"
+                id="cartEmpty"
+            >
+                <p>
+                    Your bag is currently empty.
+                </p>
+            </div>
+            <div
+                class="cart-drawer__footer"
+                id="cartFooter"
+                hidden
+            >
+                <div class="cart-total">
+                    <span>
+                        Subtotal
+                    </span>
+                    <strong id="cartSubtotal">
+                        ₦0
+                    </strong>
+                </div>
+                <button
+                    type="button"
+                    class="btn btn--primary"
+                    id="checkoutButton"
+                >
+                    Proceed To Checkout
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+    <!-- ==================================================
+         FOOTER
+    ================================================== -->
+    <div id="footer-placeholder"></div>
+    <script src="javascript/script.js"></script>
+<script src="javascript/shop.js"></script>
+    <script src="javascript/shop.js"></script>
+</body>
+</html>

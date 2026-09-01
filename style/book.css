@@ -1,0 +1,1106 @@
+/* ==================================================
+   WINICIOUS — BOOKING PAGE
+   PREMIUM • EDITORIAL • SOFT • FEMININE
+   --------------------------------------------------
+   Component-specific styles.
+   Global CSS owns:
+   - typography
+   - containers
+   - core colors
+   - buttons
+   - base form styles
+   - spacing tokens
+================================================== */
+
+
+/* ==================================================
+   BOOKING HERO
+================================================== */
+
+.booking-hero {
+    position: relative;
+    isolation: isolate;
+
+    display: flex;
+    align-items: center;
+
+    min-height: 520px;
+    padding-block: clamp(5.5rem, 9vw, 8rem);
+
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 88% 18%,
+            rgba(198, 151, 158, 0.2) 0%,
+            rgba(198, 151, 158, 0.1) 14%,
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 12% 88%,
+            rgba(224, 202, 194, 0.42) 0%,
+            rgba(224, 202, 194, 0.18) 18%,
+            transparent 42%
+        ),
+        radial-gradient(
+            circle at 70% 75%,
+            rgba(255, 255, 255, 0.8) 0%,
+            transparent 32%
+        ),
+        var(--color-cream);
+
+    color: var(--color-chocolate);
+}
+
+
+/* ==================================================
+   HERO DECORATIVE SHAPES
+================================================== */
+
+.booking-hero::before,
+.booking-hero::after {
+    content: "";
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+.booking-hero::before {
+    width: clamp(380px, 42vw, 520px);
+    height: clamp(380px, 42vw, 520px);
+
+    top: -42%;
+    right: -20%;
+
+    border: 1px solid rgba(61, 41, 36, 0.06);
+}
+
+.booking-hero::after {
+    width: clamp(220px, 28vw, 280px);
+    height: clamp(220px, 28vw, 280px);
+
+    left: -17%;
+    bottom: -42%;
+
+    background: rgba(204, 169, 169, 0.1);
+}
+
+
+/* ==================================================
+   HERO CONTENT
+================================================== */
+
+.booking-hero__content {
+    position: relative;
+    z-index: 1;
+
+    width: min(760px, 100%);
+}
+
+.booking-hero__content .eyebrow {
+    margin: 0 0 1.25rem;
+
+    color: #8a7771;
+
+    font-size: 0.625rem;
+    font-weight: 600;
+
+    line-height: 1.4;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+}
+
+.booking-hero__content h1 {
+    max-width: 760px;
+
+    margin: 0;
+
+    color: var(--color-chocolate);
+
+    font-family: var(--font-heading);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 500;
+
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+}
+
+.booking-hero__content > p:not(.eyebrow) {
+    width: min(500px, 100%);
+
+    margin: 1.75rem 0 0;
+
+    color: #706966;
+
+    font-size: 0.875rem;
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   BOOKING CONTENT
+================================================== */
+
+.booking-content {
+    padding-block: clamp(5rem, 9vw, 8rem);
+
+    background: var(--color-ivory);
+}
+
+.booking-content__layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 0.85fr)
+        minmax(0, 1.15fr);
+
+    gap: clamp(3.5rem, 7vw, 8rem);
+
+    align-items: start;
+}
+
+
+/* ==================================================
+   BOOKING INFORMATION
+================================================== */
+
+.booking-info {
+    position: sticky;
+    top: 7rem;
+
+    width: min(460px, 100%);
+}
+
+.booking-info__intro {
+    margin-bottom: 3rem;
+}
+
+.booking-info__intro .eyebrow {
+    margin: 0 0 1rem;
+}
+
+.booking-info__intro h2 {
+    margin: 0;
+
+    color: var(--color-chocolate);
+
+    font-family: var(--font-heading);
+    font-size: clamp(2.75rem, 5vw, 4.6rem);
+    font-weight: 500;
+
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+}
+
+.booking-info__intro > p:not(.eyebrow) {
+    width: min(420px, 100%);
+
+    margin: 1.5rem 0 0;
+
+    color: #706966;
+
+    font-size: 0.86rem;
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   BOOKING NOTE
+================================================== */
+
+.booking-note {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 1rem;
+
+    padding-block: 1.15rem;
+
+    border-block: 1px solid rgba(61, 41, 36, 0.12);
+}
+
+.booking-note__icon {
+    flex: 0 0 42px;
+
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(61, 41, 36, 0.16);
+
+    color: var(--color-chocolate);
+
+    font-size: 0.75rem;
+}
+
+.booking-note__label {
+    margin: 0 0 0.3rem;
+
+    color: #8a7c76;
+
+    font-size: 0.58rem;
+    font-weight: 600;
+
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.booking-note__value {
+    max-width: 330px;
+
+    margin: 0;
+
+    color: #706966;
+
+    font-size: 0.76rem;
+    line-height: 1.7;
+}
+
+
+/* ==================================================
+   BOOKING FORM WRAPPER
+================================================== */
+
+.booking-form-wrapper {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: clamp(1.5rem, 4vw, 3.5rem);
+
+    border: 1px solid rgba(61, 41, 36, 0.1);
+
+    background: var(--color-white);
+
+    box-shadow:
+        0 20px 60px rgba(61, 41, 36, 0.05);
+}
+
+.booking-form-wrapper__header {
+    margin-bottom: 2.25rem;
+}
+
+.booking-form-wrapper__header .eyebrow {
+    margin: 0 0 0.85rem;
+}
+
+.booking-form-wrapper__header h2 {
+    margin: 0;
+
+    color: var(--color-chocolate);
+
+    font-family: var(--font-heading);
+    font-size: clamp(2.3rem, 4vw, 3.5rem);
+    font-weight: 500;
+
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+}
+
+.booking-form-wrapper__header > p:last-child {
+    width: min(430px, 100%);
+
+    margin: 1rem 0 0;
+
+    color: #80746f;
+
+    font-size: 0.78rem;
+    line-height: 1.7;
+}
+
+
+/* ==================================================
+   BOOKING FORM
+================================================== */
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 1.35rem;
+}
+
+.booking-form__row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 1.5rem;
+}
+
+.booking-form__field {
+    display: flex;
+    flex-direction: column;
+
+    gap: 0.45rem;
+}
+
+.booking-form__field label {
+    color: var(--color-chocolate);
+
+    font-size: 0.66rem;
+    font-weight: 600;
+
+    line-height: 1.4;
+    letter-spacing: 0.05em;
+}
+
+.booking-form__field input,
+.booking-form__field select,
+.booking-form__field textarea {
+    width: 100%;
+    box-sizing: border-box;
+
+    padding: 0.8rem 0;
+
+    border: 0;
+    border-bottom: 1px solid rgba(61, 41, 36, 0.2);
+    border-radius: 0;
+
+    outline: none;
+
+    background: transparent;
+    color: var(--color-chocolate);
+
+    font-size: 0.82rem;
+    line-height: 1.5;
+
+    transition: border-color 180ms ease;
+}
+
+.booking-form__field input::placeholder,
+.booking-form__field textarea::placeholder {
+    color: #a49a95;
+}
+
+.booking-form__field input:hover,
+.booking-form__field select:hover,
+.booking-form__field textarea:hover {
+    border-color: rgba(61, 41, 36, 0.35);
+}
+
+.booking-form__field input:focus,
+.booking-form__field select:focus,
+.booking-form__field textarea:focus {
+    border-color: var(--color-chocolate);
+}
+
+
+/* ==================================================
+   SELECT
+================================================== */
+
+.booking-form__field select {
+    appearance: none;
+
+    cursor: pointer;
+
+    background-image:
+        linear-gradient(
+            45deg,
+            transparent 50%,
+            #6e5c55 50%
+        ),
+        linear-gradient(
+            135deg,
+            #6e5c55 50%,
+            transparent 50%
+        );
+
+    background-position:
+        calc(100% - 8px) 50%,
+        calc(100% - 3px) 50%;
+
+    background-size:
+        5px 5px,
+        5px 5px;
+
+    background-repeat: no-repeat;
+}
+
+
+/* ==================================================
+   DATE
+================================================== */
+
+.booking-form__field input[type="date"] {
+    color-scheme: light;
+}
+
+.booking-form__field input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.55;
+
+    cursor: pointer;
+}
+
+
+/* ==================================================
+   TEXTAREA
+================================================== */
+
+.booking-form__field textarea {
+    min-height: 120px;
+
+    resize: vertical;
+
+    line-height: 1.7;
+}
+
+
+/* ==================================================
+   SUBMIT
+================================================== */
+
+.booking-form__submit {
+    align-self: flex-start;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 0.8rem;
+
+    margin-top: 0.5rem;
+
+    cursor: pointer;
+}
+
+.booking-form__submit i {
+    font-size: 0.68rem;
+
+    transition: transform 180ms ease;
+}
+
+.booking-form__submit:hover i {
+    transform: translateX(4px);
+}
+
+.booking-form__submit:focus-visible {
+    outline: 2px solid var(--color-chocolate);
+    outline-offset: 4px;
+}
+
+.booking-form__note {
+    margin: -0.15rem 0 0;
+
+    color: #8a7c76;
+
+    font-size: 0.66rem;
+    line-height: 1.6;
+}
+
+
+/* ==================================================
+   REASSURANCE
+================================================== */
+
+.booking-reassurance {
+    padding-block: clamp(4.5rem, 7vw, 5.5rem);
+
+    background: #eee5df;
+}
+
+.booking-reassurance__grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 2rem;
+}
+
+.booking-reassurance__item {
+    display: flex;
+    align-items: flex-start;
+
+    gap: 1rem;
+
+    padding-right: 2rem;
+
+    border-right: 1px solid rgba(61, 41, 36, 0.12);
+}
+
+.booking-reassurance__item:last-child {
+    border-right: 0;
+}
+
+.booking-reassurance__icon {
+    flex: 0 0 40px;
+
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid rgba(61, 41, 36, 0.15);
+
+    color: var(--color-chocolate);
+
+    font-size: 0.75rem;
+}
+
+.booking-reassurance__label {
+    margin: 0 0 0.45rem;
+
+    color: #8a7c76;
+
+    font-size: 0.58rem;
+    font-weight: 600;
+
+    line-height: 1.4;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.booking-reassurance__item h3 {
+    margin: 0 0 0.45rem;
+
+    color: var(--color-chocolate);
+
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 500;
+
+    line-height: 1.1;
+}
+
+.booking-reassurance__item p:last-child {
+    margin: 0;
+
+    color: #766b66;
+
+    font-size: 0.72rem;
+    line-height: 1.7;
+}
+
+
+/* ==================================================
+   FAQ
+================================================== */
+
+.booking-faq {
+    padding-block: clamp(5rem, 9vw, 8rem);
+
+    background: var(--color-ivory);
+}
+
+
+/* ==================================================
+   FAQ HEADER
+================================================== */
+
+.booking-faq__header {
+    width: min(620px, 100%);
+
+    margin-inline: auto;
+
+    text-align: center;
+}
+
+.booking-faq__header .eyebrow {
+    margin: 0 0 1.1rem;
+}
+
+.booking-faq__header h2 {
+    margin: 0;
+
+    color: var(--color-chocolate);
+
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 500;
+
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+}
+
+.booking-faq__header > p:last-child {
+    margin: 1.25rem auto 0;
+
+    color: #706966;
+
+    font-size: 0.86rem;
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   FAQ LIST
+================================================== */
+
+.booking-faq__list {
+    width: min(850px, 100%);
+
+    margin: clamp(3rem, 5vw, 4rem) auto 0;
+
+    border-top: 1px solid rgba(61, 41, 36, 0.16);
+}
+
+.booking-faq__item {
+    border-bottom: 1px solid rgba(61, 41, 36, 0.16);
+}
+
+
+/* ==================================================
+   FAQ QUESTION
+================================================== */
+
+.booking-faq__question {
+    position: relative;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 2rem;
+
+    min-height: 58px;
+    padding-block: 1.25rem;
+
+    border: 0;
+
+    background: transparent;
+    color: var(--color-chocolate);
+
+    font-size: 0.88rem;
+    font-weight: 500;
+
+    line-height: 1.5;
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: color 180ms ease;
+}
+
+.booking-faq__question:hover {
+    color: var(--color-dusty-pink);
+}
+
+.booking-faq__question:focus-visible {
+    outline: 2px solid var(--color-dusty-pink);
+    outline-offset: 5px;
+}
+
+
+/* ==================================================
+   FAQ ICON
+================================================== */
+
+.booking-faq__icon {
+    position: relative;
+
+    width: 0;
+    height: 0;
+
+    flex: 0 0 auto;
+
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 7px solid var(--color-chocolate);
+
+    transition:
+        transform 250ms ease,
+        border-top-color 180ms ease;
+}
+
+.booking-faq__item.is-open .booking-faq__icon {
+    transform: rotate(180deg);
+
+    border-top-color: var(--color-dusty-pink);
+}
+
+.booking-faq__item.is-open .booking-faq__question {
+    color: var(--color-dusty-pink);
+}
+
+
+/* ==================================================
+   FAQ ANSWER
+================================================== */
+
+.booking-faq__answer {
+    display: grid;
+
+    grid-template-rows: 0fr;
+
+    opacity: 0;
+
+    transition:
+        grid-template-rows 300ms ease,
+        opacity 220ms ease;
+}
+
+.booking-faq__item.is-open .booking-faq__answer {
+    grid-template-rows: 1fr;
+
+    opacity: 1;
+}
+
+.booking-faq__answer-inner {
+    min-height: 0;
+
+    overflow: hidden;
+}
+
+.booking-faq__answer-inner p {
+    width: min(650px, 100%);
+
+    margin: 0;
+
+    padding: 0 3rem 1.6rem 0;
+
+    color: #706966;
+
+    font-size: 0.82rem;
+    line-height: 1.8;
+}
+
+
+/* ==================================================
+   TABLET — 900px
+================================================== */
+
+@media (max-width: 900px) {
+
+    .booking-hero {
+        min-height: 460px;
+    }
+
+    .booking-content__layout {
+        grid-template-columns: 1fr;
+
+        gap: 4.5rem;
+    }
+
+    .booking-info {
+        position: static;
+
+        width: min(620px, 100%);
+    }
+
+    .booking-form-wrapper {
+        max-width: 720px;
+    }
+
+
+    /* REASSURANCE */
+
+    .booking-reassurance__grid {
+        grid-template-columns: 1fr;
+
+        gap: 0;
+    }
+
+    .booking-reassurance__item {
+        padding-block: 1.5rem;
+        padding-right: 0;
+
+        border-right: 0;
+        border-bottom: 1px solid rgba(61, 41, 36, 0.12);
+    }
+
+    .booking-reassurance__item:first-child {
+        padding-top: 0;
+    }
+
+    .booking-reassurance__item:last-child {
+        padding-bottom: 0;
+
+        border-bottom: 0;
+    }
+}
+
+
+/* ==================================================
+   MOBILE — 700px
+================================================== */
+
+@media (max-width: 700px) {
+
+    /* HERO */
+
+    .booking-hero {
+        min-height: 420px;
+
+        padding-block: 5rem 4.5rem;
+    }
+
+    .booking-hero::before {
+        top: -32%;
+        right: -24%;
+    }
+
+    .booking-hero::after {
+        left: -24%;
+        bottom: -38%;
+    }
+
+    .booking-hero__content h1 {
+        font-size: clamp(3rem, 14vw, 5rem);
+
+        line-height: 0.9;
+    }
+
+    .booking-hero__content > p:not(.eyebrow) {
+        margin-top: 1.4rem;
+
+        font-size: 0.82rem;
+        line-height: 1.75;
+    }
+
+
+    /* CONTENT */
+
+    .booking-content {
+        padding-block: 5rem;
+    }
+
+    .booking-content__layout {
+        gap: 4rem;
+    }
+
+    .booking-info__intro {
+        margin-bottom: 2.5rem;
+    }
+
+    .booking-info__intro h2 {
+        font-size: clamp(2.6rem, 12vw, 4rem);
+    }
+
+    .booking-info__intro > p:not(.eyebrow) {
+        font-size: 0.82rem;
+    }
+
+
+    /* NOTE */
+
+    .booking-note {
+        gap: 0.85rem;
+    }
+
+    .booking-note__icon {
+        flex-basis: 38px;
+
+        width: 38px;
+        height: 38px;
+    }
+
+
+    /* FORM */
+
+    .booking-form-wrapper {
+        padding: 1.5rem;
+    }
+
+    .booking-form-wrapper__header {
+        margin-bottom: 2rem;
+    }
+
+    .booking-form-wrapper__header h2 {
+        font-size: clamp(2.25rem, 10vw, 3rem);
+    }
+
+    .booking-form__row {
+        grid-template-columns: 1fr;
+
+        gap: 1.2rem;
+    }
+
+    .booking-form__submit {
+        width: 100%;
+    }
+
+
+    /* REASSURANCE */
+
+    .booking-reassurance {
+        padding-block: 4.5rem;
+    }
+
+    .booking-reassurance__item {
+        gap: 0.85rem;
+    }
+
+    .booking-reassurance__item h3 {
+        font-size: 1.25rem;
+    }
+
+
+    /* FAQ */
+
+    .booking-faq {
+        padding-block: 5rem;
+    }
+
+    .booking-faq__header h2 {
+        font-size: clamp(2.8rem, 13vw, 4.2rem);
+    }
+
+    .booking-faq__header > p:last-child {
+        font-size: 0.8rem;
+    }
+
+    .booking-faq__list {
+        margin-top: 3rem;
+    }
+
+    .booking-faq__question {
+        min-height: 54px;
+
+        padding-block: 1.15rem;
+
+        font-size: 0.8rem;
+    }
+
+    .booking-faq__answer-inner p {
+        padding-right: 2rem;
+
+        font-size: 0.78rem;
+    }
+}
+
+
+/* ==================================================
+   SMALL PHONES — 480px
+================================================== */
+
+@media (max-width: 480px) {
+
+    .booking-hero {
+        min-height: 390px;
+
+        padding-block: 4.5rem 4rem;
+    }
+
+    .booking-hero__content .eyebrow {
+        margin-bottom: 0.9rem;
+
+        font-size: 0.56rem;
+        letter-spacing: 0.17em;
+    }
+
+    .booking-hero__content h1 {
+        font-size: clamp(2.75rem, 14vw, 4rem);
+    }
+
+    .booking-hero__content > p:not(.eyebrow) {
+        max-width: 340px;
+
+        font-size: 0.78rem;
+    }
+
+
+    /* CONTENT */
+
+    .booking-content {
+        padding-block: 4.5rem;
+    }
+
+
+    /* FORM */
+
+    .booking-form-wrapper {
+        padding: 1.25rem;
+    }
+
+    .booking-form {
+        gap: 1.2rem;
+    }
+
+    .booking-form__field input,
+    .booking-form__field select,
+    .booking-form__field textarea {
+        font-size: 0.8rem;
+    }
+
+    .booking-form__field textarea {
+        min-height: 110px;
+    }
+
+
+    /* NOTE */
+
+    .booking-note {
+        gap: 0.75rem;
+    }
+
+    .booking-note__value {
+        font-size: 0.72rem;
+    }
+
+
+    /* FAQ */
+
+    .booking-faq__question {
+        gap: 1rem;
+    }
+
+    .booking-faq__answer-inner p {
+        padding-right: 1rem;
+    }
+}
+
+
+/* ==================================================
+   VERY SMALL PHONES — 380px
+================================================== */
+
+@media (max-width: 380px) {
+
+    .booking-hero {
+        min-height: 370px;
+
+        padding-block: 4rem 3.75rem;
+    }
+
+    .booking-hero__content h1 {
+        font-size: 2.8rem;
+    }
+
+    .booking-form-wrapper {
+        padding: 1.1rem;
+    }
+
+    .booking-info__intro h2 {
+        font-size: 2.75rem;
+    }
+
+    .booking-reassurance__icon {
+        flex-basis: 38px;
+
+        width: 38px;
+        height: 38px;
+    }
+}
+
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .booking-form__field input,
+    .booking-form__field select,
+    .booking-form__field textarea,
+    .booking-form__submit i,
+    .booking-faq__icon,
+    .booking-faq__answer,
+    .booking-faq__question {
+        transition: none;
+    }
+}

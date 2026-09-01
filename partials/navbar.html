@@ -1,0 +1,208 @@
+<!-- =========================================
+     SITE HEADER
+========================================= -->
+<header class="site-header">
+    <!-- TOP UTILITY BAR -->
+    <div class="utility-bar">
+        <div class="utility-bar__container">
+            <a
+                href="https://www.google.com/maps/search/?api=1&query=14B+Remilade%2C+Opadokun+Street%2C+Ilasan%2C+Lekki%2C+Lagos%2C+Nigeria"
+                class="utility-bar__item utility-bar__location"
+                aria-label="View Winicious location in Ilasan, Lekki, Lagos on Google Maps"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                <span>Ilasan, Lekki, Lagos</span>
+            </a>
+
+            <div class="utility-bar__item utility-bar__hours" aria-label="Winicious opening hours">
+                <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                <span>Mon–Sat: 9:00 AM–7:00 PM</span>
+            </div>
+
+            <div class="utility-bar__right">
+                <a
+                    href="tel:+2349026731682"
+                    class="utility-bar__phone"
+                    aria-label="Call Winicious Hair and Beauty at +234 902 673 1682"
+                >
+                    <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                    <span>+234 902 673 1682</span>
+                </a>
+
+                <a
+                    href="https://www.instagram.com/winiciouslagos/"
+                    class="utility-bar__social"
+                    aria-label="Follow Winicious Lagos on Instagram @winiciouslagos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                </a>
+
+                <a
+                    href="https://www.tiktok.com/@winiciouslagos"
+                    class="utility-bar__social"
+                    aria-label="Follow Winicious Lagos on TikTok @winiciouslagos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+                </a>
+
+                <a
+                    href="https://wa.me/2349026731682"
+                    class="utility-bar__social"
+                    aria-label="Chat with Winicious Hair and Beauty on WhatsApp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <nav class="navbar" aria-label="Main navigation">
+        <div class="navbar__container">
+            <a href="index.html" class="navbar__logo" aria-label="Winicious Hair and Beauty Home">
+                <img src="image/logo.png" alt="Winicious Hair and Beauty">
+            </a>
+
+            <div class="navbar__links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="gallery.html">Gallery</a>
+                <a href="contact.html">Contact</a>
+            </div>
+
+            <div class="navbar__actions">
+                <!-- Bag opens cart drawer -->
+                <button
+                    type="button"
+                    class="navbar__shop"
+                    id="openCart"
+                    aria-label="Open shopping bag"
+                    title="Shopping bag"
+                >
+                    <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+                    <span class="cart-count" id="cartCount" hidden>0</span>
+                </button>
+
+                <a
+                    href="book.html"
+                    class="btn btn--primary navbar__book-btn"
+                    aria-label="Book an appointment with Winicious"
+                >
+                    <span>Book Now</span>
+                </a>
+                <button
+                class="navbar__menu-btn"
+                type="button"
+                aria-label="Open menu"
+                aria-expanded="false"
+                aria-controls="mobile-menu"
+            >
+                <span></span>
+                <span></span>
+            </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <aside class="mobile-menu" id="mobile-menu" aria-hidden="true">
+        <div class="mobile-menu__header">
+            <a href="index.html" class="mobile-menu__logo" aria-label="Winicious Hair and Beauty Home">
+                <img src="image/logo.png" alt="Winicious Hair and Beauty">
+            </a>
+            <button class="mobile-menu__close" type="button" aria-label="Close menu">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav class="mobile-menu__links" aria-label="Mobile navigation">
+            <a href="index.html">Home</a>
+            <a href="about.html">About</a>
+            <a href="services.html">Services</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="shop.html">Shop</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+        <a href="book.html" class="mobile-menu__book-btn" aria-label="Book an appointment with Winicious">
+            <span>Book Now</span>
+        </a>
+
+        <div class="mobile-menu__socials">
+            <span class="mobile-menu__social-label">Follow Winicious</span>
+            <div class="mobile-menu__social-links">
+                <a href="https://www.instagram.com/winiciouslagos/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <i class="fa-brands fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a href="https://www.tiktok.com/@winiciouslagos" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                    <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+                </a>
+                <a href="https://wa.me/2349026731682" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </aside>
+
+    <div class="mobile-menu__overlay" aria-hidden="true"></div>
+</header>
+
+<!-- =========================================
+     CART DRAWER (place near end of body)
+========================================= -->
+<aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="cart-drawer__overlay" id="closeCart"></div>
+
+    <div class="cart-drawer__panel">
+        <div class="cart-drawer__header">
+            <div>
+                <p class="eyebrow">YOUR BAG</p>
+                <h2>Shopping Bag</h2>
+            </div>
+            <button
+                class="cart-close"
+                type="button"
+                id="closeCartButton"
+                aria-label="Close shopping cart"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="cart-items" id="cartItems"></div>
+
+        <div class="cart-empty" id="cartEmpty">
+            <p>Your bag is currently empty.</p>
+            <a href="shop.html" class="cart-drawer__continue" id="continueShoppingEmpty">
+                Continue shopping
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+
+        <div class="cart-drawer__footer" id="cartFooter" hidden>
+            <div class="cart-total">
+                <span>Subtotal</span>
+                <strong id="cartSubtotal">₦0</strong>
+            </div>
+
+            <button type="button" class="btn btn--primary" id="checkoutButton">
+                Proceed To Checkout
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+
+            <a href="shop.html" class="cart-drawer__continue" id="continueShopping">
+                Continue shopping
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+</aside>

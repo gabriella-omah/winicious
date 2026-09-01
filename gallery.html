@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+<meta
+    name="description"
+    content="Explore the latest hair styles, installations, braids and transformations created by Winicious."
+>
+<title>Gallery | Winicious</title>
+<!-- Font Awesome -->
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+>
+<!-- Global Styles -->
+<link rel="stylesheet" href="style/style.css">
+<!-- Gallery Styles -->
+<link rel="stylesheet" href="style/gallery.css">
+</head>
+<body>
+<!-- ========================================
+     NAVBAR
+========================================= -->
+<div id="navbar-placeholder"></div>
+<!-- ========================================
+     MAIN
+========================================= -->
+
+<main>
+
+    <!-- ========================================
+         GALLERY HERO
+    ======================================== -->
+    <section class="gallery-hero" id="gallery-hero">
+
+        <!-- Background Image -->
+        <div class="gallery-hero__background">
+            <img
+                src="image/galleryhero.jpeg"
+                alt=""
+                aria-hidden="true"
+            >
+        </div>
+
+        <!-- Warm Overlay -->
+        <div class="gallery-hero__overlay"></div>
+
+        <!-- Content -->
+        <div class="container gallery-hero__container">
+
+            <div class="gallery-hero__content">
+
+                <p class="eyebrow gallery-hero__eyebrow">
+                    OUR WORK
+                </p>
+
+                <h1>
+                    A Look at<br>
+                    What We Create
+                </h1>
+
+                <p class="gallery-hero__text">
+                    From beautifully finished hair to refined
+                    beauty details, explore some of our latest work.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         GALLERY CONTENT
+    ======================================== -->
+    <section
+        class="gallery-content section"
+        id="gallery-content"
+    >
+
+        <div class="container">
+
+            <!-- SECTION INTRO -->
+            <div class="section-heading section-heading--center">
+
+                <p class="eyebrow">
+                    THE GALLERY
+                </p>
+
+                <h2>
+                    Our Latest Work
+                </h2>
+
+                <p class="section-heading__text">
+                    A collection of beautifully finished looks,
+                    details and transformations from the salon.
+                </p>
+
+            </div>
+
+
+            <!-- ========================================
+                 FILTERS
+            ======================================== -->
+            <nav
+                class="gallery-filters"
+                aria-label="Gallery categories"
+            >
+
+                <button
+                    class="gallery-filter is-active"
+                    type="button"
+                    data-filter="all"
+                >
+                    All
+                </button>
+
+                <button
+                    class="gallery-filter"
+                    type="button"
+                    data-filter="installation"
+                >
+                    Installation
+                </button>
+
+                <button
+                    class="gallery-filter"
+                    type="button"
+                    data-filter="braiding"
+                >
+                    Braiding
+                </button>
+
+                <button
+                    class="gallery-filter"
+                    type="button"
+                    data-filter="styling"
+                >
+                    Styling
+                </button>
+
+                <button
+                    class="gallery-filter"
+                    type="button"
+                    data-filter="wigs"
+                >
+                    Wigs
+                </button>
+
+                <button
+                    class="gallery-filter"
+                    type="button"
+                    data-filter="nails"
+                >
+                    Nails
+                </button>
+
+                <button
+                    class="gallery-filter"
+                    type="button"
+                    data-filter="lashes"
+                >
+                    Lashes
+                </button>
+
+                <button
+                    class="gallery-filter"
+                    type="button"
+                    data-filter="beauty"
+                >
+                    Beauty
+                </button>
+
+            </nav>
+
+
+            <!-- ========================================
+                 GALLERY GRID
+            ======================================== -->
+            <div
+                class="gallery-grid"
+                id="galleryGrid"
+            >
+
+                <!-- INSTALLATION -->
+                <button
+                    class="gallery-card"
+                    type="button"
+                    data-category="installation"
+                    data-title="Hair Installation"
+                    data-image="image/serviceinstall.jpeg"
+                >
+
+                    <img
+                        src="image/serviceinstall.jpeg"
+                        alt="Finished hair installation"
+                        loading="lazy"
+                    >
+
+                    <span class="gallery-card__caption">
+                        Hair Installation
+                    </span>
+
+                </button>
+
+
+                <!-- BRAIDING -->
+                <button
+                    class="gallery-card"
+                    type="button"
+                    data-category="braiding"
+                    data-title="Braiding"
+                    data-image="image/servicebraiding.jpeg"
+                >
+
+                    <img
+                        src="image/servicebraiding.jpeg"
+                        alt="Finished braided hairstyle"
+                        loading="lazy"
+                    >
+
+                    <span class="gallery-card__caption">
+                        Braiding
+                    </span>
+
+                </button>
+
+
+                <!-- STYLING -->
+                <button
+                    class="gallery-card"
+                    type="button"
+                    data-category="styling"
+                    data-title="Hair Styling"
+                    data-image="image/servicestyling.jpeg"
+                >
+
+                    <img
+                        src="image/servicestyling.jpeg"
+                        alt="Finished styled hair"
+                        loading="lazy"
+                    >
+
+                    <span class="gallery-card__caption">
+                        Hair Styling
+                    </span>
+
+                </button>
+
+
+                <!-- WIGS -->
+                <button
+                    class="gallery-card"
+                    type="button"
+                    data-category="wigs"
+                    data-title="Wig Styling"
+                    data-image="image/servicecoloring.jpeg"
+                >
+
+                    <img
+                        src="image/servicecoloring.jpeg"
+                        alt="Finished wig styling"
+                        loading="lazy"
+                    >
+
+                    <span class="gallery-card__caption">
+                        Wig Styling
+                    </span>
+
+                </button>
+
+
+                <!-- NAILS -->
+                <button
+                    class="gallery-card"
+                    type="button"
+                    data-category="nails"
+                    data-title="Nail Care"
+                    data-image="image/servicenails.jpeg"
+                >
+
+                    <img
+                        src="image/servicenails.jpeg"
+                        alt="Finished nail service"
+                        loading="lazy"
+                    >
+
+                    <span class="gallery-card__caption">
+                        Nails
+                    </span>
+
+                </button>
+
+
+                <!-- LASHES -->
+                <button
+                    class="gallery-card"
+                    type="button"
+                    data-category="lashes"
+                    data-title="Lash Extensions"
+                    data-image="image/servicelashes.jpeg"
+                >
+
+                    <img
+                        src="image/servicelashes.jpeg"
+                        alt="Finished lash extensions"
+                        loading="lazy"
+                    >
+
+                    <span class="gallery-card__caption">
+                        Lash Extensions
+                    </span>
+
+                </button>
+
+
+                <!-- MAKEUP -->
+                <button
+                    class="gallery-card"
+                    type="button"
+                    data-category="beauty"
+                    data-title="Full Glam Makeup"
+                    data-image="image/servicemakeup.jpeg"
+                >
+
+                    <img
+                        src="image/servicemakeup.jpeg"
+                        alt="Finished full glam makeup"
+                        loading="lazy"
+                    >
+
+                    <span class="gallery-card__caption">
+                        Makeup
+                    </span>
+
+                </button>
+
+
+                <!-- PEDICURE -->
+                <button
+                    class="gallery-card"
+                    type="button"
+                    data-category="beauty"
+                    data-title="Pedicure"
+                    data-image="image/servicepedicure.jpeg"
+                >
+
+                    <img
+                        src="image/servicepedicure.jpeg"
+                        alt="Finished pedicure"
+                        loading="lazy"
+                    >
+
+                    <span class="gallery-card__caption">
+                        Pedicure
+                    </span>
+
+                </button>
+
+
+                <!-- EXTRA IMAGE -->
+                <button
+                    class="gallery-card"
+                    type="button"
+                    data-category="styling"
+                    data-title="Signature Finish"
+                    data-image="image/servicespa.jpeg"
+                >
+
+                    <img
+                        src="image/servicespa.jpeg"
+                        alt="Finished salon look"
+                        loading="lazy"
+                    >
+
+                    <span class="gallery-card__caption">
+                        Signature Finish
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ========================================
+         GALLERY LIGHTBOX
+    ======================================== -->
+    <div
+        class="gallery-lightbox"
+        id="galleryLightbox"
+        aria-hidden="true"
+    >
+
+        <div
+            class="gallery-lightbox__backdrop"
+            data-lightbox-close
+        ></div>
+
+
+        <div
+            class="gallery-lightbox__dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Gallery image viewer"
+        >
+
+            <!-- CLOSE -->
+            <button
+                class="gallery-lightbox__close"
+                type="button"
+                aria-label="Close image viewer"
+                data-lightbox-close
+            >
+                <i
+                    class="fa-solid fa-xmark"
+                    aria-hidden="true"
+                ></i>
+            </button>
+
+
+            <!-- PREVIOUS -->
+            <button
+                class="gallery-lightbox__previous"
+                type="button"
+                aria-label="Previous image"
+                data-lightbox-prev
+            >
+                <i
+                    class="fa-solid fa-arrow-left"
+                    aria-hidden="true"
+                ></i>
+            </button>
+
+
+            <!-- IMAGE -->
+            <div class="gallery-lightbox__image-wrap">
+
+                <img
+                    id="lightboxImage"
+                    src=""
+                    alt=""
+                >
+
+                <div class="gallery-lightbox__caption">
+
+                    <span id="lightboxCategory">
+                        Gallery
+                    </span>
+
+                    <h3 id="lightboxTitle">
+                        Gallery Image
+                    </h3>
+
+                </div>
+
+            </div>
+
+
+            <!-- NEXT -->
+            <button
+                class="gallery-lightbox__next"
+                type="button"
+                aria-label="Next image"
+                data-lightbox-next
+            >
+                <i
+                    class="fa-solid fa-arrow-right"
+                    aria-hidden="true"
+                ></i>
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- ========================================
+         BOOKING CTA
+    ======================================== -->
+    <section class="booking-cta">
+
+        <div class="container">
+
+        <div class="section-heading">
+            <p class="eyebrow">
+                YOUR NEXT LOOK
+            </p>
+
+            <h2>
+                Ready For Your
+                <br>
+                Next Look?
+            </h2>
+
+            <p class="section-heading__text">
+                Let’s create something beautiful
+                together.
+            </p>
+
+            <a
+                href="book.html"
+                class="btn btn--primary"
+            >
+                Book Now
+            </a>
+
+        </div>
+        </div>
+
+    </section>
+
+</main>
+
+<!-- ========================================
+     FOOTER
+========================================= -->
+<div id="footer-placeholder"></div>
+<!-- ========================================
+     GLOBAL JAVASCRIPT
+========================================= -->
+<script src="javascript/script.js"></script>
+
+<script src="javascript/shop.js"></script>
+<!-- ========================================
+     GALLERY JAVASCRIPT
+========================================= -->
+<script src="javascript/gallery.js"></script>
+</body>
+</html>
