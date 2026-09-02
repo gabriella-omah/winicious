@@ -2616,11 +2616,6 @@ small {
         padding-inline: 16px;
     }
 
-    .navbar__logo img {
-        height: 36px;
-        max-width: 150px;
-    }
-
     .navbar__actions {
         right: 10px;
     }
@@ -2684,6 +2679,13 @@ small {
         line-height: 1.7;
     }
 
+    .booking-cta .eyebrow {
+        text-align: left;
+
+        margin: 0 0 14px;
+        line-height: 1.7;
+    }
+    
     .booking-cta__actions {
         justify-content: flex-start;
         align-items: stretch;
@@ -2783,11 +2785,6 @@ small {
         padding-inline: 12px;
     }
 
-    .navbar__logo img {
-        height: 34px;
-        max-width: 145px;
-    }
-
     .navbar__actions {
         right: 6px;
     }
@@ -2819,10 +2816,6 @@ small {
         padding-inline: 12px;
     }
 
-    .site-header.header--scrolled .navbar__logo img {
-        height: 32px;
-    }
-
 
     /* -----------------------------------------------------
        MOBILE MENU
@@ -2831,11 +2824,6 @@ small {
     .mobile-menu {
         width: 90%;
         padding: 20px;
-    }
-
-    .mobile-menu__logo img {
-        height: 33px;
-        max-width: 155px;
     }
 
 
@@ -2866,10 +2854,6 @@ small {
         gap: 34px;
     }
 
-    .site-footer__logo img {
-        height: 42px;
-        max-width: 165px;
-    }
 
     .site-footer__bottom {
         padding-block: 18px 22px;
@@ -2912,11 +2896,6 @@ small {
     .navbar__container {
         min-height: 58px;
         padding-inline: 8px;
-    }
-
-    .navbar__logo img {
-        height: 31px;
-        max-width: 132px;
     }
 
     .navbar__actions {

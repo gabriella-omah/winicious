@@ -905,10 +905,6 @@
     text-align: left;
 }
 
-.booking-cta__copy .eyebrow {
-    color: var(--color-cream);
-}
-
 .booking-cta__copy h2 {
     margin-top: 12px;
     color: var(--color-cream);
@@ -1309,12 +1305,13 @@
     }
 
     .testimonial {
-        align-items: flex-end;
+        align-items: flex-start;
         padding-top: 0;
     }
 
     .testimonial__content {
         max-width: 100%;
+        margin-top: 2rem;
         padding-left: 0;
     }
 
@@ -1374,10 +1371,6 @@
 
     .booking-cta__copy {
         text-align: left;
-    }
-
-    .booking-cta__copy .eyebrow {
-        color: var(--color-cream);
     }
 
     .booking-cta__location {
