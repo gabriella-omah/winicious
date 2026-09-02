@@ -141,7 +141,7 @@
     width: min(520px, 100%);
     margin: 28px auto 0;
     color: rgba(255, 255, 255, 0.82);
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.8;
     text-wrap: balance;
 }
@@ -1183,7 +1183,7 @@
     .hero__text {
         max-width: 520px;
         margin: 22px 0 0;
-        font-size: 13px;
+        font-size: 14px;
         line-height: 1.75;
         text-align: left;
     }
@@ -1309,7 +1309,7 @@
     }
 
     .testimonial {
-        align-items: flex-start;
+        align-items: flex-end;
         padding-top: 0;
     }
 
@@ -1405,7 +1405,6 @@
 
     .hero__text {
         max-width: 430px;
-        font-size: 12.5px;
     }
 
     .hero__actions .btn {
@@ -1539,7 +1538,6 @@
     .hero__text {
         max-width: 330px;
         margin-top: 18px;
-        font-size: 11.5px;
         line-height: 1.75;
     }
 
@@ -1590,7 +1588,7 @@
     }
 
     .service-card__content {
-        min-height: 245px;
+        min-height: 225px;
         padding: 24px 20px;
     }
 
@@ -1599,7 +1597,6 @@
     }
 
     .service-card p {
-        font-size: 12.5px;
         line-height: 1.7;
     }
 
@@ -1616,7 +1613,7 @@
     /* TESTIMONIALS */
 
     .testimonial-slider__stage {
-        min-height: 335px;
+        min-height: 315px;
     }
 
     .testimonial blockquote {
@@ -1708,7 +1705,6 @@
     .hero__text {
         max-width: 290px;
         margin-top: 15px;
-        font-size: 10.5px;
     }
 
     .hero__actions {
@@ -1735,16 +1731,12 @@
     /* SERVICES */
 
     .service-card__content {
-        min-height: 230px;
+        min-height: 210px;
         padding: 20px 18px;
     }
 
     .service-card h3 {
         font-size: 26px;
-    }
-
-    .service-card p {
-        font-size: 12px;
     }
 
 
@@ -1759,7 +1751,7 @@
     /* TESTIMONIALS */
 
     .testimonial-slider__stage {
-        min-height: 350px;
+        min-height: 320px;
     }
 
     .testimonial blockquote {

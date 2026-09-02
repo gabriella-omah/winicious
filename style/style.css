@@ -517,7 +517,7 @@ small {
     border-radius: var(--radius-sm);
 
     font-family: var(--font-body);
-    font-size: 13px;
+    font-size: 14px;
     font-weight: 700;
     line-height: 1;
     letter-spacing: 0.035em;
@@ -2888,15 +2888,6 @@ small {
     .back-to-top {
         right: 14px;
         bottom: 70px;
-    }
-
-
-    /* -----------------------------------------------------
-       FULL-WIDTH BUTTONS
-    ----------------------------------------------------- */
-
-    .btn:not(.btn--secondary):not(.text-link) {
-        width: 100%;
     }
 }
 
