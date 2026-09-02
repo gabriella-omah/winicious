@@ -1164,7 +1164,7 @@
         margin-bottom: 18px;
         padding-inline: 0;
         color: var(--color-white);
-        font-size: 8px;
+        font-size: 10px;
         letter-spacing: 0.20em;
     }
 
@@ -1301,11 +1301,11 @@
     /* TESTIMONIALS */
 
     .testimonial-slider {
-        margin-top: 2rem;
+        margin-top: 0;
     }
 
     .testimonial-slider__stage {
-        min-height: 300px;
+        min-height: 200px;
     }
 
     .testimonial {
@@ -1456,10 +1456,6 @@
 
     /* TESTIMONIALS */
 
-    .testimonial-slider__stage {
-        min-height: 315px;
-    }
-
     .testimonial blockquote {
         font-size: 1.25rem;
         line-height: 1.65;
@@ -1525,7 +1521,6 @@
 
     .hero__content .eyebrow {
         margin-bottom: 15px;
-        font-size: 7.5px;
         letter-spacing: 0.17em;
     }
 
@@ -1611,10 +1606,6 @@
 
 
     /* TESTIMONIALS */
-
-    .testimonial-slider__stage {
-        min-height: 315px;
-    }
 
     .testimonial blockquote {
         font-size: 1.18rem;
@@ -1749,10 +1740,6 @@
 
 
     /* TESTIMONIALS */
-
-    .testimonial-slider__stage {
-        min-height: 320px;
-    }
 
     .testimonial blockquote {
         font-size: 1.08rem;
