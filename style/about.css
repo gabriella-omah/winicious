@@ -1,16 +1,13 @@
 /* =========================================================
    WINICIOUS — ABOUT PAGE
    PREMIUM • FEMININE • EDITORIAL
-   PAGE-SPECIFIC STYLES
-   Built to work with the WINICIOUS Global Design System
+   PAGE-SPECIFIC STYLES ONLY
+   Uses the WINICIOUS Global Design System from style.css
 ========================================================= */
-
-
 /* =========================================================
    ABOUT HERO
    Desktop: Image LEFT • Content RIGHT
 ========================================================= */
-
 .about-hero {
     position: relative;
     width: 100%;
@@ -19,17 +16,15 @@
     background: var(--color-ivory);
     color: var(--color-chocolate);
 }
-
 .about-hero__container {
     width: 100%;
     min-height: calc(100svh - var(--header-utility-height));
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: 1fr 1fr;
     align-items: stretch;
-     margin: 0 ;
-    padding: 0 ;
+    margin: 0;
+    padding: 0;
 }
-
 .about-hero__image {
     position: relative;
     width: 100%;
@@ -37,7 +32,6 @@
     overflow: hidden;
     background: var(--color-cream);
 }
-
 .about-hero__image img {
     display: block;
     width: 100%;
@@ -47,25 +41,23 @@
     transform: scale(1.01);
     transition: transform var(--transition-slow);
 }
-
 .about-hero__image:hover img {
     transform: scale(1.025);
 }
-
 .about-hero__content {
     min-height: inherit;
-    padding: clamp(60px, 7vw, 110px) clamp(40px, 7vw, 100px);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    padding:
+        clamp(60px, 7vw, 110px)
+        clamp(40px, 7vw, 100px);
 }
-
 .about-hero__content .eyebrow {
     margin-bottom: 20px;
     color: var(--color-rose-dark);
 }
-
 .about-hero__content h1 {
     max-width: 580px;
     margin: 0;
@@ -76,7 +68,6 @@
     letter-spacing: -0.045em;
     text-wrap: balance;
 }
-
 .about-hero__text {
     max-width: 460px;
     margin: 26px 0 32px;
@@ -85,13 +76,10 @@
     line-height: 1.8;
     text-wrap: balance;
 }
-
-
 /* =========================================================
-   ABOUT STORY
+   OUR STORY
    Desktop: Content LEFT • Image RIGHT
 ========================================================= */
-
 .about-story {
     position: relative;
     overflow: hidden;
@@ -99,28 +87,25 @@
     background: var(--color-cream);
     color: var(--color-chocolate);
 }
-
 .about-story__container {
     display: grid;
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    grid-template-columns:
+        minmax(0, 0.95fr)
+        minmax(0, 1.05fr);
     align-items: center;
     gap: clamp(3rem, 7vw, 7rem);
 }
-
 .about-story__content {
     width: 100%;
     max-width: 500px;
     justify-self: end;
 }
-
 .about-story__text {
     max-width: 500px;
 }
-
 .about-story__text p:last-child {
     margin-bottom: 0;
 }
-
 .about-story__image {
     position: relative;
     width: 100%;
@@ -128,7 +113,6 @@
     overflow: hidden;
     background: var(--color-ivory);
 }
-
 .about-story__image img {
     display: block;
     width: 100%;
@@ -137,11 +121,9 @@
     object-position: center;
     transition: transform var(--transition-slow);
 }
-
 .about-story__image:hover img {
     transform: scale(1.025);
 }
-
 .about-story__image::after {
     content: "";
     position: absolute;
@@ -149,34 +131,27 @@
     border: 1px solid rgba(255, 255, 255, 0.28);
     pointer-events: none;
 }
-
-
 /* =========================================================
-   EXPERIENCE
+   THE WINICIOUS EXPERIENCE
 ========================================================= */
-
 .about-experience {
     position: relative;
     padding-block: clamp(90px, 10vw, 140px);
     background: var(--color-ivory);
     color: var(--color-chocolate);
 }
-
 .about-experience .section-heading {
     max-width: 620px;
     margin-bottom: clamp(3rem, 5vw, 4.5rem);
 }
-
 .about-experience .section-heading .eyebrow {
     color: var(--color-rose-dark);
 }
-
 .about-experience__list {
     width: 100%;
     max-width: 1050px;
     border-top: 1px solid var(--border-medium);
 }
-
 .experience-item {
     display: grid;
     grid-template-columns: 80px minmax(0, 1fr);
@@ -184,7 +159,6 @@
     padding-block: 2.25rem;
     border-bottom: 1px solid var(--border-medium);
 }
-
 .experience-item__number {
     padding-top: 4px;
     color: var(--color-taupe);
@@ -193,21 +167,20 @@
     line-height: 1.4;
     letter-spacing: 0.16em;
 }
-
 .experience-item__content {
     display: grid;
-    grid-template-columns: minmax(180px, 0.45fr) minmax(0, 1fr);
+    grid-template-columns:
+        minmax(180px, 0.45fr)
+        minmax(0, 1fr);
     gap: clamp(2rem, 5vw, 4rem);
     align-items: start;
 }
-
 .experience-item__content h3 {
     margin: 0;
     color: var(--color-chocolate);
     font-size: clamp(1.35rem, 2.2vw, 1.75rem);
     line-height: 1.15;
 }
-
 .experience-item__content p {
     max-width: 460px;
     margin: 0;
@@ -215,27 +188,24 @@
     font-size: 14px;
     line-height: 1.75;
 }
-
-
 /* =========================================================
    FOUNDER
    Desktop: Image LEFT • Content RIGHT
 ========================================================= */
-
 .about-founder {
     position: relative;
     padding-block: clamp(90px, 10vw, 150px);
     background: var(--color-cream);
     color: var(--color-chocolate);
 }
-
-.about-founder .container {
+.about-founder__container {
     display: grid;
-    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    grid-template-columns:
+        minmax(0, 0.95fr)
+        minmax(0, 1.05fr);
     align-items: center;
     gap: clamp(3rem, 7vw, 6.5rem);
 }
-
 .about-founder__image {
     position: relative;
     width: 100%;
@@ -243,7 +213,6 @@
     overflow: hidden;
     background: var(--color-ivory);
 }
-
 .about-founder__image img {
     display: block;
     width: 100%;
@@ -252,23 +221,19 @@
     object-position: center;
     transition: transform var(--transition-slow);
 }
-
 .about-founder__image:hover img {
     transform: scale(1.025);
 }
-
 .about-founder__content {
     width: 100%;
     max-width: 520px;
 }
-
 .about-founder__name {
     margin: 2.25rem 0 0.3rem;
     color: var(--color-chocolate);
     font-size: 1.35rem;
     line-height: 1.2;
 }
-
 .about-founder__role {
     margin: 0;
     color: var(--color-taupe);
@@ -278,12 +243,9 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
 }
-
-
 /* =========================================================
    LARGE VISUAL BREAK
 ========================================================= */
-
 .about-visual {
     position: relative;
     width: 100%;
@@ -291,12 +253,10 @@
     overflow: hidden;
     background: var(--color-chocolate);
 }
-
 .about-visual__image {
     position: absolute;
     inset: 0;
 }
-
 .about-visual__image img {
     display: block;
     width: 100%;
@@ -304,14 +264,13 @@
     object-fit: cover;
     object-position: center;
 }
-
 .about-visual__overlay {
     position: absolute;
     inset: 0;
-    padding: clamp(2rem, 5vw, 4rem);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: clamp(2rem, 5vw, 4rem);
     background:
         linear-gradient(
             to bottom,
@@ -320,597 +279,447 @@
         );
     text-align: center;
 }
-
 .about-visual__overlay p {
     max-width: 900px;
     margin: 0;
     color: var(--color-white);
-    font-family: var(--font-heading);
+    font-family: var(--font-body);
     font-size: clamp(2.2rem, 5.2vw, 4.4rem);
     font-weight: 500;
     line-height: 1.08;
     letter-spacing: -0.03em;
     text-wrap: balance;
 }
-
-
-/* =========================================================
-   BOOKING CTA
-========================================================= */
-
-.booking-cta__actions .text-link {
-    color: var(--color-cream);
-}
-
-.booking-cta__actions .text-link:hover {
-    color: var(--color-rose-light);
-}
-
-
 /* =========================================================
    LARGE DESKTOP
 ========================================================= */
-
 @media (max-width: 1200px) {
-
     .about-hero__content {
         padding-inline: clamp(40px, 5vw, 72px);
     }
-
     .about-story__container,
-    .about-founder .container {
+    .about-founder__container {
         gap: clamp(2.75rem, 5vw, 5rem);
     }
-
     .experience-item__content {
         gap: 3rem;
     }
 }
-
-
 /* =========================================================
    TABLET / SMALL LAPTOP
    1024px
 ========================================================= */
-
 @media (max-width: 1024px) {
-
     .about-hero__container {
-        grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+        grid-template-columns:
+            minmax(0, 0.95fr)
+            minmax(0, 1.05fr);
     }
-
     .about-hero__content {
         padding: 56px 42px;
     }
-
     .about-hero__content h1 {
         font-size: clamp(48px, 6vw, 68px);
     }
-
     .about-story__container,
-    .about-founder .container {
+    .about-founder__container {
         gap: 3rem;
     }
-
     .about-story__image {
         height: clamp(460px, 55vw, 570px);
     }
-
     .about-founder__image {
         height: clamp(480px, 58vw, 620px);
     }
-
     .experience-item {
         grid-template-columns: 70px minmax(0, 1fr);
     }
-
     .experience-item__content {
         gap: 2.5rem;
     }
 }
-
-
 /* =========================================================
    TABLET
    900px
 ========================================================= */
-
 @media (max-width: 900px) {
-
     .about-hero {
         min-height: auto;
     }
-
     .about-hero__container {
         min-height: 600px;
-        grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+        grid-template-columns:
+            minmax(0, 0.9fr)
+            minmax(0, 1.1fr);
     }
-
     .about-hero__image,
     .about-hero__content {
         min-height: 600px;
     }
-
     .about-hero__content {
         padding: 52px 36px;
     }
-
     .about-story__container,
-    .about-founder .container {
-        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    .about-founder__container {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr);
         gap: 2.5rem;
     }
-
     .about-story__image,
     .about-founder__image {
         height: 500px;
     }
-
     .experience-item__content {
         grid-template-columns: 1fr;
         gap: 0.75rem;
     }
-
     .experience-item__content p {
         max-width: 600px;
     }
-
     .about-visual {
         min-height: 560px;
     }
 }
-
-
 /* =========================================================
    MOBILE
    768px
 ========================================================= */
-
 @media (max-width: 768px) {
-
     /* -----------------------------------------------------
        HERO
     ----------------------------------------------------- */
-
     .about-hero {
         min-height: auto;
     }
-
     .about-hero__container {
         display: flex;
         flex-direction: column;
         min-height: auto;
     }
-
     .about-hero__image {
         order: 1;
         width: 100%;
         height: clamp(380px, 60svh, 520px);
         min-height: 0;
     }
-
     .about-hero__content {
         order: 2;
         width: 100%;
         min-height: 0;
-        padding: clamp(52px, 9vw, 72px) var(--container-padding) clamp(60px, 10vw, 80px);
+        padding:
+            clamp(52px, 9vw, 72px)
+            var(--container-padding)
+            clamp(60px, 10vw, 80px);
     }
-
     .about-hero__content .eyebrow {
         margin-bottom: 16px;
         font-size: 9px;
         letter-spacing: 0.18em;
     }
-
     .about-hero__content h1 {
         max-width: 680px;
         font-size: clamp(44px, 10.5vw, 62px);
         line-height: 0.95;
         letter-spacing: -0.04em;
     }
-
     .about-hero__text {
         max-width: 620px;
         margin: 22px 0 28px;
         font-size: 13px;
         line-height: 1.75;
     }
-
-
     /* -----------------------------------------------------
        STORY
     ----------------------------------------------------- */
-
     .about-story {
         padding-block: clamp(72px, 10vw, 96px);
     }
-
     .about-story__container {
         display: flex;
         flex-direction: column;
         gap: 2.75rem;
     }
-
     .about-story__image {
         order: 1;
         width: 100%;
         height: clamp(380px, 100vw, 500px);
     }
-
     .about-story__image::after {
         inset: 10px;
     }
-
     .about-story__content {
         order: 2;
         max-width: 100%;
         justify-self: auto;
     }
-
-
     /* -----------------------------------------------------
        EXPERIENCE
     ----------------------------------------------------- */
-
     .about-experience {
         padding-block: clamp(72px, 10vw, 96px);
     }
-
     .about-experience .section-heading {
         margin-bottom: 2.75rem;
     }
-
     .about-experience__list {
         max-width: none;
     }
-
     .experience-item {
-        grid-template-columns: 46px minmax(0, 1fr);
+        grid-template-columns:
+            46px
+            minmax(0, 1fr);
         gap: 1rem;
         padding-block: 1.65rem;
     }
-
     .experience-item__number {
         padding-top: 3px;
         font-size: 10px;
         letter-spacing: 0.12em;
     }
-
     .experience-item__content {
         display: block;
     }
-
     .experience-item__content h3 {
         margin-bottom: 0.6rem;
         font-size: 1.3rem;
         line-height: 1.2;
     }
-
     .experience-item__content p {
         max-width: 100%;
         font-size: 13px;
         line-height: 1.7;
     }
-
-
     /* -----------------------------------------------------
        FOUNDER
     ----------------------------------------------------- */
-
     .about-founder {
         padding-block: clamp(72px, 10vw, 96px);
     }
-
-    .about-founder .container {
+    .about-founder__container {
         display: flex;
         flex-direction: column;
         gap: 2.75rem;
     }
-
     .about-founder__image {
         order: 1;
         width: 100%;
         height: clamp(420px, 110vw, 540px);
     }
-
     .about-founder__content {
         order: 2;
         max-width: 100%;
     }
-
-
     .about-founder__name {
         margin-top: 1.75rem;
     }
-
-
     /* -----------------------------------------------------
        VISUAL BREAK
     ----------------------------------------------------- */
-
     .about-visual {
         min-height: clamp(420px, 72svh, 560px);
     }
-
     .about-visual__overlay {
         padding: 2rem var(--container-padding);
     }
-
     .about-visual__overlay p {
         max-width: 650px;
         font-size: clamp(2rem, 8vw, 3.4rem);
         line-height: 1.06;
     }
-
-
-    /* -----------------------------------------------------
-       BOOKING CTA
-    ----------------------------------------------------- */
-
-    .about-booking-cta {
-        padding-block: clamp(72px, 10vw, 96px);
-    }
 }
-
-
 /* =========================================================
    LARGE PHONE
    600px
 ========================================================= */
-
 @media (max-width: 600px) {
-
     .about-hero__image {
         height: clamp(360px, 62svh, 470px);
     }
-
     .about-hero__content {
         padding-top: 52px;
         padding-bottom: 64px;
     }
-
     .about-hero__content h1 {
         font-size: clamp(42px, 11vw, 54px);
     }
-
     .about-story__container,
-    .about-founder .container {
+    .about-founder__container {
         gap: 2.25rem;
     }
-
     .about-story__image,
     .about-founder__image {
         height: clamp(380px, 108vw, 460px);
     }
-
     .experience-item {
-        grid-template-columns: 40px minmax(0, 1fr);
+        grid-template-columns:
+            40px
+            minmax(0, 1fr);
         gap: 0.85rem;
     }
-
     .experience-item__content h3 {
         font-size: 1.2rem;
     }
-
     .about-visual {
         min-height: 440px;
     }
-
     .about-visual__overlay p {
         font-size: clamp(1.85rem, 8vw, 2.8rem);
     }
 }
-
-
 /* =========================================================
    SMALL PHONE
    480px
 ========================================================= */
-
 @media (max-width: 480px) {
-
     .about-hero__image {
         height: 380px;
     }
-
     .about-hero__content {
         padding:
             48px
             var(--container-padding)
             58px;
     }
-
     .about-hero__content .eyebrow {
         margin-bottom: 14px;
         font-size: 8px;
     }
-
     .about-hero__content h1 {
         font-size: clamp(39px, 11.5vw, 50px);
         line-height: 0.96;
     }
-
     .about-hero__text {
         margin: 18px 0 24px;
         font-size: 12.5px;
         line-height: 1.75;
     }
-
-
-    /* Story */
-
+    /* Story / Experience / Founder */
     .about-story,
     .about-experience,
     .about-founder {
         padding-block: 68px;
     }
-
     .about-story__image,
     .about-founder__image {
         height: 400px;
     }
-
     .about-story__image::after {
         inset: 8px;
     }
-
-
-
     /* Experience */
-
     .about-experience .section-heading {
         margin-bottom: 2.25rem;
     }
-
     .experience-item {
-        grid-template-columns: 34px minmax(0, 1fr);
+        grid-template-columns:
+            34px
+            minmax(0, 1fr);
         gap: 0.75rem;
         padding-block: 1.5rem;
     }
-
     .experience-item__number {
         font-size: 9px;
     }
-
     .experience-item__content h3 {
         margin-bottom: 0.55rem;
         font-size: 1.15rem;
     }
-
     .experience-item__content p {
         font-size: 12.5px;
     }
-
-
     /* Founder */
-
     .about-founder__name {
         margin-top: 1.5rem;
         font-size: 1.2rem;
     }
-
     .about-founder__role {
         font-size: 10px;
     }
-
-
     /* Visual */
-
     .about-visual {
         min-height: 410px;
     }
-
     .about-visual__overlay {
         padding: 1.5rem var(--container-padding);
     }
-
     .about-visual__overlay p {
         font-size: 1.8rem;
         line-height: 1.08;
     }
-
-
-    /* CTA */
-
-    .about-booking-cta {
-        padding-block: 68px;
-    }
 }
-
-
 /* =========================================================
    EXTRA SMALL PHONE
    360px
 ========================================================= */
-
 @media (max-width: 360px) {
-
     .about-hero__image {
         height: 340px;
     }
-
     .about-hero__content {
         padding:
             42px
             var(--container-padding)
             52px;
     }
-
     .about-hero__content h1 {
         font-size: 37px;
     }
-
     .about-hero__text {
         font-size: 12px;
     }
-
     .about-story,
     .about-experience,
     .about-founder {
         padding-block: 60px;
     }
-
     .about-story__image,
     .about-founder__image {
         height: 360px;
     }
-
     .experience-item {
-        grid-template-columns: 30px minmax(0, 1fr);
+        grid-template-columns:
+            30px
+            minmax(0, 1fr);
         gap: 0.65rem;
     }
-
     .experience-item__content h3 {
         font-size: 1.1rem;
     }
-
     .experience-item__content p {
         font-size: 12px;
     }
-
     .about-visual {
         min-height: 380px;
     }
-
     .about-visual__overlay p {
         font-size: 1.65rem;
     }
 }
-
-
 /* =========================================================
    LANDSCAPE PHONES
-   Prevent oversized hero sections when phone is rotated
+   Prevent oversized sections when phone is rotated
 ========================================================= */
-
 @media (max-width: 900px) and (orientation: landscape) {
-
     .about-hero__image {
         height: 78svh;
     }
-
     .about-hero__content {
         padding-block: 60px;
     }
-
     .about-visual {
         min-height: 85svh;
     }
 }
-
-
 /* =========================================================
    REDUCED MOTION
 ========================================================= */
-
 @media (prefers-reduced-motion: reduce) {
-
     .about-hero__image img,
     .about-story__image img,
     .about-founder__image img {
         transition: none !important;
     }
-
     .about-hero__image:hover img,
     .about-story__image:hover img,
     .about-founder__image:hover img {

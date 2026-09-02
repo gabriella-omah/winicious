@@ -512,7 +512,7 @@ small {
     align-items: center;
     justify-content: center;
     gap: 10px;
-
+    text-transform: capitalize;
     border: 1px solid transparent;
     border-radius: var(--radius-sm);
 
@@ -2672,7 +2672,7 @@ small {
 
     .booking-cta p:not(.eyebrow) {
         max-width: 100%;
-
+        text-align: left;
         margin: 0 0 28px;
 
         font-size: 16px;

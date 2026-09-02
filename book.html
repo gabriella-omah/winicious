@@ -1,861 +1,311 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="description"
-        content="Book your next appointment with Winicious."
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book your next appointment with Winicious Hair and Beauty in Lekki, Lagos.">
     <title>Book An Appointment | Winicious</title>
 
-
-    <!-- ========================================
-         GOOGLE FONTS
-    ========================================= -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap"
-        rel="stylesheet"
-    >
-
-
-    <!-- ========================================
-         FONT AWESOME
-    ========================================= -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-
-
-    <!-- ========================================
-         MAIN SITE CSS
-    ========================================= -->
-    <link
-        rel="stylesheet"
-        href="style/style.css"
-    >
-
-    <!-- Booking page CSS -->
-    <link
-        rel="stylesheet"
-        href="style/book.css"
-    >
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/book.css">
 </head>
-
-
 <body class="nav__dark">
 
-
-    <div id="navbar-placeholder"></div>
-
-
-
+<div id="navbar-placeholder"></div>
 
 <main>
 
-    <!-- ========================================
-         BOOKING HERO
-    ========================================= -->
-    <section
-        class="booking-hero"
-        id="booking-hero"
-    >
-        <div class="container">
-
+    <!-- HERO -->
+    <section class="booking-hero" id="booking-hero">
+        <div class="container booking-hero__container">
             <div class="booking-hero__content">
-
-                <p class="eyebrow">
-                    BOOK YOUR APPOINTMENT
-                </p>
-
+                <p class="eyebrow">Book your appointment</p>
                 <h1>
-                    Your Time,
-                    <br>
+                    Your Time,<br>
                     Beautifully Spent.
                 </h1>
-
-                <p>
-                    Choose your service, tell us when
-                    works best for you, and we'll take
-                    care of the rest.
+                <p class="booking-hero__text">
+                    Choose your service, tell us when works best,
+                    and we’ll take care of the rest.
                 </p>
-
             </div>
-
         </div>
     </section>
 
-
-    <!-- ========================================
-         BOOKING CONTENT
-    ========================================= -->
-    <section
-        class="booking-content"
-        id="booking-content"
-    >
+    <!-- CONTENT -->
+    <section class="booking-content section" id="booking-content">
         <div class="container">
-
             <div class="booking-content__layout">
 
-                <!-- ====================================
-                     BOOKING INTRO
-                ==================================== -->
-                <div class="booking-info">
-
-                    <div class="section-heading">
-
-                        <p class="eyebrow">
-                            MAKE IT YOURS
+                <aside class="booking-info">
+                    <div class="booking-info__heading">
+                        <p class="eyebrow">Make it yours</p>
+                        <h2>Find Your Time.</h2>
+                        <p>
+                            Tell us what you’d like to book. We’ll use your
+                            preferences to arrange the right appointment.
                         </p>
-
-                        <h2>
-                            Find Your Time.
-                        </h2>
-
-                        <p class="section-heading__text">
-                            Tell us a little about what you'd
-                            like to book. We'll use your
-                            preferences to help arrange the
-                            right appointment for you.
-                        </p>
-
                     </div>
 
-
-                    <!-- BOOKING NOTE -->
                     <div class="booking-note">
-
-                        <span
-                            class="booking-note__icon"
-                            aria-hidden="true"
-                        >
+                        <span class="booking-note__icon" aria-hidden="true">
                             <i class="fa-regular fa-calendar-check"></i>
                         </span>
-
                         <div>
-
-                            <p class="booking-note__label">
-                                APPOINTMENT REQUESTS
-                            </p>
-
+                            <p class="booking-note__label">Appointment requests</p>
                             <p class="booking-note__value">
-                                Your request is subject to
-                                availability. We'll confirm
-                                your appointment after
-                                reviewing your request.
+                                Requests are subject to availability.
+                                We’ll confirm after reviewing your details.
                             </p>
-
                         </div>
+                    </div>
+                </aside>
 
+                <div class="booking-form-card">
+                    <div class="booking-form-card__heading">
+                        <p class="eyebrow">Booking details</p>
+                        <h2>Request Your Visit</h2>
+                        <p>
+                            Complete the form below and we’ll get back to you
+                            with confirmation.
+                        </p>
                     </div>
 
-                </div>
-
-
-                <!-- ====================================
-                     BOOKING FORM
-                ==================================== -->
-                <div class="booking-form-wrapper">
-
-                    <div class="section-heading">
-
-                        <p class="eyebrow">
-                            BOOKING DETAILS
-                        </p>
-
-                        <h2>
-                            Book Your Appointment
-                        </h2>
-
-                        <p class="section-heading__text">
-                            Complete the form below and
-                            we'll get back to you with
-                            confirmation.
-                        </p>
-
-                    </div>
-
-
-                    <form
-                        class="booking-form"
-                        id="bookingForm"
-                        action="#"
-                        method="post"
-                    >
-
-                        <!-- =================================
-                             SERVICE
-                        ================================== -->
+                    <form class="booking-form" id="bookingForm" action="#" method="post">
                         <div class="booking-form__field">
-
-                            <label for="bookingService">
-                                What Would You Like To Book?
-                            </label>
-
-                            <select
-                                id="bookingService"
-                                name="service"
-                                required
-                            >
-
-                                <option
-                                    value=""
-                                    selected
-                                    disabled
-                                >
-                                    Select a service
-                                </option>
-
-                                <option value="hair">
-                                    Hair Services
-                                </option>
-
-                                <option value="installation">
-                                    Hair Installation
-                                </option>
-
-                                <option value="braiding">
-                                    Braiding
-                                </option>
-
-                                <option value="wigs">
-                                    Wig Services
-                                </option>
-
-                                <option value="colouring">
-                                    Hair Colouring
-                                </option>
-
-                                <option value="nails">
-                                    Nail Services
-                                </option>
-
-                                <option value="lashes">
-                                    Lash Extensions
-                                </option>
-
-                                <option value="makeup">
-                                    Makeup
-                                </option>
-
-                                <option value="beauty">
-                                    Beauty Services
-                                </option>
-
-                                <option value="other">
-                                    Other
-                                </option>
-
+                            <label for="bookingService">Service</label>
+                            <select id="bookingService" name="service" required>
+                                <option value="" selected disabled>Select a service</option>
+                                <option value="installation">Hair installation</option>
+                                <option value="braiding">Braiding</option>
+                                <option value="styling">Hair styling</option>
+                                <option value="wigs">Wig services</option>
+                                <option value="colouring">Hair colouring</option>
+                                <option value="nails">Nail services</option>
+                                <option value="lashes">Lash extensions</option>
+                                <option value="makeup">Makeup</option>
+                                <option value="other">Other</option>
                             </select>
-
                         </div>
 
-
-                        <!-- =================================
-                             DATE + TIME
-                        ================================== -->
                         <div class="booking-form__row">
-
                             <div class="booking-form__field">
-
-                                <label for="bookingDate">
-                                    Preferred Date
-                                </label>
-
-                                <input
-                                    type="date"
-                                    id="bookingDate"
-                                    name="date"
-                                    required
-                                >
-
+                                <label for="bookingDate">Preferred date</label>
+                                <input type="date" id="bookingDate" name="date" required>
                             </div>
-
-
                             <div class="booking-form__field">
-
-                                <label for="bookingTime">
-                                    Preferred Time
-                                </label>
-
-                                <select
-                                    id="bookingTime"
-                                    name="time"
-                                    required
-                                >
-
-                                    <option
-                                        value=""
-                                        selected
-                                        disabled
-                                    >
-                                        Select a time
-                                    </option>
-
-                                    <option value="09:00">
-                                        9:00 AM
-                                    </option>
-
-                                    <option value="10:00">
-                                        10:00 AM
-                                    </option>
-
-                                    <option value="11:00">
-                                        11:00 AM
-                                    </option>
-
-                                    <option value="12:00">
-                                        12:00 PM
-                                    </option>
-
-                                    <option value="13:00">
-                                        1:00 PM
-                                    </option>
-
-                                    <option value="14:00">
-                                        2:00 PM
-                                    </option>
-
-                                    <option value="15:00">
-                                        3:00 PM
-                                    </option>
-
-                                    <option value="16:00">
-                                        4:00 PM
-                                    </option>
-
-                                    <option value="17:00">
-                                        5:00 PM
-                                    </option>
-
+                                <label for="bookingTime">Preferred time</label>
+                                <select id="bookingTime" name="time" required>
+                                    <option value="" selected disabled>Select a time</option>
+                                    <option value="09:00">9:00 AM</option>
+                                    <option value="10:00">10:00 AM</option>
+                                    <option value="11:00">11:00 AM</option>
+                                    <option value="12:00">12:00 PM</option>
+                                    <option value="13:00">1:00 PM</option>
+                                    <option value="14:00">2:00 PM</option>
+                                    <option value="15:00">3:00 PM</option>
+                                    <option value="16:00">4:00 PM</option>
+                                    <option value="17:00">5:00 PM</option>
                                 </select>
-
                             </div>
-
                         </div>
 
-
-                        <!-- =================================
-                             NAME
-                        ================================== -->
                         <div class="booking-form__field">
-
-                            <label for="bookingName">
-                                Full Name
-                            </label>
-
-                            <input
-                                type="text"
-                                id="bookingName"
-                                name="name"
-                                placeholder="Your name"
-                                autocomplete="name"
-                                required
-                            >
-
+                            <label for="bookingName">Full name</label>
+                            <input type="text" id="bookingName" name="name" placeholder="Your name" autocomplete="name" required>
                         </div>
 
-
-                        <!-- =================================
-                             EMAIL + PHONE
-                        ================================== -->
                         <div class="booking-form__row">
-
                             <div class="booking-form__field">
-
-                                <label for="bookingEmail">
-                                    Email Address
-                                </label>
-
-                                <input
-                                    type="email"
-                                    id="bookingEmail"
-                                    name="email"
-                                    placeholder="you@example.com"
-                                    autocomplete="email"
-                                    required
-                                >
-
+                                <label for="bookingEmail">Email</label>
+                                <input type="email" id="bookingEmail" name="email" placeholder="you@example.com" autocomplete="email" required>
                             </div>
-
-
                             <div class="booking-form__field">
-
-                                <label for="bookingPhone">
-                                    Phone Number
-                                </label>
-
-                                <input
-                                    type="tel"
-                                    id="bookingPhone"
-                                    name="phone"
-                                    placeholder="+234"
-                                    autocomplete="tel"
-                                    required
-                                >
-
+                                <label for="bookingPhone">Phone</label>
+                                <input type="tel" id="bookingPhone" name="phone" placeholder="+234" autocomplete="tel" required>
                             </div>
-
                         </div>
 
-
-                        <!-- =================================
-                             NOTES
-                        ================================== -->
                         <div class="booking-form__field">
-
-                            <label for="bookingNotes">
-                                Anything We Should Know?
-                            </label>
-
-                            <textarea
-                                id="bookingNotes"
-                                name="notes"
-                                rows="5"
-                                placeholder="Tell us anything that may help us prepare for your appointment..."
-                            ></textarea>
-
+                            <label for="bookingNotes">Anything we should know?</label>
+                            <textarea id="bookingNotes" name="notes" rows="5" placeholder="Hair history, preferences, or other notes…"></textarea>
                         </div>
 
-
-                        <!-- =================================
-                             SUBMIT
-                        ================================== -->
-                        <button
-                            type="submit"
-                            class="btn booking-form__submit btn--primary"
-                        >
-                            Request Appointment
-
-                            <i
-                                class="fa-solid fa-arrow-right"
-                                aria-hidden="true"
-                            ></i>
-                        </button>
-
-
-                        <p class="booking-form__note">
-                            Submitting this form does not
-                            automatically confirm your appointment.
-                        </p>
-
+                        <div class="booking-form__actions">
+                            <button type="submit" class="btn btn--primary booking-form__submit">
+                                Request appointment
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </button>
+                            <p class="booking-form__note">
+                                Submitting does not automatically confirm your appointment.
+                            </p>
+                        </div>
                     </form>
-
                 </div>
 
             </div>
-
         </div>
     </section>
 
-
-    <!-- ========================================
-         BOOKING REASSURANCE
-    ========================================= -->
-    <section
-        class="booking-reassurance"
-        id="booking-reassurance"
-    >
+    <!-- REASSURANCE -->
+    <section class="booking-reassurance" id="booking-reassurance">
         <div class="container">
-
             <div class="booking-reassurance__grid">
-
-                <!-- FLEXIBLE SCHEDULING -->
-                <div class="booking-reassurance__item">
-
-                    <span
-                        class="booking-reassurance__icon"
-                        aria-hidden="true"
-                    >
+                <article class="booking-reassurance__item">
+                    <span class="booking-reassurance__icon" aria-hidden="true">
                         <i class="fa-regular fa-clock"></i>
                     </span>
-
                     <div>
-
-                        <p class="booking-reassurance__label">
-                            FLEXIBLE SCHEDULING
-                        </p>
-
-                        <h3>
-                            We'll Work Around You.
-                        </h3>
-
-                        <p>
-                            Tell us your preferred time
-                            and we'll do our best to
-                            accommodate you.
-                        </p>
-
+                        <p class="booking-reassurance__label">Flexible scheduling</p>
+                        <h3>We’ll Work Around You.</h3>
+                        <p>Share your preferred time and we’ll do our best to accommodate you.</p>
                     </div>
-
-                </div>
-
-
-                <!-- PERSONAL CONFIRMATION -->
-                <div class="booking-reassurance__item">
-
-                    <span
-                        class="booking-reassurance__icon"
-                        aria-hidden="true"
-                    >
+                </article>
+                <article class="booking-reassurance__item">
+                    <span class="booking-reassurance__icon" aria-hidden="true">
                         <i class="fa-regular fa-message"></i>
                     </span>
-
                     <div>
-
-                        <p class="booking-reassurance__label">
-                            PERSONAL CONFIRMATION
-                        </p>
-
-                        <h3>
-                            We'll Keep You Updated.
-                        </h3>
-
-                        <p>
-                            We'll review your request
-                            and confirm the details with you.
-                        </p>
-
+                        <p class="booking-reassurance__label">Personal confirmation</p>
+                        <h3>We’ll Keep You Updated.</h3>
+                        <p>We’ll review your request and confirm the details with you.</p>
                     </div>
-
-                </div>
-
-
-                <!-- EXPERIENCE -->
-                <div class="booking-reassurance__item">
-
-                    <span
-                        class="booking-reassurance__icon"
-                        aria-hidden="true"
-                    >
+                </article>
+                <article class="booking-reassurance__item">
+                    <span class="booking-reassurance__icon" aria-hidden="true">
                         <i class="fa-solid fa-sparkles"></i>
                     </span>
-
                     <div>
-
-                        <p class="booking-reassurance__label">
-                            YOUR EXPERIENCE
-                        </p>
-
-                        <h3>
-                            Every Detail Matters.
-                        </h3>
-
-                        <p>
-                            Every appointment is planned
-                            with your experience in mind.
-                        </p>
-
+                        <p class="booking-reassurance__label">Your experience</p>
+                        <h3>Every Detail Matters.</h3>
+                        <p>Every appointment is planned with your experience in mind.</p>
                     </div>
-
-                </div>
-
+                </article>
             </div>
-
         </div>
     </section>
 
-
-    <!-- ========================================
-         BOOKING FAQ
-    ========================================= -->
-    <section
-        class="booking-faq"
-        id="booking-faq"
-    >
+    <!-- FAQ -->
+    <section class="booking-faq section" id="booking-faq">
         <div class="container">
-
             <div class="section-heading section-heading--center">
-
-                <p class="eyebrow">
-                    FREQUENTLY ASKED
-                </p>
-
-                <h2>
-                    Need to Know?
-                </h2>
-
+                <p class="eyebrow">Frequently asked</p>
+                <h2>Need To Know?</h2>
                 <p class="section-heading__text">
                     A few helpful answers before your appointment.
                 </p>
-
             </div>
-
 
             <div class="booking-faq__list">
-
-                <!-- FAQ ITEM 1 -->
                 <div class="booking-faq__item">
-
-                    <button
-                        class="booking-faq__question"
-                        type="button"
-                        aria-expanded="false"
-                        aria-controls="booking-faq-answer-1"
-                    >
-                        <span>
-                            How do I book an appointment?
-                        </span>
-
-                        <span
-                            class="booking-faq__icon"
-                            aria-hidden="true"
-                        ></span>
+                    <button class="booking-faq__question" type="button" aria-expanded="false" aria-controls="faq-1">
+                        <span>How do I book an appointment?</span>
+                        <span class="booking-faq__icon" aria-hidden="true"></span>
                     </button>
-
-                    <div
-                        class="booking-faq__answer"
-                        id="booking-faq-answer-1"
-                        role="region"
-                    >
+                    <div class="booking-faq__answer" id="faq-1">
                         <div class="booking-faq__answer-inner">
-
                             <p>
-                                Choose your preferred service,
-                                select an available date and time,
-                                and complete the booking details
-                                to request your appointment.
+                                Choose your service, select a preferred date and time,
+                                and complete the form. We’ll confirm availability with you.
                             </p>
-
                         </div>
                     </div>
-
                 </div>
 
-
-                <!-- FAQ ITEM 2 -->
                 <div class="booking-faq__item">
-
-                    <button
-                        class="booking-faq__question"
-                        type="button"
-                        aria-expanded="false"
-                        aria-controls="booking-faq-answer-2"
-                    >
-                        <span>
-                            Can I change or cancel my appointment?
-                        </span>
-
-                        <span
-                            class="booking-faq__icon"
-                            aria-hidden="true"
-                        ></span>
+                    <button class="booking-faq__question" type="button" aria-expanded="false" aria-controls="faq-2">
+                        <span>Can I change or cancel my appointment?</span>
+                        <span class="booking-faq__icon" aria-hidden="true"></span>
                     </button>
-
-                    <div
-                        class="booking-faq__answer"
-                        id="booking-faq-answer-2"
-                        role="region"
-                    >
+                    <div class="booking-faq__answer" id="faq-2">
                         <div class="booking-faq__answer-inner">
-
                             <p>
-                                Yes. If you need to change or cancel
-                                an appointment, please contact us
-                                as soon as possible so we can assist you.
+                                Yes. Contact us as soon as possible so we can help
+                                reschedule or cancel.
                             </p>
-
                         </div>
                     </div>
-
                 </div>
 
-
-                <!-- FAQ ITEM 3 -->
                 <div class="booking-faq__item">
-
-                    <button
-                        class="booking-faq__question"
-                        type="button"
-                        aria-expanded="false"
-                        aria-controls="booking-faq-answer-3"
-                    >
-                        <span>
-                            What should I do if I am running late?
-                        </span>
-
-                        <span
-                            class="booking-faq__icon"
-                            aria-hidden="true"
-                        ></span>
+                    <button class="booking-faq__question" type="button" aria-expanded="false" aria-controls="faq-3">
+                        <span>What if I’m running late?</span>
+                        <span class="booking-faq__icon" aria-hidden="true"></span>
                     </button>
-
-                    <div
-                        class="booking-faq__answer"
-                        id="booking-faq-answer-3"
-                        role="region"
-                    >
+                    <div class="booking-faq__answer" id="faq-3">
                         <div class="booking-faq__answer-inner">
-
                             <p>
-                                Please let us know as soon as possible.
-                                Depending on the appointment schedule,
-                                we may need to adjust the service time.
+                                Please let us know. Depending on the schedule,
+                                we may need to adjust the service length.
                             </p>
-
                         </div>
                     </div>
-
                 </div>
 
-
-                <!-- FAQ ITEM 4 -->
                 <div class="booking-faq__item">
-
-                    <button
-                        class="booking-faq__question"
-                        type="button"
-                        aria-expanded="false"
-                        aria-controls="booking-faq-answer-4"
-                    >
-                        <span>
-                            Can I ask about a service before booking?
-                        </span>
-
-                        <span
-                            class="booking-faq__icon"
-                            aria-hidden="true"
-                        ></span>
+                    <button class="booking-faq__question" type="button" aria-expanded="false" aria-controls="faq-4">
+                        <span>Can I ask about a service before booking?</span>
+                        <span class="booking-faq__icon" aria-hidden="true"></span>
                     </button>
-
-                    <div
-                        class="booking-faq__answer"
-                        id="booking-faq-answer-4"
-                        role="region"
-                    >
+                    <div class="booking-faq__answer" id="faq-4">
                         <div class="booking-faq__answer-inner">
-
                             <p>
-                                Of course. If you're unsure which
-                                service is right for you, you can
-                                contact us before making your appointment.
+                                Of course. Reach out via the contact page or WhatsApp
+                                if you’re unsure which service is right for you.
                             </p>
-
                         </div>
                     </div>
-
                 </div>
 
-
-                <!-- FAQ ITEM 5 -->
                 <div class="booking-faq__item">
-
-                    <button
-                        class="booking-faq__question"
-                        type="button"
-                        aria-expanded="false"
-                        aria-controls="booking-faq-answer-5"
-                    >
-                        <span>
-                            What if I have an existing appointment?
-                        </span>
-
-                        <span
-                            class="booking-faq__icon"
-                            aria-hidden="true"
-                        ></span>
+                    <button class="booking-faq__question" type="button" aria-expanded="false" aria-controls="faq-5">
+                        <span>What if I already have an appointment?</span>
+                        <span class="booking-faq__icon" aria-hidden="true"></span>
                     </button>
-
-                    <div
-                        class="booking-faq__answer"
-                        id="booking-faq-answer-5"
-                        role="region"
-                    >
+                    <div class="booking-faq__answer" id="faq-5">
                         <div class="booking-faq__answer-inner">
-
                             <p>
-                                If you already have an appointment
-                                and need assistance with it, please
-                                contact us directly and we'll be
-                                happy to help.
+                                Contact us directly and we’ll help with changes,
+                                questions, or follow-up for your existing booking.
                             </p>
-
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
     </section>
 
-
-    <!-- ========================================
-         CONTACT CTA
-    ========================================= -->
-    <section
-        class="booking-cta"
-        id="booking-cta"
-    >
+    <!-- CTA -->
+    <section class="booking-cta" id="booking-cta">
         <div class="container">
-
-            <div class="section-heading">
-
-                <p class="eyebrow">
-                    STILL HAVE QUESTIONS?
-                </p>
-
+            <div class="section-heading section-heading--center">
+                <p class="eyebrow">Still have questions?</p>
                 <h2>
-                    We're Here To
-                    <br>
+                    We’re Here To<br>
                     Help.
                 </h2>
-
                 <p>
                     Not sure which service is right for you?
-                    Have a question before booking?
-                    We'd be happy to help.
+                    We’re happy to guide you before you book.
                 </p>
-
-                <a
-                    href="contact.html"
-                    class="btn btn--primary"
-                >
-                    Contact Us
-
-                    <i
-                        class="fa-solid fa-arrow-right"
-                        aria-hidden="true"
-                    ></i>
-                </a>
-
             </div>
-
+            <div class="booking-cta__actions">
+                <a href="contact.html" class="btn btn--primary">
+                    Contact us
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+            </div>
         </div>
     </section>
 
 </main>
 
+<div id="footer-placeholder"></div>
 
-
-
-
-    <div id="footer-placeholder"></div>
-
-    <script src="javascript/script.js"></script>
-    
+<script src="javascript/script.js"></script>
 <script src="javascript/shop.js"></script>
-    <script src="javascript/book.js"></script>
+<script src="javascript/book.js"></script>
 
 </body>
-
 </html>
