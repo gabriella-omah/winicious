@@ -290,6 +290,19 @@
     letter-spacing: -0.03em;
     text-wrap: balance;
 }
+
+.booking-cta .btn--secondary2 {
+    background: transparent;
+    color: var(--color-cream);
+    border-color: rgba(248, 244, 239, 0.7);
+}
+
+.booking-cta .btn--secondary2:hover,
+.booking-cta .btn--secondary2:focus-visible {
+    background: var(--color-cream);
+    color: var(--color-chocolate);
+    border-color: var(--color-cream);
+}
 /* =========================================================
    LARGE DESKTOP
 ========================================================= */
