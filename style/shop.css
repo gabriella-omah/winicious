@@ -205,6 +205,7 @@ CATEGORY FILTERS
     flex-wrap: wrap;
 
     gap: 8px;
+
 }
 
 .category-button {
@@ -1226,8 +1227,8 @@ MOBILE
         gap: 8px;
 
         padding:
-            2px
-            2px
+            4px
+            4px
             8px;
 
         scrollbar-width: none;
@@ -1235,6 +1236,7 @@ MOBILE
         -webkit-overflow-scrolling: touch;
 
         overscroll-behavior-inline: contain;
+            overflow-x: auto;
     }
 
     .shop-categories::-webkit-scrollbar {

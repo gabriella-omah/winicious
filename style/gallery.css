@@ -604,7 +604,9 @@ body.gallery-lightbox-open {
         margin-top: 38px;
         padding-bottom: 5px;
         flex-wrap: nowrap;
+        overflow-x: auto;
         scrollbar-width: none;
+        padding: 5px;
     }
     .gallery-filters::-webkit-scrollbar {
         display: none;
