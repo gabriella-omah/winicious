@@ -2,240 +2,366 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
     >
+
+    <meta
+        name="description"
+        content="Shop Winicious hair, beauty and care essentials, including Elume Hair and selected salon favourites."
+    >
+
     <title>Shop | Winicious</title>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap"
         rel="stylesheet"
     >
+
     <!-- Font Awesome -->
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     >
+
+    <!-- Global Styles -->
     <link rel="stylesheet" href="style/style.css">
+
+    <!-- Shop Styles -->
     <link rel="stylesheet" href="style/shop.css">
 </head>
+
 <body class="nav__dark">
-    <!-- ==================================================
+
+    <!-- ========================================
          NAVIGATION
-    ================================================== -->
+    ========================================= -->
     <div id="navbar-placeholder"></div>
-<main>
-   <!-- ====================================
-         FEATURED COLLECTION
-    ==================================== -->
-    <section
-        class="shop-featured section"
-        id="featured"
-    >
-        <div class=" shop-featured__container">
-            <!-- Featured Image -->
-            <div class="shop-featured__image">
-                <img
-                    src="image/hairproduct2.jpeg"
-                    alt="Elume Hair collection"
-                    loading="lazy"
-                >
-            </div>
-            <!-- Featured Content -->
-            <div class="shop-featured__content">
-                <div class="section-heading">
-                    <p class="eyebrow">
-                        FEATURED COLLECTION
-                    </p>
-                    <h2>
-                        Meet
-                        <br>
-                        Elume Hair.
-                    </h2>
-                    <p class="section-heading__text">
-                        Our signature hair collection, selected
-                        for women who want beautiful, versatile
-                        hair that feels as good as it looks.
-                    </p>
+
+
+    <!-- ========================================
+         MAIN
+    ========================================= -->
+    <main>
+
+        <!-- ========================================
+             FEATURED COLLECTION
+        ========================================= -->
+        <section
+            class="shop-featured section"
+            id="featured"
+        >
+
+            <div class="container shop-featured__container">
+
+                <!-- Image -->
+                <div class="shop-featured__image">
+                    <img
+                        src="image/hairproduct2.jpeg"
+                        alt="Elume Hair collection"
+                        loading="lazy"
+                    >
                 </div>
-                <button
-                    class="text-link"
-                    type="button"
-                    data-filter-category="hair"
-                >
-                    Shop Elume Hair
-                    <i
-                        class="fa-solid fa-arrow-right"
-                        aria-hidden="true"
-                    ></i>
-                </button>
-            </div>
-        </div>
-    </section>
-    <!-- ====================================
-         SHOP PRODUCTS
-    ==================================== -->
-    <section
-        class="shop-products section"
-        id="shopProducts"
-    >
-        <div class="container">
-            <!-- Shop Header -->
-            <div class="shop-products__header">
-                <div class="section-heading">
-                    <p class="eyebrow">
-                        SHOP
-                    </p>
-                    <h2>
-                        Find Your
-                        <br>
-                        Favourites.
-                    </h2>
+
+
+                <!-- Content -->
+                <div class="shop-featured__content">
+
+                    <div class="section-heading">
+
+                        <p class="eyebrow">
+                            FEATURED COLLECTION
+                        </p>
+
+                        <h1>
+                            Meet
+                            <br>
+                            Elume Hair.
+                        </h1>
+
+                        <p class="section-heading__text">
+                            Our signature hair collection, selected
+                            for women who want beautiful, versatile
+                            hair that feels as good as it looks.
+                        </p>
+
+                    </div>
+
+                    <button
+                        class="btn btn--primary shop-featured__button"
+                        type="button"
+                        data-filter-category="hair"
+                    >
+                        Shop Elume Hair
+
+                        <i
+                            class="fa-solid fa-arrow-right"
+                            aria-hidden="true"
+                        ></i>
+                    </button>
+
                 </div>
-                <!-- Category Filters -->
-                <div class="shop-controls">
-                    <div
-                        class="shop-categories"
-                        role="tablist"
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================
+             SHOP PRODUCTS
+        ========================================= -->
+        <section
+            class="shop-products section"
+            id="shopProducts"
+        >
+
+            <div class="container">
+
+                <!-- Section Header -->
+                <div class="shop-products__header">
+
+                    <div class="section-heading">
+
+                        <p class="eyebrow">
+                            SHOP
+                        </p>
+
+                        <h2>
+                            Find Your
+                            <br>
+                            Favourites.
+                        </h2>
+
+                    </div>
+
+
+                    <!-- Category Filters -->
+                    <nav
+                        class="shop-controls"
                         aria-label="Shop categories"
                     >
-                        <button
-                            class="category-button active"
-                            type="button"
-                            data-category="all"
+
+                        <div
+                            class="shop-categories"
+                            role="tablist"
+                            aria-label="Product categories"
                         >
-                            All
-                        </button>
-                        <button
-                            class="category-button"
-                            type="button"
-                            data-category="hair"
-                        >
-                            Elume Hair
-                        </button>
-                        <button
-                            class="category-button"
-                            type="button"
-                            data-category="tools"
-                        >
-                            Hair Tools
-                        </button>
-                        <button
-                            class="category-button"
-                            type="button"
-                            data-category="care"
-                        >
-                            Hair Care
-                        </button>
-                        <button
-                            class="category-button"
-                            type="button"
-                            data-category="beauty"
-                        >
-                            Beauty
-                        </button>
-                    </div>
+
+                            <button
+                                class="category-button active"
+                                type="button"
+                                role="tab"
+                                aria-selected="true"
+                                data-category="all"
+                            >
+                                All
+                            </button>
+
+                            <button
+                                class="category-button"
+                                type="button"
+                                role="tab"
+                                aria-selected="false"
+                                data-category="hair"
+                            >
+                                Elume Hair
+                            </button>
+
+                            <button
+                                class="category-button"
+                                type="button"
+                                role="tab"
+                                aria-selected="false"
+                                data-category="tools"
+                            >
+                                Hair Tools
+                            </button>
+
+                            <button
+                                class="category-button"
+                                type="button"
+                                role="tab"
+                                aria-selected="false"
+                                data-category="care"
+                            >
+                                Hair Care
+                            </button>
+
+                            <button
+                                class="category-button"
+                                type="button"
+                                role="tab"
+                                aria-selected="false"
+                                data-category="beauty"
+                            >
+                                Beauty
+                            </button>
+
+                        </div>
+
+                    </nav>
+
                 </div>
-            </div>
-            <!-- Product Grid -->
-            <div
-                class="product-grid"
-                id="productGrid"
-            ></div>
-            <!-- Empty State -->
-            <div
-                class="shop-empty"
-                id="shopEmpty"
-                hidden
-            >
-                <p>
-                    No products found in this category.
-                </p>
-            </div>
-        </div>
-    </section>
-    <!-- ====================================
-         SHOP CTA
-    ==================================== -->
-    <section
-        class="shop-cta section"
-        id="shop-cta"
-    >
-        <div class="container">
-            <div class="section-heading">
-                <p class="eyebrow">
-                    NEED A LITTLE HELP?
-                </p>
-                <h2>
-                    Not Sure
-                    <br>
-                    What To Choose?
-                </h2>
-                <p class="section-heading__text">
-                    Get in touch and we'll help you find
-                    the right product for your hair and
-                    beauty needs.
-                </p>
-            </div>
-            <div class="booking-cta__actions">
-                <a
-                    href="contact.html"
-                    class="btn btn--primary"
+
+
+                <!-- Product Grid -->
+                <div
+                    class="product-grid"
+                    id="productGrid"
+                ></div>
+
+
+                <!-- Empty State -->
+                <div
+                    class="shop-empty"
+                    id="shopEmpty"
+                    hidden
                 >
-                    Talk To Us
-                    <i
-                        class="fa-solid fa-arrow-right"
-                        aria-hidden="true"
-                    ></i>
-                </a>
+                    <p>
+                        No products found in this category.
+                    </p>
+                </div>
+
             </div>
-        </div>
-    </section>
-</main>
-    <!-- ==================================================
+
+        </section>
+
+
+        <!-- ========================================
+             SHOP CTA
+        ========================================= -->
+        <section
+            class="shop-cta section"
+            id="shop-cta"
+        >
+
+            <div class="container">
+
+                <div class="shop-cta__inner">
+
+                    <div class="section-heading">
+
+                        <p class="eyebrow">
+                            NEED A LITTLE HELP?
+                        </p>
+
+                        <h2>
+                            Not Sure
+                            <br>
+                            What To Choose?
+                        </h2>
+
+                        <p class="section-heading__text">
+                            Get in touch and we'll help you find
+                            the right product for your hair and
+                            beauty needs.
+                        </p>
+
+                    </div>
+
+
+                    <div class="shop-cta__actions">
+
+                        <a
+                            href="contact.html"
+                            class="btn btn--primary"
+                        >
+                            Talk To Us
+
+                            <i
+                                class="fa-solid fa-arrow-right"
+                                aria-hidden="true"
+                            ></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ========================================
          CART DRAWER
-    ================================================== -->
+    ========================================= -->
     <aside
         class="cart-drawer"
         id="cartDrawer"
         aria-label="Shopping cart"
         aria-hidden="true"
     >
-        <div class="cart-drawer__overlay" id="closeCart"></div>
+
+        <div
+            class="cart-drawer__overlay"
+            id="closeCart"
+        ></div>
+
+
         <div class="cart-drawer__panel">
+
+            <!-- Cart Header -->
             <div class="cart-drawer__header">
+
                 <div>
+
                     <p class="eyebrow">
                         YOUR BAG
                     </p>
+
                     <h2>
                         Shopping Bag
                     </h2>
+
                 </div>
+
+
                 <button
                     type="button"
                     class="cart-close"
                     id="closeCartButton"
                     aria-label="Close shopping cart"
                 >
-                    <i class="fa-solid fa-xmark"></i>
+                    <i
+                        class="fa-solid fa-xmark"
+                        aria-hidden="true"
+                    ></i>
                 </button>
+
             </div>
+
+
+            <!-- Cart Items -->
             <div
                 class="cart-items"
                 id="cartItems"
             ></div>
+
+
+            <!-- Empty Cart -->
             <div
                 class="cart-empty"
                 id="cartEmpty"
             >
-                <i class="fa-regular fa-heart"></i>
+
+                <i
+                    class="fa-regular fa-heart"
+                    aria-hidden="true"
+                ></i>
+
                 <p>
                     Your bag is currently empty.
                 </p>
+
                 <button
                     type="button"
                     class="text-link"
@@ -243,40 +369,67 @@
                 >
                     Continue Shopping
                 </button>
+
             </div>
+
+
+            <!-- Cart Footer -->
             <div
                 class="cart-drawer__footer"
                 id="cartFooter"
                 hidden
             >
+
                 <div class="cart-total">
+
                     <span>
                         Subtotal
                     </span>
+
                     <strong id="cartSubtotal">
                         ₦0
                     </strong>
+
                 </div>
+
+
                 <button
                     type="button"
-                    class="btn cart-checkout"
+                    class="btn btn--primary cart-checkout"
                     id="checkoutButton"
                 >
                     Proceed To Checkout
-                    <i class="fa-solid fa-arrow-right"></i>
+
+                    <i
+                        class="fa-solid fa-arrow-right"
+                        aria-hidden="true"
+                    ></i>
                 </button>
+
+
                 <p>
                     Secure payment options will be available
                     at checkout.
                 </p>
+
             </div>
+
         </div>
+
     </aside>
-    <!-- ==================================================
+
+
+    <!-- ========================================
          FOOTER
-    ================================================== -->
+    ========================================= -->
     <div id="footer-placeholder"></div>
+
+
+    <!-- ========================================
+         JAVASCRIPT
+    ========================================= -->
     <script src="javascript/script.js"></script>
     <script src="javascript/shop.js"></script>
+
 </body>
 </html>

@@ -357,7 +357,7 @@ a.contact-detail__value:hover {
 .contact-form__note {
     margin: 0;
     color: var(--color-taupe);
-    font-size: 12px;
+    font-size: 13px;
     line-height: 1.5;
 }
 

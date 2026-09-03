@@ -1,0 +1,458 @@
+```css
+/* ==================================================
+   SERVICES GALLERY CTA
+   PREMIUM • EDITORIAL • PINTEREST-STYLE
+================================================== */
+
+.services-gallery-cta {
+    padding-block: clamp(5.5rem, 9vw, 8rem);
+    background: var(--color-ivory);
+    overflow: hidden;
+}
+
+.services-gallery-cta__layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.28fr);
+    align-items: center;
+    gap: clamp(3rem, 7vw, 7rem);
+}
+
+
+/* ==================================================
+   GALLERY CTA CONTENT
+================================================== */
+
+.services-gallery-cta__content {
+    width: min(100%, 400px);
+}
+
+.services-gallery-cta__content h2 {
+    margin: 0.75rem 0 1.25rem;
+
+    color: var(--color-chocolate);
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 4vw, 3.6rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+}
+
+.services-gallery-cta__content > p:not(.eyebrow) {
+    max-width: 360px;
+    margin: 0;
+
+    color: var(--color-muted, #756b68);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+.services-gallery-cta__content .btn {
+    margin-top: 1.75rem;
+}
+
+
+/* ==================================================
+   PINTEREST-STYLE GALLERY
+================================================== */
+
+.services-gallery-cta__grid {
+    width: 100%;
+
+    display: grid;
+
+    /*
+       Four genuine grid areas.
+       Nothing overlaps another image.
+    */
+    grid-template-columns:
+        minmax(0, 1.08fr)
+        minmax(0, 0.82fr)
+        minmax(0, 0.82fr);
+
+    grid-template-rows:
+        220px
+        280px
+        190px;
+
+    gap: clamp(0.8rem, 1.5vw, 1.25rem);
+
+    align-items: stretch;
+}
+
+
+/* ==================================================
+   GALLERY IMAGE
+================================================== */
+
+.services-gallery-cta__image {
+    position: relative;
+
+    display: block;
+
+    min-width: 0;
+    min-height: 0;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(91, 62, 55, 0.12);
+
+    background: var(--color-cream);
+
+    box-shadow:
+        0 12px 35px rgba(67, 45, 40, 0.07);
+
+    text-decoration: none;
+
+    transition:
+        transform 0.45s ease,
+        box-shadow 0.45s ease;
+}
+
+
+/* ==================================================
+   ASYMMETRIC IMAGE PLACEMENT
+================================================== */
+
+/*
+   IMAGE 1
+   Tall hero image on the LEFT.
+*/
+
+.services-gallery-cta__image:nth-child(1) {
+    grid-column: 1;
+    grid-row: 1 / 4;
+
+    min-height: 100%;
+}
+
+
+/*
+   IMAGE 2
+   Smaller image — TOP CENTER.
+*/
+
+.services-gallery-cta__image:nth-child(2) {
+    grid-column: 2;
+    grid-row: 1;
+
+    transform: translateY(1.5rem);
+}
+
+
+/*
+   IMAGE 3
+   Medium image — CENTER RIGHT.
+*/
+
+.services-gallery-cta__image:nth-child(3) {
+    grid-column: 3;
+    grid-row: 1 / 3;
+
+    transform: translateY(-0.25rem);
+}
+
+
+/*
+   IMAGE 4
+   Wide image across the bottom.
+*/
+
+.services-gallery-cta__image:nth-child(4) {
+    grid-column: 2 / 4;
+    grid-row: 3;
+
+    transform: translateY(0.75rem);
+}
+
+
+/* ==================================================
+   IMAGE ELEMENT
+================================================== */
+
+.services-gallery-cta__image img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.75s cubic-bezier(0.2, 0.65, 0.3, 1);
+}
+
+
+/* ==================================================
+   SUBTLE IMAGE FRAME
+================================================== */
+
+.services-gallery-cta__image::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    pointer-events: none;
+}
+
+
+/* ==================================================
+   GALLERY HOVER
+================================================== */
+
+.services-gallery-cta__image:hover {
+    z-index: 2;
+
+    box-shadow:
+        0 20px 45px rgba(67, 45, 40, 0.12);
+}
+
+.services-gallery-cta__image:hover img {
+    transform: scale(1.035);
+}
+
+
+/* ==================================================
+   TABLET — 900px
+================================================== */
+
+@media (max-width: 900px) {
+
+    .services-gallery-cta {
+        padding-block: 6rem;
+    }
+
+    .services-gallery-cta__layout {
+        grid-template-columns:
+            minmax(250px, 0.8fr)
+            minmax(0, 1.2fr);
+
+        gap: 3rem;
+    }
+
+    .services-gallery-cta__grid {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 0.78fr)
+            minmax(0, 0.78fr);
+
+        grid-template-rows:
+            180px
+            235px
+            165px;
+
+        gap: 0.85rem;
+    }
+
+    .services-gallery-cta__content h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+}
+
+
+/* ==================================================
+   MOBILE — 768px
+================================================== */
+
+@media (max-width: 768px) {
+
+    .services-gallery-cta {
+        padding-block: 5rem;
+    }
+
+    .services-gallery-cta__layout {
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .services-gallery-cta__content {
+        width: 100%;
+        max-width: 500px;
+        margin-inline: auto;
+
+        text-align: center;
+    }
+
+    .services-gallery-cta__content h2 {
+        font-size: clamp(2.35rem, 9vw, 3.4rem);
+    }
+
+    .services-gallery-cta__content > p:not(.eyebrow) {
+        margin-inline: auto;
+    }
+
+    .services-gallery-cta__content .btn {
+        margin-top: 1.5rem;
+    }
+
+
+    /* ------------------------------------------
+       MOBILE PINTEREST GRID
+    ------------------------------------------ */
+
+    .services-gallery-cta__grid {
+        width: 100%;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 0.82fr);
+
+        grid-template-rows:
+            230px
+            170px
+            230px
+            190px;
+
+        gap: 0.85rem;
+    }
+
+
+    /*
+       IMAGE 1
+       Tall left image.
+    */
+
+    .services-gallery-cta__image:nth-child(1) {
+        grid-column: 1;
+        grid-row: 1 / 3;
+
+        transform: none;
+    }
+
+
+    /*
+       IMAGE 2
+       Small top-right image.
+    */
+
+    .services-gallery-cta__image:nth-child(2) {
+        grid-column: 2;
+        grid-row: 1;
+
+        transform: translateY(0.8rem);
+    }
+
+
+    /*
+       IMAGE 3
+       Middle-right image.
+    */
+
+    .services-gallery-cta__image:nth-child(3) {
+        grid-column: 2;
+        grid-row: 2;
+
+        transform: translateY(-0.25rem);
+    }
+
+
+    /*
+       IMAGE 4
+       Wide bottom image.
+    */
+
+    .services-gallery-cta__image:nth-child(4) {
+        grid-column: 1 / 3;
+        grid-row: 3 / 5;
+
+        transform: translateY(0.5rem);
+    }
+
+}
+
+
+/* ==================================================
+   SMALL PHONES — 480px
+================================================== */
+
+@media (max-width: 480px) {
+
+    .services-gallery-cta {
+        padding-block: 4.5rem;
+    }
+
+    .services-gallery-cta__layout {
+        gap: 2.5rem;
+    }
+
+    .services-gallery-cta__grid {
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 0.82fr);
+
+        grid-template-rows:
+            195px
+            145px
+            195px
+            165px;
+
+        gap: 0.7rem;
+    }
+
+    .services-gallery-cta__content h2 {
+        font-size: clamp(2.15rem, 10vw, 3rem);
+    }
+
+    .services-gallery-cta__content > p:not(.eyebrow) {
+        font-size: 0.82rem;
+        line-height: 1.75;
+    }
+
+    .services-gallery-cta__image:nth-child(2) {
+        transform: translateY(0.6rem);
+    }
+
+    .services-gallery-cta__image:nth-child(4) {
+        transform: translateY(0.35rem);
+    }
+
+}
+
+
+/* ==================================================
+   EXTRA SMALL — 360px
+================================================== */
+
+@media (max-width: 360px) {
+
+    .services-gallery-cta {
+        padding-block: 4rem;
+    }
+
+    .services-gallery-cta__grid {
+        grid-template-rows:
+            175px
+            130px
+            175px
+            145px;
+
+        gap: 0.6rem;
+    }
+
+    .services-gallery-cta__content h2 {
+        font-size: 2.1rem;
+    }
+
+}
+
+
+/* ==================================================
+   REDUCED MOTION
+================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .services-gallery-cta__image,
+    .services-gallery-cta__image img {
+        transition: none !important;
+        animation: none !important;
+    }
+
+}
+```
