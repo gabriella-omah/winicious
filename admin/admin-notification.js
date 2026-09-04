@@ -45,12 +45,17 @@ const markNotificationsRead =
 
 
 /* ==================================================
+   NOTIFICATION DATA
+================================================== */
+
+let notifications = [];
+
+
+/* ==================================================
    FORMAT DATE
 ================================================== */
 
-function formatNotificationDate(
-    date
-) {
+function formatNotificationDate(date) {
 
     return new Intl.DateTimeFormat(
         "en-NG",
@@ -61,6 +66,167 @@ function formatNotificationDate(
     ).format(
         new Date(date)
     );
+}
+
+
+/* ==================================================
+   ESCAPE HTML
+================================================== */
+
+function escapeNotificationHTML(value) {
+
+    return String(
+        value ?? ""
+    )
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* ==================================================
+   GET NOTIFICATION ICON
+================================================== */
+
+function getNotificationIcon(type) {
+
+    switch (type) {
+
+        case "order":
+            return "🛍️";
+
+        case "payment":
+            return "💳";
+
+        case "booking":
+            return "📅";
+
+        case "contact":
+            return "💬";
+
+        default:
+            return "🔔";
+    }
+}
+
+
+/* ==================================================
+   UPDATE BADGE
+================================================== */
+
+function updateNotificationBadge() {
+
+    const unreadCount =
+        notifications.filter(
+            notification =>
+                !notification.is_read
+        ).length;
+
+
+    if (!notificationBadge) {
+        return;
+    }
+
+
+    if (unreadCount === 0) {
+
+        notificationBadge.hidden =
+            true;
+
+        return;
+    }
+
+
+    notificationBadge.textContent =
+        unreadCount > 99
+            ? "99+"
+            : unreadCount;
+
+
+    notificationBadge.hidden =
+        false;
+}
+
+
+/* ==================================================
+   RENDER NOTIFICATIONS
+================================================== */
+
+function renderNotifications() {
+
+    if (!notificationList) {
+        return;
+    }
+
+
+    if (!notifications.length) {
+
+        notificationList.innerHTML = `
+            <p class="notification-empty">
+                No notifications yet.
+            </p>
+        `;
+
+        updateNotificationBadge();
+
+        return;
+    }
+
+
+    notificationList.innerHTML =
+        notifications
+            .map(notification => {
+
+                return `
+                    <div
+                        class="
+                            notification-item
+                            ${
+                                notification.is_read
+                                    ? ""
+                                    : "notification-item--unread"
+                            }
+                        "
+                    >
+
+                        <div class="notification-item__icon">
+                            ${getNotificationIcon(
+                                notification.type
+                            )}
+                        </div>
+
+                        <div class="notification-item__content">
+
+                            <strong>
+                                ${escapeNotificationHTML(
+                                    notification.title
+                                )}
+                            </strong>
+
+                            <p>
+                                ${escapeNotificationHTML(
+                                    notification.message
+                                )}
+                            </p>
+
+                            <small>
+                                ${formatNotificationDate(
+                                    notification.created_at
+                                )}
+                            </small>
+
+                        </div>
+
+                    </div>
+                `;
+
+            })
+            .join("");
+
+
+    updateNotificationBadge();
 }
 
 
@@ -97,220 +263,258 @@ async function loadNotifications() {
     }
 
 
-    renderNotifications(
-        data || []
-    );
+    notifications =
+        data || [];
+
+
+    renderNotifications();
 }
 
 
 /* ==================================================
-   RENDER NOTIFICATIONS
+   SHOW LIVE TOAST
 ================================================== */
 
-function renderNotifications(
-    notifications
+function showNotificationToast(
+    notification
 ) {
 
-    if (!notificationList) {
-        return;
-    }
+    /* ----------------------------------------------
+       Remove an existing toast
+    ---------------------------------------------- */
 
-
-    /* ------------------------------------------------
-       No notifications
-    ------------------------------------------------ */
-
-    if (!notifications.length) {
-
-        notificationList.innerHTML = `
-            <p class="notification-empty">
-                No notifications yet.
-            </p>
-        `;
-
-
-        updateNotificationBadge(
-            0
+    const existingToast =
+        document.querySelector(
+            ".notification-toast"
         );
 
-        return;
+
+    if (existingToast) {
+        existingToast.remove();
     }
 
 
-    /* ------------------------------------------------
-       Count unread notifications
-    ------------------------------------------------ */
+    /* ----------------------------------------------
+       Create toast
+    ---------------------------------------------- */
 
-    const unreadCount =
-        notifications.filter(
-            notification =>
-                !notification.is_read
-        ).length;
+    const toast =
+        document.createElement(
+            "div"
+        );
 
 
-    updateNotificationBadge(
-        unreadCount
+    toast.className =
+        "notification-toast";
+
+
+    toast.innerHTML = `
+
+        <div class="notification-toast__icon">
+
+            ${getNotificationIcon(
+                notification.type
+            )}
+
+        </div>
+
+        <div class="notification-toast__content">
+
+            <strong>
+                ${escapeNotificationHTML(
+                    notification.title
+                )}
+            </strong>
+
+            <p>
+                ${escapeNotificationHTML(
+                    notification.message
+                )}
+            </p>
+
+        </div>
+
+        <button
+            type="button"
+            class="notification-toast__close"
+            aria-label="Close notification"
+        >
+            ×
+        </button>
+
+    `;
+
+
+    document.body.appendChild(
+        toast
     );
 
 
-    /* ------------------------------------------------
-       Display notifications
-    ------------------------------------------------ */
+    /* ----------------------------------------------
+       Close button
+    ---------------------------------------------- */
 
-    notificationList.innerHTML =
-        notifications
-            .map(
-                notification => {
+    const closeButton =
+        toast.querySelector(
+            ".notification-toast__close"
+        );
 
-                    return `
-                        <div
-                            class="
-                                notification-item
-                                ${
-                                    notification.is_read
-                                        ? ""
-                                        : "notification-item--unread"
-                                }
-                            "
-                        >
 
-                            <div class="notification-item__icon">
-                                ${getNotificationIcon(
-                                    notification.type
-                                )}
-                            </div>
+    closeButton?.addEventListener(
+        "click",
+        () => {
 
-                            <div class="notification-item__content">
+            toast.remove();
 
-                                <strong>
-                                    ${escapeNotificationHTML(
-                                        notification.title
-                                    )}
-                                </strong>
+        }
+    );
 
-                                <p>
-                                    ${escapeNotificationHTML(
-                                        notification.message
-                                    )}
-                                </p>
 
-                                <small>
-                                    ${formatNotificationDate(
-                                        notification.created_at
-                                    )}
-                                </small>
+    /* ----------------------------------------------
+       Automatically disappear
+    ---------------------------------------------- */
 
-                            </div>
+    setTimeout(() => {
 
-                        </div>
-                    `;
+        if (toast.isConnected) {
+
+            toast.remove();
+
+        }
+
+    }, 7000);
+}
+
+
+/* ==================================================
+   PLAY NOTIFICATION SOUND
+================================================== */
+
+function playNotificationSound() {
+
+    try {
+
+        const audio =
+            new Audio(
+                "sounds/notification.mp3"
+            );
+
+        audio.volume =
+            0.5;
+
+        audio.play().catch(() => {
+
+            /*
+             * Browsers can block automatic
+             * audio until the admin interacts
+             * with the page.
+             */
+
+        });
+
+    } catch (error) {
+
+        console.log(
+            "Notification sound unavailable."
+        );
+
+    }
+}
+
+
+/* ==================================================
+   REALTIME SUBSCRIPTION
+================================================== */
+
+const notificationChannel =
+    notificationSupabase
+        .channel(
+            "winicious-admin-notifications"
+        )
+        .on(
+            "postgres_changes",
+            {
+                event: "INSERT",
+                schema: "public",
+                table: "notifications"
+            },
+            (payload) => {
+
+                console.log(
+                    "🔔 New notification received:",
+                    payload.new
+                );
+
+
+                /* ----------------------------------
+                   Add new notification to beginning
+                ---------------------------------- */
+
+                notifications.unshift(
+                    payload.new
+                );
+
+
+                /* ----------------------------------
+                   Keep only newest 30
+                ---------------------------------- */
+
+                notifications =
+                    notifications.slice(
+                        0,
+                        30
+                    );
+
+
+                /* ----------------------------------
+                   Update dashboard
+                ---------------------------------- */
+
+                renderNotifications();
+
+
+                /* ----------------------------------
+                   Show popup
+                ---------------------------------- */
+
+                showNotificationToast(
+                    payload.new
+                );
+
+
+                /* ----------------------------------
+                   Play sound
+                ---------------------------------- */
+
+                playNotificationSound();
+
+            }
+        )
+        .subscribe(
+            (status) => {
+
+                console.log(
+                    "🔔 Notification realtime:",
+                    status
+                );
+
+
+                if (
+                    status === "SUBSCRIBED"
+                ) {
+
+                    console.log(
+                        "✅ Live notifications connected."
+                    );
 
                 }
-            )
-            .join("");
-}
 
-
-/* ==================================================
-   NOTIFICATION BADGE
-================================================== */
-
-function updateNotificationBadge(
-    count
-) {
-
-    if (!notificationBadge) {
-        return;
-    }
-
-
-    if (count <= 0) {
-
-        notificationBadge.hidden =
-            true;
-
-        return;
-    }
-
-
-    notificationBadge.textContent =
-        count > 99
-            ? "99+"
-            : count;
-
-
-    notificationBadge.hidden =
-        false;
-}
-
-
-/* ==================================================
-   NOTIFICATION ICONS
-================================================== */
-
-function getNotificationIcon(
-    type
-) {
-
-    switch (type) {
-
-        case "order":
-            return "🛍️";
-
-        case "payment":
-            return "💳";
-
-        case "booking":
-            return "📅";
-
-        case "contact":
-            return "💬";
-
-        case "test":
-            return "🔔";
-
-        default:
-            return "🔔";
-    }
-}
-
-
-/* ==================================================
-   ESCAPE HTML
-================================================== */
-
-function escapeNotificationHTML(
-    value
-) {
-
-    return String(
-        value ?? ""
-    )
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
+            }
         );
-}
 
 
 /* ==================================================
-   OPEN / CLOSE NOTIFICATION PANEL
+   OPEN / CLOSE NOTIFICATIONS
 ================================================== */
 
 notificationButton?.addEventListener(
@@ -324,6 +528,7 @@ notificationButton?.addEventListener(
 
         notificationPanel.hidden =
             !notificationPanel.hidden;
+
     }
 );
 
@@ -361,46 +566,19 @@ markNotificationsRead?.addEventListener(
         }
 
 
-        await loadNotifications();
+        notifications =
+            notifications.map(
+                notification => ({
+                    ...notification,
+                    is_read: true
+                })
+            );
+
+
+        renderNotifications();
+
     }
 );
-
-
-/* ==================================================
-   REALTIME
-================================================== */
-
-notificationSupabase
-    .channel(
-        "winicious-notifications"
-    )
-    .on(
-        "postgres_changes",
-        {
-            event: "INSERT",
-            schema: "public",
-            table: "notifications"
-        },
-        (payload) => {
-
-            console.log(
-                "New notification:",
-                payload.new
-            );
-
-
-            loadNotifications();
-        }
-    )
-    .subscribe(
-        (status) => {
-
-            console.log(
-                "Notification realtime status:",
-                status
-            );
-        }
-    );
 
 
 /* ==================================================

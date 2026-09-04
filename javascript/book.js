@@ -61,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-
 const bookingForm =
     document.getElementById("bookingForm");
 
@@ -75,19 +74,11 @@ if (bookingForm) {
             event.preventDefault();
 
 
-            /* ==========================================
-               GET SUBMIT BUTTON
-            ========================================== */
-
             const submitButton =
                 bookingForm.querySelector(
                     ".booking-form__submit"
                 );
 
-
-            /* ==========================================
-               READ FORM
-            ========================================== */
 
             const formData =
                 new FormData(bookingForm);
@@ -118,10 +109,6 @@ if (bookingForm) {
             };
 
 
-            /* ==========================================
-               DISABLE BUTTON
-            ========================================== */
-
             submitButton.disabled =
                 true;
 
@@ -135,20 +122,11 @@ if (bookingForm) {
                    CREATE BOOKING
                 ====================================== */
 
-                const {
-                    data: createdBooking,
-                    error
-                } =
+                const { error } =
                     await supabaseClient
                         .from("bookings")
-                        .insert([booking])
-                        .select()
-                        .single();
+                        .insert([booking]);
 
-
-                /* ======================================
-                   CHECK BOOKING ERROR
-                ====================================== */
 
                 if (error) {
 
@@ -157,62 +135,9 @@ if (bookingForm) {
                         error
                     );
 
-
                     throw new Error(
                         "We couldn't submit your appointment request. Please try again."
                     );
-                }
-
-
-                console.log(
-                    "Booking created:",
-                    createdBooking
-                );
-
-
-                /* ======================================
-                   CREATE ADMIN NOTIFICATION
-                ====================================== */
-
-                const {
-                    error: notificationError
-                } =
-                    await supabaseClient
-                        .from("notifications")
-                        .insert({
-
-                            type:
-                                "booking",
-
-                            title:
-                                "New Booking",
-
-                            message:
-                                `${booking.customer_name} submitted a new ${booking.service} booking request.`,
-
-                            related_id:
-                                createdBooking.id
-                        });
-
-
-                /* --------------------------------------
-                   Notification errors should NOT
-                   cancel the booking
-                -------------------------------------- */
-
-                if (notificationError) {
-
-                    console.error(
-                        "Notification error:",
-                        notificationError
-                    );
-
-                } else {
-
-                    console.log(
-                        "Booking notification created successfully."
-                    );
-
                 }
 
 
@@ -235,10 +160,6 @@ if (bookingForm) {
 
 
             } catch (error) {
-
-                /* ======================================
-                   ERROR HANDLING
-                ====================================== */
 
                 console.error(
                     "Booking submission error:",
