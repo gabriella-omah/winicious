@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Checkout | Winicious</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <!-- Existing styles -->
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/checkout.css">
+</head>
+
+<body class="nav__dark">
+
+    <!-- Navbar -->
+    <div id="navbar-placeholder"></div>
+
+
+    <main>
+
+        <!-- ==================================================
+             CHECKOUT HEADER
+        ================================================== -->
+        <section class="checkout-header section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <p class="eyebrow">
+                        YOUR ORDER
+                    </p>
+
+                    <h1>
+                        Checkout.
+                    </h1>
+
+                    <p>
+                        Complete your details below to place your order.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==================================================
+             CHECKOUT
+        ================================================== -->
+        <section class="checkout section">
+
+            <div class="container">
+
+                <div class="checkout-layout">
+
+                    <!-- ==========================================
+                         CUSTOMER DETAILS
+                    =========================================== -->
+                    <div class="checkout-form-wrapper">
+
+                        <div class="checkout-card">
+
+                            <div class="checkout-card__heading">
+
+                                <p class="eyebrow">
+                                    DELIVERY DETAILS
+                                </p>
+
+                                <h2>
+                                    Your Information
+                                </h2>
+
+                            </div>
+
+
+                            <form id="checkoutForm">
+
+                                <!-- Name -->
+                                <div class="form-group">
+
+                                    <label for="customerName">
+                                        Full Name
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        id="customerName"
+                                        name="customerName"
+                                        placeholder="Enter your full name"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <!-- Email -->
+                                <div class="form-group">
+
+                                    <label for="customerEmail">
+                                        Email Address
+                                    </label>
+
+                                    <input
+                                        type="email"
+                                        id="customerEmail"
+                                        name="customerEmail"
+                                        placeholder="you@example.com"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <!-- Phone -->
+                                <div class="form-group">
+
+                                    <label for="customerPhone">
+                                        Phone Number
+                                    </label>
+
+                                    <input
+                                        type="tel"
+                                        id="customerPhone"
+                                        name="customerPhone"
+                                        placeholder="08012345678"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <!-- Address -->
+                                <div class="form-group">
+
+                                    <label for="deliveryAddress">
+                                        Delivery Address
+                                    </label>
+
+                                    <textarea
+                                        id="deliveryAddress"
+                                        name="deliveryAddress"
+                                        rows="4"
+                                        placeholder="Enter your delivery address"
+                                        required
+                                    ></textarea>
+
+                                </div>
+
+
+                                <!-- Payment Method -->
+                                <div class="form-group">
+
+                                    <label>
+                                        Payment Method
+                                    </label>
+
+
+                                    <div class="payment-options">
+
+                                        <label class="payment-option">
+
+                                            <input
+                                                type="radio"
+                                                name="paymentMethod"
+                                                value="flutterwave"
+                                                checked
+                                            >
+
+                                            <span>
+                                                <strong>Flutterwave</strong>
+                                                <small>
+                                                    Pay securely online
+                                                </small>
+                                            </span>
+
+                                        </label>
+
+
+                                        <label class="payment-option">
+
+                                            <input
+                                                type="radio"
+                                                name="paymentMethod"
+                                                value="bank_transfer"
+                                            >
+
+                                            <span>
+                                                <strong>Bank Transfer</strong>
+                                                <small>
+                                                    Pay by bank transfer
+                                                </small>
+                                            </span>
+
+                                        </label>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- Error -->
+                                <div
+                                    class="checkout-message checkout-message--error"
+                                    id="checkoutError"
+                                    hidden
+                                ></div>
+
+
+                                <!-- Success -->
+                                <div
+                                    class="checkout-message checkout-message--success"
+                                    id="checkoutSuccess"
+                                    hidden
+                                ></div>
+
+
+                                <!-- Submit -->
+                                <button
+                                    type="submit"
+                                    class="btn btn--primary checkout-submit"
+                                    id="placeOrderButton"
+                                >
+                                    Place Order
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ==========================================
+                         ORDER SUMMARY
+                    =========================================== -->
+                    <aside class="checkout-summary">
+
+                        <div class="checkout-card">
+
+                            <div class="checkout-card__heading">
+
+                                <p class="eyebrow">
+                                    YOUR BAG
+                                </p>
+
+                                <h2>
+                                    Order Summary
+                                </h2>
+
+                            </div>
+
+
+                            <!-- Products -->
+                            <div
+                                class="checkout-items"
+                                id="checkoutItems"
+                            ></div>
+
+
+                            <!-- Empty -->
+                            <div
+                                class="checkout-empty"
+                                id="checkoutEmpty"
+                                hidden
+                            >
+                                <p>
+                                    Your bag is empty.
+                                </p>
+
+                                <a
+                                    href="shop.html"
+                                    class="text-link"
+                                >
+                                    Return To Shop
+                                </a>
+                            </div>
+
+
+                            <!-- Totals -->
+                            <div
+                                class="checkout-totals"
+                                id="checkoutTotals"
+                            >
+
+                                <div class="checkout-total-row">
+
+                                    <span>
+                                        Subtotal
+                                    </span>
+
+                                    <strong id="checkoutSubtotal">
+                                        ₦0
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="checkout-total-row">
+
+                                    <span>
+                                        Delivery
+                                    </span>
+
+                                    <strong id="checkoutDelivery">
+                                        ₦0
+                                    </strong>
+
+                                </div>
+
+
+                                <div class="checkout-total-row checkout-total-row--grand">
+
+                                    <span>
+                                        Total
+                                    </span>
+
+                                    <strong id="checkoutTotal">
+                                        ₦0
+                                    </strong>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </aside>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Your Supabase client -->
+    <script src="javascript/supabase.js"></script>
+
+    <!-- Global JS -->
+    <script src="javascript/products.js"></script>
+    <script src="javascript/script.js"></script>
+
+    <!-- Checkout JS -->
+    <script src="javascript/checkout.js"></script>
+
+</body>
+</html>

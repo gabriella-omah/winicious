@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Winicious</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<main class="admin-page">
+    <section class="admin-login">
+        <p class="eyebrow">Winicious</p>
+        <h1>Admin Login</h1>
+        <p>
+            Sign in to access the Winicious admin dashboard.
+        </p>
+        <form id="adminLoginForm">
+            <button
+    type="button"
+    id="adminLogout"
+    class="admin-logout"
+>
+    Logout
+</button>
+            <div>
+                <label for="adminEmail">Email</label>
+                <input
+                    type="email"
+                    id="adminEmail"
+                    required
+                    autocomplete="email"
+                >
+            </div>
+            <div>
+                <label for="adminPassword">Password</label>
+                <input
+                    type="password"
+                    id="adminPassword"
+                    required
+                    autocomplete="current-password"
+                >
+            </div>
+            <button type="submit">
+                Login
+            </button>
+            <p id="loginError" role="alert"></p>
+            
+        </form>
+    </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../javascript/supabase.js"></script>
+<script src="admin-login.js"></script>
+</body>
+</html>

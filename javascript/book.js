@@ -61,3 +61,55 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+const bookingForm = document.getElementById("bookingForm");
+
+if (bookingForm) {
+    bookingForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const submitButton = bookingForm.querySelector(
+            ".booking-form__submit"
+        );
+
+        const formData = new FormData(bookingForm);
+
+        const booking = {
+            service: formData.get("service"),
+            preferred_date: formData.get("date"),
+            preferred_time: formData.get("time"),
+            customer_name: formData.get("name"),
+            customer_email: formData.get("email"),
+            customer_phone: formData.get("phone"),
+            notes: formData.get("notes") || null
+        };
+
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+
+        const { error } = await supabaseClient
+            .from("bookings")
+            .insert([booking]);
+
+        if (error) {
+            console.error("Booking error:", error);
+
+            alert(
+                "We couldn't submit your appointment request. Please try again."
+            );
+
+            submitButton.disabled = false;
+            submitButton.textContent = "Request appointment";
+            return;
+        }
+
+        bookingForm.reset();
+
+        submitButton.disabled = false;
+        submitButton.textContent = "Request appointment";
+
+        alert(
+            "Your appointment request has been received. We'll contact you to confirm your appointment."
+        );
+    });
+}

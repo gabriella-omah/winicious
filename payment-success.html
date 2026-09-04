@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Payment Status | Winicious</title>
+
+    <link
+        rel="stylesheet"
+        href="style/style.css"
+    >
+</head>
+
+<body>
+
+    <main class="payment-result">
+
+        <div class="payment-result__card">
+
+            <h1 id="paymentTitle">
+                Checking Payment...
+            </h1>
+
+            <p id="paymentMessage">
+                Please wait while we confirm your payment.
+            </p>
+
+            <div
+                id="paymentDetails"
+                hidden
+            >
+            </div>
+
+            <a
+                href="shop.html"
+                id="continueShopping"
+                class="btn btn--primary"
+                hidden
+            >
+                Continue Shopping
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Your Supabase configuration -->
+    <script src="javascript/supabase.js"></script>
+
+    <!-- Payment result logic -->
+    <script src="javascript/payment-success.js"></script>
+
+</body>
+</html>

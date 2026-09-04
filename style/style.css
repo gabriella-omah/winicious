@@ -1905,6 +1905,7 @@ small {
     gap: 24px;
 
     flex-wrap: wrap;
+    
 }
 
 .booking-cta .btn--primary {
@@ -2691,10 +2692,6 @@ small {
         align-items: stretch;
 
         gap: 12px;
-    }
-
-    .booking-cta__actions .btn {
-        width: auto;
     }
 
 
