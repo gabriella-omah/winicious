@@ -2,16 +2,11 @@
    WINICIOUS ADMIN NOTIFICATIONS
 ================================================== */
 
-
 /* ==================================================
    SUPABASE CLIENT
 ================================================== */
 
-const notificationSupabase =
-    supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
+const notificationSupabase = supabaseClient;
 
 
 /* ==================================================
