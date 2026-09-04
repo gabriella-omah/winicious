@@ -62,54 +62,203 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-const bookingForm = document.getElementById("bookingForm");
+const bookingForm =
+    document.getElementById("bookingForm");
+
 
 if (bookingForm) {
-    bookingForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
 
-        const submitButton = bookingForm.querySelector(
-            ".booking-form__submit"
-        );
+    bookingForm.addEventListener(
+        "submit",
+        async (event) => {
 
-        const formData = new FormData(bookingForm);
+            event.preventDefault();
 
-        const booking = {
-            service: formData.get("service"),
-            preferred_date: formData.get("date"),
-            preferred_time: formData.get("time"),
-            customer_name: formData.get("name"),
-            customer_email: formData.get("email"),
-            customer_phone: formData.get("phone"),
-            notes: formData.get("notes") || null
-        };
 
-        submitButton.disabled = true;
-        submitButton.textContent = "Sending...";
+            /* ==========================================
+               GET SUBMIT BUTTON
+            ========================================== */
 
-        const { error } = await supabaseClient
-            .from("bookings")
-            .insert([booking]);
+            const submitButton =
+                bookingForm.querySelector(
+                    ".booking-form__submit"
+                );
 
-        if (error) {
-            console.error("Booking error:", error);
 
-            alert(
-                "We couldn't submit your appointment request. Please try again."
-            );
+            /* ==========================================
+               READ FORM
+            ========================================== */
 
-            submitButton.disabled = false;
-            submitButton.textContent = "Request appointment";
-            return;
+            const formData =
+                new FormData(bookingForm);
+
+
+            const booking = {
+
+                service:
+                    formData.get("service"),
+
+                preferred_date:
+                    formData.get("date"),
+
+                preferred_time:
+                    formData.get("time"),
+
+                customer_name:
+                    formData.get("name"),
+
+                customer_email:
+                    formData.get("email"),
+
+                customer_phone:
+                    formData.get("phone"),
+
+                notes:
+                    formData.get("notes") || null
+            };
+
+
+            /* ==========================================
+               DISABLE BUTTON
+            ========================================== */
+
+            submitButton.disabled =
+                true;
+
+            submitButton.textContent =
+                "Sending...";
+
+
+            try {
+
+                /* ======================================
+                   CREATE BOOKING
+                ====================================== */
+
+                const {
+                    data: createdBooking,
+                    error
+                } =
+                    await supabaseClient
+                        .from("bookings")
+                        .insert([booking])
+                        .select()
+                        .single();
+
+
+                /* ======================================
+                   CHECK BOOKING ERROR
+                ====================================== */
+
+                if (error) {
+
+                    console.error(
+                        "Booking error:",
+                        error
+                    );
+
+
+                    throw new Error(
+                        "We couldn't submit your appointment request. Please try again."
+                    );
+                }
+
+
+                console.log(
+                    "Booking created:",
+                    createdBooking
+                );
+
+
+                /* ======================================
+                   CREATE ADMIN NOTIFICATION
+                ====================================== */
+
+                const {
+                    error: notificationError
+                } =
+                    await supabaseClient
+                        .from("notifications")
+                        .insert({
+
+                            type:
+                                "booking",
+
+                            title:
+                                "New Booking",
+
+                            message:
+                                `${booking.customer_name} submitted a new ${booking.service} booking request.`,
+
+                            related_id:
+                                createdBooking.id
+                        });
+
+
+                /* --------------------------------------
+                   Notification errors should NOT
+                   cancel the booking
+                -------------------------------------- */
+
+                if (notificationError) {
+
+                    console.error(
+                        "Notification error:",
+                        notificationError
+                    );
+
+                } else {
+
+                    console.log(
+                        "Booking notification created successfully."
+                    );
+
+                }
+
+
+                /* ======================================
+                   SUCCESS
+                ====================================== */
+
+                bookingForm.reset();
+
+                submitButton.disabled =
+                    false;
+
+                submitButton.textContent =
+                    "Request appointment";
+
+
+                alert(
+                    "Your appointment request has been received. We'll contact you to confirm your appointment."
+                );
+
+
+            } catch (error) {
+
+                /* ======================================
+                   ERROR HANDLING
+                ====================================== */
+
+                console.error(
+                    "Booking submission error:",
+                    error
+                );
+
+
+                alert(
+                    error.message ||
+                    "We couldn't submit your appointment request. Please try again."
+                );
+
+
+                submitButton.disabled =
+                    false;
+
+                submitButton.textContent =
+                    "Request appointment";
+            }
+
         }
-
-        bookingForm.reset();
-
-        submitButton.disabled = false;
-        submitButton.textContent = "Request appointment";
-
-        alert(
-            "Your appointment request has been received. We'll contact you to confirm your appointment."
-        );
-    });
+    );
 }

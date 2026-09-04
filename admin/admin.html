@@ -19,6 +19,62 @@
 <main class="admin-page">
     <!-- HEADER -->
     <header class="admin-header">
+        <div class="admin-notifications">
+
+    <button
+        type="button"
+        id="notificationButton"
+        class="notification-button"
+        aria-label="Notifications"
+    >
+        🔔
+
+        <span
+            id="notificationBadge"
+            class="notification-badge"
+            hidden
+        >
+            0
+        </span>
+    </button>
+
+
+    <div
+        id="notificationPanel"
+        class="notification-panel"
+        hidden
+    >
+
+        <div class="notification-panel__header">
+
+            <h3>
+                Notifications
+            </h3>
+
+            <button
+                type="button"
+                id="markNotificationsRead"
+            >
+                Mark all as read
+            </button>
+
+        </div>
+
+
+        <div
+            id="notificationList"
+            class="notification-list"
+        >
+
+            <p class="notification-empty">
+                No notifications yet.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
         <div>
             <p class="eyebrow">Winicious</p>
             <h1>Admin Dashboard</h1>
@@ -155,5 +211,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../javascript/supabase.js"></script>
 <script src="admin.js"></script>
+<script src="admin-notification.js"></script>
 </body>
 </html>
