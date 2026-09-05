@@ -1,3 +1,19 @@
+/* ==================================================
+   WINICIOUS ADMIN ORDERS
+================================================== */
+
+let allOrders = [];
+
+let orderStatusFilter = "all";
+let orderDateFilter = "all";
+let orderSort = "newest";
+let orderMonthFilter = "";
+
+
+/* ==================================================
+   ADMIN AUTH + INITIALISE
+================================================== */
+
 document.addEventListener("DOMContentLoaded", async () => {
 
     const ordersContent = document.getElementById("ordersContent");
@@ -62,6 +78,231 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     // --------------------------------------------------
+    // DATE FILTER HELPERS
+    // --------------------------------------------------
+
+    function getDateRange(filter, specificMonth = "") {
+
+        const now = new Date();
+
+        if (filter === "all") {
+            return {
+                start: null,
+                end: null
+            };
+        }
+
+
+        if (filter === "7days") {
+
+            const start = new Date(now);
+
+            start.setDate(
+                start.getDate() - 7
+            );
+
+            return {
+                start,
+                end: now
+            };
+        }
+
+
+        if (filter === "30days") {
+
+            const start = new Date(now);
+
+            start.setDate(
+                start.getDate() - 30
+            );
+
+            return {
+                start,
+                end: now
+            };
+        }
+
+
+        if (filter === "thisMonth") {
+
+            const start = new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                1
+            );
+
+            return {
+                start,
+                end: now
+            };
+        }
+
+
+        if (filter === "lastMonth") {
+
+            const start = new Date(
+                now.getFullYear(),
+                now.getMonth() - 1,
+                1
+            );
+
+            const end = new Date(
+                now.getFullYear(),
+                now.getMonth(),
+                1
+            );
+
+            return {
+                start,
+                end
+            };
+        }
+
+
+        if (
+            filter === "specificMonth" &&
+            specificMonth
+        ) {
+
+            const [year, month] =
+                specificMonth
+                    .split("-")
+                    .map(Number);
+
+            if (!year || !month) {
+                return {
+                    start: null,
+                    end: null
+                };
+            }
+
+            const start = new Date(
+                year,
+                month - 1,
+                1
+            );
+
+            const end = new Date(
+                year,
+                month,
+                1
+            );
+
+            return {
+                start,
+                end
+            };
+        }
+
+
+        return {
+            start: null,
+            end: null
+        };
+    }
+
+
+    function filterAndSortOrders(orders) {
+
+        const {
+            start,
+            end
+        } = getDateRange(
+            orderDateFilter,
+            orderMonthFilter
+        );
+
+
+        let filteredOrders = [...orders];
+
+
+        // --------------------------------------------------
+        // STATUS FILTER
+        // --------------------------------------------------
+
+        if (orderStatusFilter !== "all") {
+
+            filteredOrders =
+                filteredOrders.filter(
+                    order =>
+                        order.order_status ===
+                        orderStatusFilter
+                );
+        }
+
+
+        // --------------------------------------------------
+        // DATE FILTER
+        // --------------------------------------------------
+
+        if (start || end) {
+
+            filteredOrders =
+                filteredOrders.filter(order => {
+
+                    if (!order.created_at) {
+                        return false;
+                    }
+
+                    const createdAt =
+                        new Date(
+                            order.created_at
+                        );
+
+                    if (
+                        Number.isNaN(
+                            createdAt.getTime()
+                        )
+                    ) {
+                        return false;
+                    }
+
+                    if (
+                        start &&
+                        createdAt < start
+                    ) {
+                        return false;
+                    }
+
+                    if (
+                        end &&
+                        createdAt >= end
+                    ) {
+                        return false;
+                    }
+
+                    return true;
+                });
+        }
+
+
+        // --------------------------------------------------
+        // SORT
+        // --------------------------------------------------
+
+        filteredOrders.sort((a, b) => {
+
+            const dateA =
+                new Date(
+                    a.created_at
+                ).getTime();
+
+            const dateB =
+                new Date(
+                    b.created_at
+                ).getTime();
+
+            return orderSort === "oldest"
+                ? dateA - dateB
+                : dateB - dateA;
+        });
+
+
+        return filteredOrders;
+    }
+
+
+    // --------------------------------------------------
     // LOAD ORDERS
     // --------------------------------------------------
 
@@ -73,39 +314,41 @@ document.addEventListener("DOMContentLoaded", async () => {
             </div>
         `;
 
-        const { data: orders, error } = await supabaseClient
+
+        const {
+            data: orders,
+            error
+        } = await supabaseClient
             .from("orders")
             .select("*")
             .order("created_at", {
                 ascending: false
             });
 
+
         if (error) {
-            console.error("Orders loading error:", error);
+
+            console.error(
+                "Orders loading error:",
+                error
+            );
 
             ordersContent.innerHTML = `
                 <div class="empty-orders">
                     <h3>Could not load orders</h3>
-                    <p>${escapeHTML(error.message)}</p>
+                    <p>
+                        ${escapeHTML(error.message)}
+                    </p>
                 </div>
             `;
 
             return;
         }
 
-        if (!orders || orders.length === 0) {
 
-            ordersContent.innerHTML = `
-                <div class="empty-orders">
-                    <h3>No orders yet</h3>
-                    <p>Customer orders will appear here.</p>
-                </div>
-            `;
+        allOrders = orders || [];
 
-            return;
-        }
-
-        renderOrders(orders);
+        renderOrders();
     }
 
 
@@ -113,15 +356,154 @@ document.addEventListener("DOMContentLoaded", async () => {
     // RENDER ORDERS
     // --------------------------------------------------
 
-    function renderOrders(orders) {
+    function renderOrders() {
+
+        const orders =
+            filterAndSortOrders(
+                allOrders
+            );
+
+
+        if (!orders.length) {
+
+            ordersContent.innerHTML = `
+                <div class="empty-orders">
+                    <h3>No orders found</h3>
+                    <p>
+                        Try changing your filters.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
 
         ordersContent.innerHTML = `
+
+            <div class="orders-filters">
+
+                <div class="orders-filter">
+
+                    <label for="orderStatusFilter">
+                        Status
+                    </label>
+
+                    <select id="orderStatusFilter">
+
+                        <option value="all">
+                            All orders
+                        </option>
+
+                        <option value="pending">
+                            Pending
+                        </option>
+
+                        <option value="processing">
+                            Processing
+                        </option>
+
+                        <option value="shipped">
+                            Shipped
+                        </option>
+
+                        <option value="delivered">
+                            Delivered
+                        </option>
+
+                        <option value="cancelled">
+                            Cancelled
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="orders-filter">
+
+                    <label for="orderDateFilter">
+                        Date
+                    </label>
+
+                    <select id="orderDateFilter">
+
+                        <option value="all">
+                            All time
+                        </option>
+
+                        <option value="7days">
+                            Last 7 days
+                        </option>
+
+                        <option value="30days">
+                            Last 30 days
+                        </option>
+
+                        <option value="thisMonth">
+                            This month
+                        </option>
+
+                        <option value="lastMonth">
+                            Last month
+                        </option>
+
+                        <option value="specificMonth">
+                            Specific month
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="orders-filter">
+
+                    <label for="orderMonthFilter">
+                        Month
+                    </label>
+
+                    <input
+                        type="month"
+                        id="orderMonthFilter"
+                        value="${escapeHTML(orderMonthFilter)}"
+                        ${orderDateFilter !== "specificMonth" ? "hidden" : ""}
+                    >
+
+                </div>
+
+
+                <div class="orders-filter">
+
+                    <label for="orderSort">
+                        Sort
+                    </label>
+
+                    <select id="orderSort">
+
+                        <option value="newest">
+                            Newest first
+                        </option>
+
+                        <option value="oldest">
+                            Oldest first
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
             <div class="orders-table-wrapper">
 
                 <table class="orders-table">
 
                     <thead>
+
                         <tr>
+                            <th>#</th>
                             <th>Customer</th>
                             <th>Total</th>
                             <th>Payment</th>
@@ -129,45 +511,83 @@ document.addEventListener("DOMContentLoaded", async () => {
                             <th>Date</th>
                             <th>Actions</th>
                         </tr>
+
                     </thead>
+
 
                     <tbody>
 
-                        ${orders.map(order => `
+                        ${orders.map((order, index) => `
 
                             <tr>
 
                                 <td>
+                                    ${index + 1}
+                                </td>
+
+
+                                <td>
+
                                     <strong>
-                                        ${escapeHTML(order.customer_name)}
+                                        ${escapeHTML(
+                                            order.customer_name
+                                        )}
                                     </strong>
 
                                     <br>
 
                                     <small>
-                                        ${escapeHTML(order.customer_email)}
+                                        ${escapeHTML(
+                                            order.customer_email
+                                        )}
                                     </small>
+
                                 </td>
 
-                                <td>
-                                    ${formatNaira(order.total)}
-                                </td>
 
                                 <td>
-                                    <span class="payment-${escapeHTML(order.payment_status)}">
-                                        ${escapeHTML(order.payment_status)}
+                                    ${formatNaira(
+                                        order.total
+                                    )}
+                                </td>
+
+
+                                <td>
+
+                                    <span
+                                        class="payment-${escapeHTML(
+                                            order.payment_status
+                                        )}"
+                                    >
+                                        ${escapeHTML(
+                                            order.payment_status
+                                        )}
                                     </span>
+
                                 </td>
 
+
                                 <td>
-                                    <span class="status status--${escapeHTML(order.order_status)}">
-                                        ${escapeHTML(order.order_status)}
+
+                                    <span
+                                        class="status status--${escapeHTML(
+                                            order.order_status
+                                        )}"
+                                    >
+                                        ${escapeHTML(
+                                            order.order_status
+                                        )}
                                     </span>
+
                                 </td>
 
+
                                 <td>
-                                    ${formatDate(order.created_at)}
+                                    ${formatDate(
+                                        order.created_at
+                                    )}
                                 </td>
+
 
                                 <td>
 
@@ -176,38 +596,63 @@ document.addEventListener("DOMContentLoaded", async () => {
                                         <button
                                             type="button"
                                             class="btn btn--secondary view-order"
-                                            data-order-id="${order.id}"
+                                            data-order-id="${escapeHTML(
+                                                order.id
+                                            )}"
                                         >
                                             View
                                         </button>
 
+
                                         <select
                                             class="order-status-select"
-                                            data-order-id="${order.id}"
+                                            data-order-id="${escapeHTML(
+                                                order.id
+                                            )}"
                                         >
 
-                                            <option value="pending"
-                                                ${order.order_status === "pending" ? "selected" : ""}>
+                                            <option
+                                                value="pending"
+                                                ${order.order_status === "pending"
+                                                    ? "selected"
+                                                    : ""}
+                                            >
                                                 Pending
                                             </option>
 
-                                            <option value="processing"
-                                                ${order.order_status === "processing" ? "selected" : ""}>
+                                            <option
+                                                value="processing"
+                                                ${order.order_status === "processing"
+                                                    ? "selected"
+                                                    : ""}
+                                            >
                                                 Processing
                                             </option>
 
-                                            <option value="shipped"
-                                                ${order.order_status === "shipped" ? "selected" : ""}>
+                                            <option
+                                                value="shipped"
+                                                ${order.order_status === "shipped"
+                                                    ? "selected"
+                                                    : ""}
+                                            >
                                                 Shipped
                                             </option>
 
-                                            <option value="delivered"
-                                                ${order.order_status === "delivered" ? "selected" : ""}>
+                                            <option
+                                                value="delivered"
+                                                ${order.order_status === "delivered"
+                                                    ? "selected"
+                                                    : ""}
+                                            >
                                                 Delivered
                                             </option>
 
-                                            <option value="cancelled"
-                                                ${order.order_status === "cancelled" ? "selected" : ""}>
+                                            <option
+                                                value="cancelled"
+                                                ${order.order_status === "cancelled"
+                                                    ? "selected"
+                                                    : ""}
+                                            >
                                                 Cancelled
                                             </option>
 
@@ -227,6 +672,40 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             </div>
         `;
+
+
+        // Restore current filter values
+
+        const statusSelect =
+            document.getElementById(
+                "orderStatusFilter"
+            );
+
+        const dateSelect =
+            document.getElementById(
+                "orderDateFilter"
+            );
+
+        const sortSelect =
+            document.getElementById(
+                "orderSort"
+            );
+
+
+        if (statusSelect) {
+            statusSelect.value =
+                orderStatusFilter;
+        }
+
+        if (dateSelect) {
+            dateSelect.value =
+                orderDateFilter;
+        }
+
+        if (sortSelect) {
+            sortSelect.value =
+                orderSort;
+        }
     }
 
 
@@ -236,20 +715,35 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     async function viewOrder(orderId) {
 
-        const { data: order, error: orderError } = await supabaseClient
+        const {
+            data: order,
+            error: orderError
+        } = await supabaseClient
             .from("orders")
             .select("*")
             .eq("id", orderId)
             .single();
 
+
         if (orderError) {
-            console.error("Order error:", orderError);
-            alert("Could not load this order.");
+
+            console.error(
+                "Order error:",
+                orderError
+            );
+
+            alert(
+                "Could not load this order."
+            );
+
             return;
         }
 
 
-        const { data: items, error: itemsError } = await supabaseClient
+        const {
+            data: items,
+            error: itemsError
+        } = await supabaseClient
             .from("order_items")
             .select("*")
             .eq("order_id", orderId)
@@ -257,9 +751,18 @@ document.addEventListener("DOMContentLoaded", async () => {
                 ascending: true
             });
 
+
         if (itemsError) {
-            console.error("Order items error:", itemsError);
-            alert("Could not load order items.");
+
+            console.error(
+                "Order items error:",
+                itemsError
+            );
+
+            alert(
+                "Could not load order items."
+            );
+
             return;
         }
 
@@ -272,22 +775,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 <p>
                     <strong>Name:</strong>
-                    ${escapeHTML(order.customer_name)}
+                    ${escapeHTML(
+                        order.customer_name
+                    )}
                 </p>
 
                 <p>
                     <strong>Email:</strong>
-                    ${escapeHTML(order.customer_email)}
+                    ${escapeHTML(
+                        order.customer_email
+                    )}
                 </p>
 
                 <p>
                     <strong>Phone:</strong>
-                    ${escapeHTML(order.customer_phone)}
+                    ${escapeHTML(
+                        order.customer_phone
+                    )}
                 </p>
 
                 <p>
                     <strong>Delivery Address:</strong><br>
-                    ${escapeHTML(order.delivery_address || "Not provided")}
+                    ${escapeHTML(
+                        order.delivery_address ||
+                        "Not provided"
+                    )}
                 </p>
 
             </div>
@@ -299,33 +811,43 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 <div class="order-items">
 
-                    ${items.length
-                        ? items.map(item => `
+                    ${
+                        items.length
+                            ? items.map(item => `
 
-                            <div class="order-item">
+                                <div class="order-item">
 
-                                <div>
+                                    <div>
+
+                                        <strong>
+                                            ${escapeHTML(
+                                                item.product_name
+                                            )}
+                                        </strong>
+
+                                        <br>
+
+                                        <small>
+                                            ${item.quantity}
+                                            ×
+                                            ${formatNaira(
+                                                item.unit_price
+                                            )}
+                                        </small>
+
+                                    </div>
 
                                     <strong>
-                                        ${escapeHTML(item.product_name)}
+                                        ${formatNaira(
+                                            item.total_price
+                                        )}
                                     </strong>
-
-                                    <br>
-
-                                    <small>
-                                        ${item.quantity} × ${formatNaira(item.unit_price)}
-                                    </small>
 
                                 </div>
 
-                                <strong>
-                                    ${formatNaira(item.total_price)}
-                                </strong>
+                            `).join("")
 
-                            </div>
-
-                        `).join("")
-                        : "<p>No order items found.</p>"
+                            : "<p>No order items found.</p>"
                     }
 
                 </div>
@@ -337,12 +859,16 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 <p>
                     <strong>Subtotal:</strong>
-                    ${formatNaira(order.subtotal)}
+                    ${formatNaira(
+                        order.subtotal
+                    )}
                 </p>
 
                 <p>
                     <strong>Delivery:</strong>
-                    ${formatNaira(order.delivery_fee)}
+                    ${formatNaira(
+                        order.delivery_fee
+                    )}
                 </p>
 
                 <div class="order-total">
@@ -350,7 +876,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                     <span>Total</span>
 
                     <span>
-                        ${formatNaira(order.total)}
+                        ${formatNaira(
+                            order.total
+                        )}
                     </span>
 
                 </div>
@@ -364,17 +892,25 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 <p>
                     <strong>Method:</strong>
-                    ${escapeHTML(order.payment_method || "Not selected")}
+                    ${escapeHTML(
+                        order.payment_method ||
+                        "Not selected"
+                    )}
                 </p>
 
                 <p>
                     <strong>Status:</strong>
-                    ${escapeHTML(order.payment_status)}
+                    ${escapeHTML(
+                        order.payment_status
+                    )}
                 </p>
 
                 <p>
                     <strong>Reference:</strong>
-                    ${escapeHTML(order.payment_reference || "Not available")}
+                    ${escapeHTML(
+                        order.payment_reference ||
+                        "Not available"
+                    )}
                 </p>
 
             </div>
@@ -384,30 +920,55 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 <h3>Order Status</h3>
 
-                <select id="modalOrderStatus" data-order-id="${order.id}">
+                <select
+                    id="modalOrderStatus"
+                    data-order-id="${escapeHTML(
+                        order.id
+                    )}"
+                >
 
-                    <option value="pending"
-                        ${order.order_status === "pending" ? "selected" : ""}>
+                    <option
+                        value="pending"
+                        ${order.order_status === "pending"
+                            ? "selected"
+                            : ""}
+                    >
                         Pending
                     </option>
 
-                    <option value="processing"
-                        ${order.order_status === "processing" ? "selected" : ""}>
+                    <option
+                        value="processing"
+                        ${order.order_status === "processing"
+                            ? "selected"
+                            : ""}
+                    >
                         Processing
                     </option>
 
-                    <option value="shipped"
-                        ${order.order_status === "shipped" ? "selected" : ""}>
+                    <option
+                        value="shipped"
+                        ${order.order_status === "shipped"
+                            ? "selected"
+                            : ""}
+                    >
                         Shipped
                     </option>
 
-                    <option value="delivered"
-                        ${order.order_status === "delivered" ? "selected" : ""}>
+                    <option
+                        value="delivered"
+                        ${order.order_status === "delivered"
+                            ? "selected"
+                            : ""}
+                    >
                         Delivered
                     </option>
 
-                    <option value="cancelled"
-                        ${order.order_status === "cancelled" ? "selected" : ""}>
+                    <option
+                        value="cancelled"
+                        ${order.order_status === "cancelled"
+                            ? "selected"
+                            : ""}
+                    >
                         Cancelled
                     </option>
 
@@ -417,7 +978,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         `;
 
-        orderModal.classList.add("is-open");
+        orderModal.classList.add(
+            "is-open"
+        );
     }
 
 
@@ -425,85 +988,254 @@ document.addEventListener("DOMContentLoaded", async () => {
     // UPDATE ORDER STATUS
     // --------------------------------------------------
 
-    async function updateOrderStatus(orderId, newStatus) {
+    async function updateOrderStatus(
+        orderId,
+        newStatus
+    ) {
 
-        const { error } = await supabaseClient
-            .from("orders")
-            .update({
-                order_status: newStatus
-            })
-            .eq("id", orderId);
+        const { error } =
+            await supabaseClient
+                .from("orders")
+                .update({
+                    order_status: newStatus
+                })
+                .eq("id", orderId);
+
 
         if (error) {
-            console.error("Status update error:", error);
 
-            alert("Could not update order status.");
+            console.error(
+                "Status update error:",
+                error
+            );
+
+            alert(
+                "Could not update order status."
+            );
 
             return;
         }
 
-        await loadOrders();
 
-        if (orderModal.classList.contains("is-open")) {
-            await viewOrder(orderId);
+        // Update local data immediately
+
+        const order =
+            allOrders.find(
+                item =>
+                    String(item.id) ===
+                    String(orderId)
+            );
+
+        if (order) {
+            order.order_status =
+                newStatus;
+        }
+
+
+        renderOrders();
+
+
+        if (
+            orderModal.classList.contains(
+                "is-open"
+            )
+        ) {
+            await viewOrder(
+                orderId
+            );
         }
     }
 
 
     // --------------------------------------------------
-    // EVENT LISTENERS
+    // FILTER EVENT LISTENERS
     // --------------------------------------------------
 
-    ordersContent.addEventListener("click", event => {
+    ordersContent.addEventListener(
+        "change",
+        event => {
 
-        const button = event.target.closest(".view-order");
+            const statusSelect =
+                event.target.closest(
+                    "#orderStatusFilter"
+                );
 
-        if (!button) return;
+            if (statusSelect) {
 
-        const orderId = button.dataset.orderId;
+                orderStatusFilter =
+                    statusSelect.value;
 
-        viewOrder(orderId);
-    });
+                renderOrders();
 
-
-    ordersContent.addEventListener("change", event => {
-
-        const select = event.target.closest(".order-status-select");
-
-        if (!select) return;
-
-        const orderId = select.dataset.orderId;
-        const newStatus = select.value;
-
-        updateOrderStatus(orderId, newStatus);
-    });
+                return;
+            }
 
 
-    orderDetails.addEventListener("change", event => {
+            const dateSelect =
+                event.target.closest(
+                    "#orderDateFilter"
+                );
 
-        const select = event.target.closest("#modalOrderStatus");
+            if (dateSelect) {
 
-        if (!select) return;
+                orderDateFilter =
+                    dateSelect.value;
 
-        const orderId = select.dataset.orderId;
-        const newStatus = select.value;
+                const monthInput =
+                    document.getElementById(
+                        "orderMonthFilter"
+                    );
 
-        updateOrderStatus(orderId, newStatus);
-    });
+                if (monthInput) {
+
+                    monthInput.hidden =
+                        orderDateFilter !==
+                        "specificMonth";
+                }
+
+                renderOrders();
+
+                return;
+            }
 
 
-    closeOrderModal.addEventListener("click", () => {
-        orderModal.classList.remove("is-open");
-    });
+            const monthInput =
+                event.target.closest(
+                    "#orderMonthFilter"
+                );
+
+            if (monthInput) {
+
+                orderMonthFilter =
+                    monthInput.value;
+
+                renderOrders();
+
+                return;
+            }
 
 
-    orderModal.addEventListener("click", event => {
+            const sortSelect =
+                event.target.closest(
+                    "#orderSort"
+                );
 
-        if (event.target === orderModal) {
-            orderModal.classList.remove("is-open");
+            if (sortSelect) {
+
+                orderSort =
+                    sortSelect.value;
+
+                renderOrders();
+
+                return;
+            }
+
+
+            const orderStatusSelect =
+                event.target.closest(
+                    ".order-status-select"
+                );
+
+            if (orderStatusSelect) {
+
+                const orderId =
+                    orderStatusSelect
+                        .dataset.orderId;
+
+                const newStatus =
+                    orderStatusSelect.value;
+
+                updateOrderStatus(
+                    orderId,
+                    newStatus
+                );
+            }
         }
+    );
 
-    });
+
+    // --------------------------------------------------
+    // VIEW ORDER
+    // --------------------------------------------------
+
+    ordersContent.addEventListener(
+        "click",
+        event => {
+
+            const button =
+                event.target.closest(
+                    ".view-order"
+                );
+
+            if (!button) return;
+
+            const orderId =
+                button.dataset.orderId;
+
+            viewOrder(orderId);
+        }
+    );
+
+
+    // --------------------------------------------------
+    // MODAL STATUS
+    // --------------------------------------------------
+
+    orderDetails.addEventListener(
+        "change",
+        event => {
+
+            const select =
+                event.target.closest(
+                    "#modalOrderStatus"
+                );
+
+            if (!select) return;
+
+            const orderId =
+                select.dataset.orderId;
+
+            const newStatus =
+                select.value;
+
+            updateOrderStatus(
+                orderId,
+                newStatus
+            );
+        }
+    );
+
+
+    // --------------------------------------------------
+    // CLOSE MODAL
+    // --------------------------------------------------
+
+    closeOrderModal.addEventListener(
+        "click",
+        () => {
+            orderModal.classList.remove(
+                "is-open"
+            );
+        }
+    );
+
+
+    orderModal.addEventListener(
+        "click",
+        event => {
+
+            if (
+                event.target === orderModal ||
+                event.target.id ===
+                "orderModalBackdrop"
+            ) {
+                orderModal.classList.remove(
+                    "is-open"
+                );
+            }
+
+        }
+    );
 
 
     // --------------------------------------------------

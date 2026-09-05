@@ -5,6 +5,14 @@
 let allBookings = [];
 let allMessages = [];
 
+let bookingDateFilter = "all";
+let bookingSort = "newest";
+let bookingMonthFilter = "";
+
+let messageDateFilter = "all";
+let messageSort = "newest";
+let messageMonthFilter = "";
+
 /* ==================================================
    ADMIN AUTH CHECK
 ================================================== */
@@ -90,12 +98,19 @@ function renderBookings() {
 
     const selectedStatus = filter?.value || "all";
 
-    const bookings =
+    let bookings =
         selectedStatus === "all"
-            ? allBookings
+            ? [...allBookings]
             : allBookings.filter(
                 booking => booking.status === selectedStatus
             );
+
+    bookings = filterAndSortByDate(
+        bookings,
+        bookingDateFilter,
+        bookingSort,
+        bookingMonthFilter
+    );
 
     if (!bookings.length) {
         table.innerHTML = `
@@ -251,12 +266,19 @@ function renderMessages() {
 
     const selectedStatus = filter?.value || "all";
 
-    const messages =
+    let messages =
         selectedStatus === "all"
-            ? allMessages
+            ? [...allMessages]
             : allMessages.filter(
                 message => message.status === selectedStatus
             );
+
+    messages = filterAndSortByDate(
+        messages,
+        messageDateFilter,
+        messageSort,
+        messageMonthFilter
+    );
 
     if (!messages.length) {
         table.innerHTML = `
@@ -388,41 +410,77 @@ function updateMessageStats() {
 }
 
 /* ==================================================
-   FILTERS
+   FILTERS & SORTING
 ================================================== */
+
 document
     .getElementById("bookingFilter")
     ?.addEventListener("change", renderBookings);
 
 document
+    .getElementById("bookingDateFilter")
+    ?.addEventListener("change", event => {
+        bookingDateFilter = event.target.value;
+
+        const monthInput =
+            document.getElementById("bookingMonthFilter");
+
+        if (monthInput) {
+            monthInput.hidden =
+                bookingDateFilter !== "specificMonth";
+        }
+
+        renderBookings();
+    });
+
+document
+    .getElementById("bookingMonthFilter")
+    ?.addEventListener("change", event => {
+        bookingMonthFilter = event.target.value;
+        renderBookings();
+    });
+
+document
+    .getElementById("bookingSort")
+    ?.addEventListener("change", event => {
+        bookingSort = event.target.value;
+        renderBookings();
+    });
+
+
+document
     .getElementById("messageFilter")
     ?.addEventListener("change", renderMessages);
 
-/* ==================================================
-   STATUS EVENTS
-================================================== */
-document.addEventListener("change", event => {
-    const bookingSelect =
-        event.target.closest("[data-booking-status]");
+document
+    .getElementById("messageDateFilter")
+    ?.addEventListener("change", event => {
+        messageDateFilter = event.target.value;
 
-    if (bookingSelect) {
-        updateBookingStatus(
-            bookingSelect.dataset.bookingStatus,
-            bookingSelect.value
-        );
-        return;
-    }
+        const monthInput =
+            document.getElementById("messageMonthFilter");
 
-    const messageSelect =
-        event.target.closest("[data-message-status]");
+        if (monthInput) {
+            monthInput.hidden =
+                messageDateFilter !== "specificMonth";
+        }
 
-    if (messageSelect) {
-        updateMessageStatus(
-            messageSelect.dataset.messageStatus,
-            messageSelect.value
-        );
-    }
-});
+        renderMessages();
+    });
+
+document
+    .getElementById("messageMonthFilter")
+    ?.addEventListener("change", event => {
+        messageMonthFilter = event.target.value;
+        renderMessages();
+    });
+
+document
+    .getElementById("messageSort")
+    ?.addEventListener("change", event => {
+        messageSort = event.target.value;
+        renderMessages();
+    });
 
 /* ==================================================
    CLOSE NOTIFICATION PANEL
@@ -530,6 +588,162 @@ function messageStatusOptions(currentStatus) {
     `).join("");
 }
 
+/* ==================================================
+   DATE FILTER HELPERS
+================================================== */
+
+function getDateRange(filter, specificMonth = "") {
+    const now = new Date();
+
+    if (filter === "all") {
+        return {
+            start: null,
+            end: null
+        };
+    }
+
+    if (filter === "7days") {
+        const start = new Date(now);
+        start.setDate(start.getDate() - 7);
+
+        return {
+            start,
+            end: now
+        };
+    }
+
+    if (filter === "30days") {
+        const start = new Date(now);
+        start.setDate(start.getDate() - 30);
+
+        return {
+            start,
+            end: now
+        };
+    }
+
+    if (filter === "thisMonth") {
+        const start = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            1
+        );
+
+        return {
+            start,
+            end: now
+        };
+    }
+
+    if (filter === "lastMonth") {
+        const start = new Date(
+            now.getFullYear(),
+            now.getMonth() - 1,
+            1
+        );
+
+        const end = new Date(
+            now.getFullYear(),
+            now.getMonth(),
+            1
+        );
+
+        return {
+            start,
+            end
+        };
+    }
+
+    if (filter === "specificMonth" && specificMonth) {
+        const [year, month] = specificMonth
+            .split("-")
+            .map(Number);
+
+        if (!year || !month) {
+            return {
+                start: null,
+                end: null
+            };
+        }
+
+        const start = new Date(
+            year,
+            month - 1,
+            1
+        );
+
+        const end = new Date(
+            year,
+            month,
+            1
+        );
+
+        return {
+            start,
+            end
+        };
+    }
+
+    return {
+        start: null,
+        end: null
+    };
+}
+
+function filterAndSortByDate(
+    items,
+    dateFilter,
+    sortOrder,
+    specificMonth = ""
+) {
+    const { start, end } =
+        getDateRange(
+            dateFilter,
+            specificMonth
+        );
+
+    let filteredItems = [...items];
+
+    if (start || end) {
+        filteredItems = filteredItems.filter(item => {
+            if (!item.created_at) {
+                return false;
+            }
+
+            const createdAt =
+                new Date(item.created_at);
+
+            if (Number.isNaN(createdAt.getTime())) {
+                return false;
+            }
+
+            if (start && createdAt < start) {
+                return false;
+            }
+
+            if (end && createdAt >= end) {
+                return false;
+            }
+
+            return true;
+        });
+    }
+
+    filteredItems.sort((a, b) => {
+        const dateA =
+            new Date(a.created_at).getTime();
+
+        const dateB =
+            new Date(b.created_at).getTime();
+
+        return sortOrder === "oldest"
+            ? dateA - dateB
+            : dateB - dateA;
+    });
+
+    return filteredItems;
+}
+
 function formatDate(dateString) {
     if (!dateString) return "—";
 
@@ -562,6 +776,7 @@ function escapeAttribute(value) {
 /* ==================================================
    INITIALISE
 ================================================== */
+
 document.addEventListener("DOMContentLoaded", async () => {
     const authenticated = await requireAdmin();
 

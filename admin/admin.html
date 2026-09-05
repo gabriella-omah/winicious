@@ -3,34 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Winicious Admin Dashboard">
-    <meta name="robots" content="noindex, nofollow">
+
+    <meta
+        name="description"
+        content="Winicious Admin Dashboard"
+    >
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
     <title>Admin Dashboard | Winicious</title>
 
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     >
-    <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="admin.css">
+
+    <link
+        rel="stylesheet"
+        href="../style/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="admin.css"
+    >
 </head>
+
 <body>
 
 <main class="admin-page">
 
-    <!-- HEADER -->
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
     <header class="admin-header">
+
         <div class="admin-header__main">
+
             <p class="eyebrow">Winicious</p>
+
             <h1>Admin Dashboard</h1>
+
             <p class="admin-header__text">
                 Manage bookings, orders, and customer enquiries.
             </p>
+
         </div>
 
+
         <div class="admin-header__actions">
+
             <!-- Notifications -->
             <div class="admin-notifications">
+
                 <button
                     type="button"
                     id="notificationButton"
@@ -39,7 +68,11 @@
                     aria-expanded="false"
                     aria-controls="notificationPanel"
                 >
-                    <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                    <i
+                        class="fa-regular fa-bell"
+                        aria-hidden="true"
+                    ></i>
+
                     <span
                         id="notificationBadge"
                         class="notification-badge"
@@ -47,181 +80,538 @@
                     >0</span>
                 </button>
 
-                
-<div
-    id="notificationPanel"
-    class="notification-panel"
-    hidden
->
-    <div class="notification-panel__header">
-        <h3>Notifications</h3>
 
-        <div class="notification-panel__actions">
-            <button type="button" id="markNotificationsRead">
-                Mark all as read
-            </button>
+                <!-- Notification Panel -->
+                <div
+                    id="notificationPanel"
+                    class="notification-panel"
+                    hidden
+                >
 
-            <button
-                type="button"
-                id="closeNotifications"
-                class="notification-panel__close"
-                aria-label="Close notifications"
+                    <div class="notification-panel__header">
+
+                        <h3>Notifications</h3>
+
+                        <div class="notification-panel__actions">
+
+                            <button
+                                type="button"
+                                id="markNotificationsRead"
+                            >
+                                Mark all as read
+                            </button>
+
+                            <button
+                                type="button"
+                                id="closeNotifications"
+                                class="notification-panel__close"
+                                aria-label="Close notifications"
+                            >
+                                <i
+                                    class="fa-solid fa-xmark"
+                                    aria-hidden="true"
+                                ></i>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="notificationList"
+                        class="notification-list"
+                    >
+                        <p class="notification-empty">
+                            No notifications yet.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Orders -->
+            <a
+                href="admin-orders.html"
+                class="admin-nav-link"
             >
-                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-            </button>
-        </div>
-    </div>
+                <i
+                    class="fa-solid fa-bag-shopping"
+                    aria-hidden="true"
+                ></i>
 
-    <div id="notificationList" class="notification-list">
-        <p class="notification-empty">
-            No notifications yet.
-        </p>
-    </div>
-</div>
-
-            <a href="admin-orders.html" class="admin-nav-link">
-                <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
                 Orders
             </a>
 
+
+            <!-- Refresh -->
             <button
                 type="button"
                 class="admin-refresh"
                 id="refreshDashboard"
             >
-                <i class="fa-solid fa-rotate" aria-hidden="true"></i>
+                <i
+                    class="fa-solid fa-rotate"
+                    aria-hidden="true"
+                ></i>
+
                 Refresh
             </button>
+
         </div>
+
     </header>
 
-    <!-- STATS -->
-    <section class="admin-stats" aria-label="Overview stats">
+
+    <!-- =====================================================
+         STATS
+    ====================================================== -->
+
+    <section
+        class="admin-stats"
+        aria-label="Overview stats"
+    >
+
         <article class="admin-stat">
-            <span class="admin-stat__icon" aria-hidden="true">
+
+            <span
+                class="admin-stat__icon"
+                aria-hidden="true"
+            >
                 <i class="fa-regular fa-calendar"></i>
             </span>
+
             <div>
                 <p>Total bookings</p>
                 <strong id="totalBookings">0</strong>
             </div>
+
         </article>
 
+
         <article class="admin-stat">
-            <span class="admin-stat__icon" aria-hidden="true">
+
+            <span
+                class="admin-stat__icon"
+                aria-hidden="true"
+            >
                 <i class="fa-regular fa-clock"></i>
             </span>
+
             <div>
                 <p>Pending bookings</p>
                 <strong id="pendingBookings">0</strong>
             </div>
+
         </article>
 
+
         <article class="admin-stat">
-            <span class="admin-stat__icon" aria-hidden="true">
+
+            <span
+                class="admin-stat__icon"
+                aria-hidden="true"
+            >
                 <i class="fa-regular fa-envelope"></i>
             </span>
+
             <div>
                 <p>Messages</p>
                 <strong id="totalMessages">0</strong>
             </div>
+
         </article>
 
+
         <article class="admin-stat">
-            <span class="admin-stat__icon" aria-hidden="true">
+
+            <span
+                class="admin-stat__icon"
+                aria-hidden="true"
+            >
                 <i class="fa-solid fa-envelope-open"></i>
             </span>
+
             <div>
                 <p>Unread messages</p>
                 <strong id="unreadMessages">0</strong>
             </div>
+
         </article>
+
     </section>
 
-    <!-- BOOKINGS -->
+
+    <!-- =====================================================
+         BOOKINGS
+    ====================================================== -->
+
     <section class="admin-section">
+
         <div class="admin-section__heading">
-            <div>
-                <p class="eyebrow">Appointments</p>
-                <h2>Bookings</h2>
+
+            <div class="admin-section__title">
+
+                <p class="eyebrow">
+                    Appointments
+                </p>
+
+                <h2>
+                    Bookings
+                </h2>
+
             </div>
-            <select id="bookingFilter" aria-label="Filter bookings">
-                <option value="all">All bookings</option>
-                <option value="pending">Pending</option>
-                <option value="confirmed">Confirmed</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
-            </select>
+
+
+            <div class="admin-section__filters">
+
+                <!-- Booking status -->
+                <div class="admin-filter">
+
+                    <label for="bookingFilter">
+                        Status
+                    </label>
+
+                    <select
+                        id="bookingFilter"
+                        aria-label="Filter bookings by status"
+                    >
+                        <option value="all">
+                            All bookings
+                        </option>
+
+                        <option value="pending">
+                            Pending
+                        </option>
+
+                        <option value="confirmed">
+                            Confirmed
+                        </option>
+
+                        <option value="completed">
+                            Completed
+                        </option>
+
+                        <option value="cancelled">
+                            Cancelled
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <!-- Booking date -->
+                <div class="admin-filter">
+
+                    <label for="bookingDateFilter">
+                        Date
+                    </label>
+
+                    <select
+                        id="bookingDateFilter"
+                        aria-label="Filter bookings by date"
+                    >
+                        <option value="all">
+                            All time
+                        </option>
+
+                        <option value="7days">
+                            Last 7 days
+                        </option>
+
+                        <option value="30days">
+                            Last 30 days
+                        </option>
+
+                        <option value="thisMonth">
+                            This month
+                        </option>
+
+                        <option value="lastMonth">
+                            Last month
+                        </option>
+
+                        <option value="specificMonth">
+                            Specific month
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <!-- Booking month -->
+                <div class="admin-filter">
+
+                    <label for="bookingMonthFilter">
+                        Month
+                    </label>
+
+                    <input
+                        type="month"
+                        id="bookingMonthFilter"
+                        aria-label="Select booking month"
+                        hidden
+                    >
+
+                </div>
+
+
+                <!-- Booking sort -->
+                <div class="admin-filter">
+
+                    <label for="bookingSort">
+                        Sort
+                    </label>
+
+                    <select
+                        id="bookingSort"
+                        aria-label="Sort bookings"
+                    >
+                        <option value="newest">
+                            Newest first
+                        </option>
+
+                        <option value="oldest">
+                            Oldest first
+                        </option>
+                    </select>
+
+                </div>
+
+            </div>
+
         </div>
 
+
         <div class="admin-table-wrapper">
+
             <table class="admin-table">
+
                 <thead>
-                   <tr>
-    <th>#</th>
-    <th>Customer</th>
-    <th>Service</th>
-    <th>Preferred date</th>
-    <th>Time</th>
-    <th>Contact</th>
-    <th>Status</th>
-</tr>
-                </thead>
-                <tbody id="bookingsTable">
+
                     <tr>
-                        <td colspan="7" class="admin-table__loading">
+                        <th>#</th>
+                        <th>Customer</th>
+                        <th>Service</th>
+                        <th>Preferred date</th>
+                        <th>Time</th>
+                        <th>Contact</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="bookingsTable">
+
+                    <tr>
+                        <td
+                            colspan="7"
+                            class="admin-table__loading"
+                        >
                             Loading bookings...
                         </td>
                     </tr>
+
                 </tbody>
+
             </table>
+
         </div>
+
     </section>
 
-    <!-- MESSAGES -->
+
+    <!-- =====================================================
+         CONTACT MESSAGES
+    ====================================================== -->
+
     <section class="admin-section">
+
         <div class="admin-section__heading">
-            <div>
-                <p class="eyebrow">Customer enquiries</p>
-                <h2>Contact Messages</h2>
+
+            <div class="admin-section__title">
+
+                <p class="eyebrow">
+                    Customer enquiries
+                </p>
+
+                <h2>
+                    Contact Messages
+                </h2>
+
             </div>
-            <select id="messageFilter" aria-label="Filter messages">
-                <option value="all">All messages</option>
-                <option value="unread">Unread</option>
-                <option value="read">Read</option>
-                <option value="replied">Replied</option>
-            </select>
+
+
+            <div class="admin-section__filters">
+
+                <!-- Message status -->
+                <div class="admin-filter">
+
+                    <label for="messageFilter">
+                        Status
+                    </label>
+
+                    <select
+                        id="messageFilter"
+                        aria-label="Filter messages by status"
+                    >
+                        <option value="all">
+                            All messages
+                        </option>
+
+                        <option value="unread">
+                            Unread
+                        </option>
+
+                        <option value="read">
+                            Read
+                        </option>
+
+                        <option value="replied">
+                            Replied
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <!-- Message date -->
+                <div class="admin-filter">
+
+                    <label for="messageDateFilter">
+                        Date
+                    </label>
+
+                    <select
+                        id="messageDateFilter"
+                        aria-label="Filter messages by date"
+                    >
+                        <option value="all">
+                            All time
+                        </option>
+
+                        <option value="7days">
+                            Last 7 days
+                        </option>
+
+                        <option value="30days">
+                            Last 30 days
+                        </option>
+
+                        <option value="thisMonth">
+                            This month
+                        </option>
+
+                        <option value="lastMonth">
+                            Last month
+                        </option>
+
+                        <option value="specificMonth">
+                            Specific month
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <!-- Message month -->
+                <div class="admin-filter">
+
+                    <label for="messageMonthFilter">
+                        Month
+                    </label>
+
+                    <input
+                        type="month"
+                        id="messageMonthFilter"
+                        aria-label="Select message month"
+                        hidden
+                    >
+
+                </div>
+
+
+                <!-- Message sort -->
+                <div class="admin-filter">
+
+                    <label for="messageSort">
+                        Sort
+                    </label>
+
+                    <select
+                        id="messageSort"
+                        aria-label="Sort messages"
+                    >
+                        <option value="newest">
+                            Newest first
+                        </option>
+
+                        <option value="oldest">
+                            Oldest first
+                        </option>
+                    </select>
+
+                </div>
+
+            </div>
+
         </div>
 
+
         <div class="admin-table-wrapper">
+
             <table class="admin-table">
+
                 <thead>
+
                     <tr>
-    <th>#</th>
-    <th>Name</th>
-    <th>Enquiry</th>
-    <th>Email</th>
-    <th>Phone</th>
-    <th>Message</th>
-    <th>Status</th>
-</tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Enquiry</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                    </tr>
+
                 </thead>
+
+
                 <tbody id="messagesTable">
+
                     <tr>
-                        <td colspan="7" class="admin-table__loading">
+                        <td
+                            colspan="7"
+                            class="admin-table__loading"
+                        >
                             Loading messages...
                         </td>
                     </tr>
+
                 </tbody>
+
             </table>
+
         </div>
+
     </section>
 
 </main>
 
+
+<!-- =========================================================
+     SCRIPTS
+========================================================= -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="../javascript/supabase.js"></script>
+
 <script src="admin.js"></script>
+
 <script src="admin-notification.js"></script>
 
 </body>
