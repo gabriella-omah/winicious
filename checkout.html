@@ -48,8 +48,10 @@
                                 <input
                                     type="text"
                                     id="customerName"
-                                    name="customerName"
+                                    name="name"
+                                    minlength="2"
                                     placeholder="Enter your full name"
+                                    maxlength="80"
                                     autocomplete="name"
                                     required
                                 >
@@ -60,8 +62,9 @@
                                 <input
                                     type="email"
                                     id="customerEmail"
-                                    name="customerEmail"
-                                    placeholder="you@example.com"
+                                    name="email"
+                                    placeholder="youexample@gmail.com"
+                                    maxlength="254"
                                     autocomplete="email"
                                     required
                                 >
@@ -72,8 +75,10 @@
                                 <input
                                     type="tel"
                                     id="customerPhone"
-                                    name="customerPhone"
-                                    placeholder="08012345678"
+                                    name="phone"
+                                    maxlength="16"
+                                    placeholder="08123456789"
+                                    inputmode="tel"
                                     autocomplete="tel"
                                     required
                                 >
@@ -84,8 +89,9 @@
                                 <textarea
                                     id="deliveryAddress"
                                     name="deliveryAddress"
-                                    rows="4"
-                                    placeholder="Street, area, city"
+                                    minlength="10"
+                                    maxlength="300"
+                                    placeholder="Street, Area, City"
                                     autocomplete="street-address"
                                     required
                                 ></textarea>

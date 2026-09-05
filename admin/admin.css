@@ -19,7 +19,7 @@
 
 
 /* =========================================================
-   LOGIN (from earlier — keep if same file)
+   LOGIN
 ========================================================= */
 
 .admin-login {
@@ -206,6 +206,11 @@
     background: var(--color-cream);
 }
 
+.admin-refresh:disabled {
+    opacity: 0.65;
+    cursor: wait;
+}
+
 
 /* =========================================================
    NOTIFICATIONS
@@ -213,95 +218,334 @@
 
 .admin-notifications {
     position: relative;
+    z-index: 100;
+    flex-shrink: 0;
 }
 
 .notification-button {
     position: relative;
+
     width: 44px;
     height: 44px;
+
     display: grid;
     place-items: center;
+
+    padding: 0;
+
     border: 1px solid var(--border-medium);
+
     background: var(--color-white);
     color: var(--color-chocolate);
+
     cursor: pointer;
-    transition: border-color var(--transition-fast), color var(--transition-fast);
+
+    transition:
+        border-color var(--transition-fast),
+        color var(--transition-fast),
+        background-color var(--transition-fast);
 }
 
-.notification-button:hover {
+.notification-button:hover,
+.notification-button[aria-expanded="true"] {
     border-color: var(--color-chocolate);
     color: var(--color-rose-dark);
+    background: var(--color-cream);
 }
+
+
+/* =========================================================
+   NOTIFICATION BADGE
+========================================================= */
 
 .notification-badge {
     position: absolute;
-    top: 6px;
-    right: 6px;
-    min-width: 16px;
-    height: 16px;
+
+    top: 5px;
+    right: 5px;
+
+    min-width: 17px;
+    height: 17px;
+
     padding: 0 4px;
+
     display: grid;
     place-items: center;
+
     border-radius: 999px;
+
     background: var(--color-rose-dark);
     color: var(--color-white);
+
     font-size: 9px;
     font-weight: 700;
     line-height: 1;
+
+    pointer-events: none;
 }
+
+.notification-badge:empty,
+.notification-badge[hidden] {
+    display: none !important;
+}
+
+
+/* =========================================================
+   NOTIFICATION PANEL
+========================================================= */
 
 .notification-panel {
     position: absolute;
-    top: calc(100% + 8px);
+
+    top: calc(100% + 10px);
     right: 0;
-    z-index: 50;
-    width: min(360px, calc(100vw - 32px));
-    max-height: 400px;
-    overflow: hidden;
+    left: auto;
+
+    z-index: 999;
+
+    width: min(380px, calc(100vw - 32px));
+    max-height: min(420px, 70vh);
+
     display: flex;
     flex-direction: column;
+
+    overflow: hidden;
+
     background: var(--color-white);
+
     border: 1px solid var(--border-light);
+
     box-shadow: var(--shadow-medium);
 }
 
+.notification-panel[hidden] {
+    display: none !important;
+}
+
+
+/* =========================================================
+   NOTIFICATION HEADER
+========================================================= */
+
 .notification-panel__header {
+    flex-shrink: 0;
+
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     gap: 12px;
+
     padding: 14px 16px;
+
     border-bottom: 1px solid var(--border-light);
+
+    background: var(--color-ivory);
 }
 
 .notification-panel__header h3 {
     margin: 0;
+
     font-family: var(--font-heading);
-    font-size: 1.15rem;
+
+    font-size: 1.2rem;
     font-weight: 500;
+
+    color: var(--color-chocolate);
 }
 
-.notification-panel__header button {
+
+/* =========================================================
+   NOTIFICATION HEADER ACTIONS
+========================================================= */
+
+.notification-panel__actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notification-panel__actions button {
     border: 0;
+
     background: transparent;
+
     color: var(--color-rose-dark);
+
+    font-family: var(--font-body);
     font-size: 11px;
     font-weight: 600;
+
     cursor: pointer;
+
+    white-space: nowrap;
+
+    transition: color var(--transition-fast);
 }
 
+.notification-panel__actions button:hover {
+    color: var(--color-chocolate);
+}
+
+
+/* =========================================================
+   NOTIFICATION CLOSE BUTTON
+========================================================= */
+
+.notification-panel__close {
+    width: 30px;
+    height: 30px;
+
+    display: grid;
+    place-items: center;
+
+    padding: 0 !important;
+
+    color: var(--color-taupe) !important;
+
+    font-size: 15px !important;
+
+    flex-shrink: 0;
+}
+
+.notification-panel__close:hover {
+    color: var(--color-chocolate) !important;
+}
+
+
+/* =========================================================
+   NOTIFICATION LIST
+========================================================= */
+
 .notification-list {
+    flex: 1;
+
+    min-height: 0;
+
     overflow-y: auto;
-    max-height: 320px;
-    padding: 8px 0;
+
+    overscroll-behavior: contain;
+
+    padding: 0;
 }
 
 .notification-empty {
     margin: 0;
-    padding: 24px 16px;
+
+    padding: 32px 20px;
+
     color: var(--color-taupe);
+
     font-size: 13px;
+    line-height: 1.6;
+
     text-align: center;
+}
+
+
+/* =========================================================
+   NOTIFICATION ITEMS
+========================================================= */
+
+.notification-item,
+.notification-list > article,
+.notification-list > div:not(.notification-empty),
+.notification-list > button,
+.notification-list > a {
+    display: block;
+
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: 0;
+    border-bottom: 1px solid var(--border-light);
+
+    background: transparent;
+
+    color: var(--color-chocolate);
+
+    text-align: left;
+    font: inherit;
+
+    cursor: pointer;
+
+    transition: background-color var(--transition-fast);
+}
+
+.notification-item:last-child,
+.notification-list > article:last-child,
+.notification-list > div:not(.notification-empty):last-child {
+    border-bottom: 0;
+}
+
+.notification-item:hover,
+.notification-list > article:hover,
+.notification-list > div:not(.notification-empty):hover,
+.notification-list > button:hover,
+.notification-list > a:hover {
+    background: var(--color-cream);
+}
+
+
+/* =========================================================
+   UNREAD NOTIFICATIONS
+========================================================= */
+
+.notification-item.is-unread,
+.notification-item.unread,
+.notification-item--unread,
+.notification-list .unread {
+    background: rgba(201, 154, 166, 0.08);
+}
+
+.notification-item.is-unread:hover,
+.notification-item.unread:hover,
+.notification-item--unread:hover {
+    background: rgba(201, 154, 166, 0.14);
+}
+
+
+/* =========================================================
+   NOTIFICATION TEXT
+========================================================= */
+
+.notification-item__title,
+.notification-item strong,
+.notification-list strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    color: var(--color-chocolate);
+}
+
+.notification-item__body,
+.notification-item p,
+.notification-list p:not(.notification-empty) {
+    margin: 0;
+
+    color: var(--color-taupe);
+
+    font-size: 12.5px;
+    line-height: 1.55;
+}
+
+.notification-item__time,
+.notification-item small,
+.notification-list small {
+    display: block;
+
+    margin-top: 6px;
+
+    color: var(--color-taupe);
+
+    font-size: 11px;
+
+    opacity: 0.85;
 }
 
 
@@ -312,46 +556,66 @@
 .admin-stats {
     max-width: 1400px;
     margin: 0 auto 48px;
+
     display: grid;
+
     grid-template-columns: repeat(4, minmax(0, 1fr));
+
     gap: 14px;
 }
 
 .admin-stat {
     display: flex;
     align-items: center;
+
     gap: 14px;
+
     padding: 20px;
+
     background: var(--color-white);
+
     border: 1px solid var(--border-light);
 }
 
 .admin-stat__icon {
     flex-shrink: 0;
+
     width: 44px;
     height: 44px;
+
     display: grid;
     place-items: center;
+
     border: 1px solid var(--border-medium);
+
     border-radius: 50%;
+
     color: var(--color-rose-dark);
+
     font-size: 0.9rem;
 }
 
 .admin-stat p {
     margin: 0 0 4px;
+
     color: var(--color-taupe);
+
     font-size: 12px;
     font-weight: 600;
+
     letter-spacing: 0.04em;
+
     text-transform: uppercase;
 }
 
 .admin-stat strong {
     font-family: var(--font-heading);
+
     font-size: 1.75rem;
     font-weight: 500;
+
     line-height: 1;
+
     color: var(--color-chocolate);
 }
 
@@ -362,6 +626,7 @@
 
 .admin-section {
     max-width: 1400px;
+
     margin: 0 auto 56px;
 }
 
@@ -369,67 +634,92 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+
     gap: 16px;
+
     margin-bottom: 18px;
+
     flex-wrap: wrap;
 }
 
 .admin-section__heading .eyebrow {
     margin-bottom: 8px;
+
     color: var(--color-rose-dark);
 }
 
 .admin-section__heading h2 {
     margin: 0;
+
     font-family: var(--font-heading);
+
     font-size: clamp(1.5rem, 3vw, 2rem);
+
     font-weight: 500;
 }
 
 .admin-section__heading select {
     min-width: 160px;
     min-height: 42px;
+
     padding: 0 12px;
+
     border: 1px solid var(--border-medium);
+
     background: var(--color-white);
     color: var(--color-chocolate);
+
     font: inherit;
     font-size: 13px;
 }
 
 .admin-table-wrapper {
     width: 100%;
+
     overflow-x: auto;
+
     -webkit-overflow-scrolling: touch;
+
     background: var(--color-white);
+
     border: 1px solid var(--border-light);
 }
 
 .admin-table {
     width: 100%;
+
     min-width: 820px;
+
     border-collapse: collapse;
 }
 
 .admin-table th,
 .admin-table td {
     padding: 14px 16px;
+
     text-align: left;
+
     border-bottom: 1px solid var(--border-light);
+
     vertical-align: top;
 }
 
 .admin-table th {
     background: var(--color-cream);
+
     color: var(--color-taupe);
+
     font-size: 11px;
     font-weight: 700;
+
     letter-spacing: 0.08em;
+
     text-transform: uppercase;
 }
 
 .admin-table td {
     font-size: 13.5px;
+
     color: var(--color-chocolate);
 }
 
@@ -437,17 +727,47 @@
     border-bottom: 0;
 }
 
+
+/* =========================================================
+   TABLE NUMBER COLUMN
+========================================================= */
+
+.admin-table__number {
+    width: 50px;
+
+    color: var(--color-taupe) !important;
+
+    font-size: 12px !important;
+    font-weight: 600;
+
+    text-align: center !important;
+}
+
+
+/* =========================================================
+   TABLE LOADING / EMPTY
+========================================================= */
+
 .admin-table__loading,
 .admin-table__empty {
     text-align: center !important;
+
     padding: 36px 16px !important;
+
     color: var(--color-taupe);
 }
+
+
+/* =========================================================
+   CUSTOMER + CONTACT
+========================================================= */
 
 .admin-customer,
 .admin-contact {
     display: flex;
+
     flex-direction: column;
+
     gap: 3px;
 }
 
@@ -458,45 +778,73 @@
 .admin-customer small,
 .admin-contact {
     color: var(--color-taupe);
+
     font-size: 12px;
 }
 
 .admin-contact a {
     color: inherit;
+
     text-decoration: none;
 }
 
 .admin-contact a:hover {
     color: var(--color-rose-dark);
+
     text-decoration: underline;
 }
 
+
+/* =========================================================
+   STATUS
+========================================================= */
+
 .admin-status {
     display: inline-flex;
+
     align-items: center;
     justify-content: center;
+
     min-width: 88px;
+
     padding: 5px 10px;
+
     border: 1px solid var(--border-medium);
+
     background: var(--color-cream);
+
     font-size: 11px;
     font-weight: 600;
+
     text-transform: capitalize;
 }
 
 .admin-status-select {
     min-height: 34px;
+
     padding: 6px 8px;
+
     border: 1px solid var(--border-medium);
+
     background: var(--color-white);
+
     font: inherit;
+
     font-size: 12px;
 }
 
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
 .admin-message {
     max-width: 260px;
+
     color: var(--color-taupe);
+
     font-size: 13px;
+
     line-height: 1.55;
 }
 
@@ -506,34 +854,102 @@
 
 
 /* =========================================================
-   TOAST (global style already exists — refine if needed)
+   TOAST
 ========================================================= */
 
 .notification-toast {
-    border-color: var(--border-light);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-medium);
+    position: fixed;
+
+    top: 24px;
+    right: 24px;
+
+    z-index: 9999;
+
+    width: min(380px, calc(100vw - 32px));
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding: 16px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e5e5;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 12px 35px
+        rgba(0, 0, 0, 0.15);
+}
+
+.notification-toast__icon {
+    flex-shrink: 0;
+
+    font-size: 24px;
+}
+
+.notification-toast__content {
+    flex: 1;
+}
+
+.notification-toast__content strong {
+    display: block;
+
+    margin-bottom: 4px;
+}
+
+.notification-toast__content p {
+    margin: 0;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+.notification-toast__close {
+    border: 0;
+
+    background: transparent;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    line-height: 1;
 }
 
 
 /* =========================================================
-   RESPONSIVE
+   RESPONSIVE — TABLET
 ========================================================= */
 
 @media (max-width: 1024px) {
+
     .admin-stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
 }
 
+
+/* =========================================================
+   RESPONSIVE — SMALL TABLET / MOBILE
+========================================================= */
+
 @media (max-width: 900px) {
+
     .admin-page {
         padding: 36px 16px 64px;
     }
 
     .admin-header {
         flex-direction: column;
+
         align-items: stretch;
+
         margin-bottom: 32px;
     }
 
@@ -544,9 +960,16 @@
     .admin-section {
         margin-bottom: 44px;
     }
+
 }
 
+
+/* =========================================================
+   RESPONSIVE — MOBILE
+========================================================= */
+
 @media (max-width: 600px) {
+
     .admin-page {
         padding: 28px 14px 56px;
     }
@@ -557,7 +980,9 @@
 
     .admin-stats {
         grid-template-columns: 1fr;
+
         gap: 10px;
+
         margin-bottom: 36px;
     }
 
@@ -571,43 +996,102 @@
 
     .admin-section__heading {
         flex-direction: column;
+
         align-items: stretch;
     }
 
     .admin-section__heading select {
         width: 100%;
+
         min-width: 0;
     }
 
     .admin-nav-link,
     .admin-refresh {
         flex: 1 1 auto;
+
         justify-content: center;
     }
 
-    .notification-panel {
-        right: auto;
-        left: 0;
-        width: min(100vw - 28px, 360px);
+    .admin-header__actions {
+        position: relative;
+        width: 100%;
     }
+
+    .admin-notifications {
+        position: relative;
+        z-index: 1000;
+        flex-shrink: 0;
+    }
+
+    .notification-panel {
+        position: fixed !important;
+
+        top: 82px !important;
+        right: 12px !important;
+        left: 12px !important;
+
+        width: auto !important;
+        max-width: none !important;
+
+        max-height: 70vh;
+
+        margin: 0;
+
+        overflow: hidden;
+
+        background: var(--color-white);
+
+        border: 1px solid var(--border-light);
+
+        box-shadow: var(--shadow-medium);
+
+        z-index: 99999;
+    }
+
 }
 
+
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
 @media (max-width: 400px) {
+
     .admin-header__actions {
         gap: 8px;
     }
 
-    .admin-nav-link span,
+    .admin-nav-link,
     .admin-refresh {
         font-size: 12px;
     }
+
+    .notification-panel {
+        top: 76px !important;
+
+        right: 10px !important;
+        left: 10px !important;
+
+        width: auto !important;
+        max-width: none !important;
+    }
+
 }
 
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
 @media (prefers-reduced-motion: reduce) {
+
     .admin-nav-link,
     .admin-refresh,
     .notification-button,
     .admin-field input {
         transition: none;
     }
+
 }

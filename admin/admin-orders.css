@@ -3,23 +3,47 @@
    Works with admin.css + global style.css
 ========================================================= */
 
-.orders-page {
-    max-width: 1400px;
-    margin-inline: auto;
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.orders-page.admin-page,
+.admin-page.orders-page {
+    max-width: none;
+    padding: 48px clamp(16px, 5vw, 48px) 80px;
+    background: var(--color-ivory);
+    color: var(--color-chocolate);
 }
 
+.orders-page {
+    width: 100%;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 .orders-header {
+    max-width: 1400px;
+    margin: 0 auto 40px;
+    padding: 0;
+
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 20px;
+    gap: 24px;
     flex-wrap: wrap;
-    margin-bottom: 36px;
 }
 
 .orders-header .eyebrow {
-    margin-bottom: 10px;
+    margin: 0 0 10px;
     color: var(--color-rose-dark);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
 }
 
 .orders-header h1 {
@@ -32,7 +56,8 @@
     color: var(--color-chocolate);
 }
 
-.orders-header__text {
+.orders-header__text,
+.orders-header p:not(.eyebrow) {
     margin: 0;
     max-width: 420px;
     color: var(--color-taupe);
@@ -43,16 +68,30 @@
 .orders-header__actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 10px;
 }
 
-.orders-content {
-    width: 100%;
+/* If back link isn't using .admin-nav-link */
+.orders-header .btn,
+.orders-header a.btn {
+    min-height: 44px;
 }
 
 
 /* =========================================================
-   TABLE (when JS injects .orders-table)
+   CONTENT
+========================================================= */
+
+.orders-content {
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+}
+
+
+/* =========================================================
+   TABLE
 ========================================================= */
 
 .orders-table-wrapper {
@@ -96,6 +135,10 @@
     border-bottom: 0;
 }
 
+.orders-table tbody tr:hover td {
+    background: rgba(248, 244, 239, 0.55);
+}
+
 
 /* =========================================================
    STATUS + PAYMENT
@@ -111,7 +154,6 @@
     font-size: 11px;
     font-weight: 600;
     text-transform: capitalize;
-    border-radius: 0;
 }
 
 .status--pending {
@@ -199,10 +241,11 @@
 
 .empty-orders,
 .loading-orders {
-    padding: 48px 20px;
+    padding: 48px 24px;
     text-align: center;
     color: var(--color-taupe);
     font-size: 14px;
+    line-height: 1.6;
     background: var(--color-white);
     border: 1px solid var(--border-light);
 }
@@ -222,12 +265,10 @@
     padding: 20px;
 }
 
-.order-modal.is-open,
-.order-modal:not([hidden]) {
+.order-modal.is-open {
     display: flex;
 }
 
-/* Prefer .is-open if your JS uses classList */
 .order-modal[hidden] {
     display: none !important;
 }
@@ -338,24 +379,43 @@
    RESPONSIVE
 ========================================================= */
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .orders-page.admin-page,
+    .admin-page.orders-page {
+        padding: 36px 16px 64px;
+    }
+
     .orders-header {
         flex-direction: column;
         align-items: stretch;
-        margin-bottom: 28px;
+        margin-bottom: 32px;
     }
 
     .orders-header__actions {
         width: 100%;
     }
 
-    .orders-header__actions .admin-nav-link {
+    .orders-header__actions .admin-nav-link,
+    .orders-header__actions .btn {
         width: 100%;
         justify-content: center;
     }
 }
 
 @media (max-width: 600px) {
+    .orders-page.admin-page,
+    .admin-page.orders-page {
+        padding: 28px 14px 56px;
+    }
+
+    .orders-header h1 {
+        font-size: 1.85rem;
+    }
+
+    .orders-header {
+        margin-bottom: 28px;
+    }
+
     .order-modal {
         padding: 12px;
         align-items: flex-end;
@@ -384,6 +444,7 @@
 
 @media (prefers-reduced-motion: reduce) {
     .order-actions button,
+    .order-actions select,
     .close-modal {
         transition: none;
     }

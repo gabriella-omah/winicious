@@ -13,18 +13,22 @@ async function requireAdmin() {
         data: { session },
         error
     } = await supabaseClient.auth.getSession();
+
     if (error) {
         console.error("Auth check error:", error);
         window.location.href = "admin-login.html";
         return false;
     }
+
     if (!session) {
         window.location.href = "admin-login.html";
         return false;
     }
+
     console.log("Admin authenticated:", session.user.email);
     return true;
 }
+
 /* ==================================================
    LOAD BOOKINGS
 ================================================== */
@@ -38,7 +42,7 @@ async function loadBookings() {
 
     table.innerHTML = `
         <tr>
-            <td colspan="6" class="admin-table__loading">
+            <td colspan="7" class="admin-table__loading">
                 Loading bookings...
             </td>
         </tr>
@@ -60,7 +64,7 @@ async function loadBookings() {
 
         table.innerHTML = `
             <tr>
-                <td colspan="6" class="admin-table__empty">
+                <td colspan="7" class="admin-table__empty">
                     ${escapeHTML(error.message)}
                 </td>
             </tr>
@@ -74,37 +78,48 @@ async function loadBookings() {
     renderBookings();
     updateBookingStats();
 }
+
 /* ==================================================
    RENDER BOOKINGS
 ================================================== */
 function renderBookings() {
     const table = document.getElementById("bookingsTable");
     const filter = document.getElementById("bookingFilter");
+
     if (!table) return;
+
     const selectedStatus = filter?.value || "all";
+
     const bookings =
         selectedStatus === "all"
             ? allBookings
             : allBookings.filter(
                 booking => booking.status === selectedStatus
             );
+
     if (!bookings.length) {
         table.innerHTML = `
             <tr>
-                <td colspan="6" class="admin-table__empty">
+                <td colspan="7" class="admin-table__empty">
                     No bookings found.
                 </td>
             </tr>
         `;
         return;
     }
-    table.innerHTML = bookings.map(booking => `
+
+    table.innerHTML = bookings.map((booking, index) => `
         <tr>
+            <td class="admin-table__number">
+                ${index + 1}
+            </td>
+
             <td>
                 <div class="admin-customer">
                     <strong>
                         ${escapeHTML(booking.customer_name || "—")}
                     </strong>
+
                     ${
                         booking.notes
                             ? `<small>${escapeHTML(booking.notes)}</small>`
@@ -112,15 +127,19 @@ function renderBookings() {
                     }
                 </div>
             </td>
+
             <td>
                 ${escapeHTML(booking.service || "—")}
             </td>
+
             <td class="admin-date">
                 ${formatDate(booking.preferred_date)}
             </td>
+
             <td>
                 ${escapeHTML(booking.preferred_time || "—")}
             </td>
+
             <td>
                 <div class="admin-contact">
                     ${
@@ -130,6 +149,7 @@ function renderBookings() {
                                </a>`
                             : ""
                     }
+
                     ${
                         booking.customer_email
                             ? `<a href="mailto:${escapeAttribute(booking.customer_email)}">
@@ -139,6 +159,7 @@ function renderBookings() {
                     }
                 </div>
             </td>
+
             <td>
                 <select
                     class="admin-status-select"
@@ -150,6 +171,7 @@ function renderBookings() {
         </tr>
     `).join("");
 }
+
 /* ==================================================
    UPDATE BOOKING STATUS
 ================================================== */
@@ -158,78 +180,101 @@ async function updateBookingStatus(id, status) {
         .from("bookings")
         .update({ status })
         .eq("id", id);
+
     if (error) {
         console.error("Status update error:", error);
         alert("We couldn't update the booking status.");
         return;
     }
+
     const booking = allBookings.find(
         item => String(item.id) === String(id)
     );
+
     if (booking) {
         booking.status = status;
     }
+
     renderBookings();
     updateBookingStats();
 }
+
 /* ==================================================
    LOAD CONTACT MESSAGES
 ================================================== */
 async function loadMessages() {
     const table = document.getElementById("messagesTable");
+
     if (!table) return;
+
     table.innerHTML = `
         <tr>
-            <td colspan="6" class="admin-table__loading">
+            <td colspan="7" class="admin-table__loading">
                 Loading messages...
             </td>
         </tr>
     `;
+
     const { data, error } = await supabaseClient
         .from("contact_messages")
         .select("*")
         .order("created_at", { ascending: false });
+
     if (error) {
         console.error("Messages error:", error);
+
         table.innerHTML = `
             <tr>
-                <td colspan="6" class="admin-table__empty">
+                <td colspan="7" class="admin-table__empty">
                     Could not load messages.
                 </td>
             </tr>
         `;
+
         return;
     }
+
     allMessages = data || [];
+
     renderMessages();
     updateMessageStats();
 }
+
 /* ==================================================
    RENDER MESSAGES
 ================================================== */
 function renderMessages() {
     const table = document.getElementById("messagesTable");
     const filter = document.getElementById("messageFilter");
+
     if (!table) return;
+
     const selectedStatus = filter?.value || "all";
+
     const messages =
         selectedStatus === "all"
             ? allMessages
             : allMessages.filter(
                 message => message.status === selectedStatus
             );
+
     if (!messages.length) {
         table.innerHTML = `
             <tr>
-                <td colspan="6" class="admin-table__empty">
+                <td colspan="7" class="admin-table__empty">
                     No messages found.
                 </td>
             </tr>
         `;
         return;
     }
-    table.innerHTML = messages.map(message => `
+
+    table.innerHTML = messages.map((message, index) => `
         <tr>
+            <td class="admin-table__number">
+                ${index + 1}
+            </td>
+
             <td>
                 <div class="admin-customer">
                     <strong>
@@ -237,9 +282,11 @@ function renderMessages() {
                     </strong>
                 </div>
             </td>
+
             <td>
                 ${escapeHTML(message.reason || "—")}
             </td>
+
             <td>
                 ${
                     message.email
@@ -249,6 +296,7 @@ function renderMessages() {
                         : "—"
                 }
             </td>
+
             <td>
                 ${
                     message.phone
@@ -258,11 +306,13 @@ function renderMessages() {
                         : "—"
                 }
             </td>
+
             <td>
                 <div class="admin-message">
                     ${escapeHTML(message.message || "—")}
                 </div>
             </td>
+
             <td>
                 <select
                     class="admin-status-select"
@@ -274,6 +324,7 @@ function renderMessages() {
         </tr>
     `).join("");
 }
+
 /* ==================================================
    UPDATE MESSAGE STATUS
 ================================================== */
@@ -282,29 +333,36 @@ async function updateMessageStatus(id, status) {
         .from("contact_messages")
         .update({ status })
         .eq("id", id);
+
     if (error) {
         console.error("Message status error:", error);
         alert("We couldn't update the message status.");
         return;
     }
+
     const message = allMessages.find(
         item => String(item.id) === String(id)
     );
+
     if (message) {
         message.status = status;
     }
+
     renderMessages();
     updateMessageStats();
 }
+
 /* ==================================================
    STATS
 ================================================== */
 function updateBookingStats() {
     const total = document.getElementById("totalBookings");
     const pending = document.getElementById("pendingBookings");
+
     if (total) {
         total.textContent = allBookings.length;
     }
+
     if (pending) {
         pending.textContent =
             allBookings.filter(
@@ -312,12 +370,15 @@ function updateBookingStats() {
             ).length;
     }
 }
+
 function updateMessageStats() {
     const total = document.getElementById("totalMessages");
     const unread = document.getElementById("unreadMessages");
+
     if (total) {
         total.textContent = allMessages.length;
     }
+
     if (unread) {
         unread.textContent =
             allMessages.filter(
@@ -325,21 +386,25 @@ function updateMessageStats() {
             ).length;
     }
 }
+
 /* ==================================================
    FILTERS
 ================================================== */
 document
     .getElementById("bookingFilter")
     ?.addEventListener("change", renderBookings);
+
 document
     .getElementById("messageFilter")
     ?.addEventListener("change", renderMessages);
+
 /* ==================================================
    STATUS EVENTS
 ================================================== */
 document.addEventListener("change", event => {
     const bookingSelect =
         event.target.closest("[data-booking-status]");
+
     if (bookingSelect) {
         updateBookingStatus(
             bookingSelect.dataset.bookingStatus,
@@ -347,8 +412,10 @@ document.addEventListener("change", event => {
         );
         return;
     }
+
     const messageSelect =
         event.target.closest("[data-message-status]");
+
     if (messageSelect) {
         updateMessageStatus(
             messageSelect.dataset.messageStatus,
@@ -356,31 +423,75 @@ document.addEventListener("change", event => {
         );
     }
 });
-/* ==================================================
-   REFRESH
-================================================== */
-document.addEventListener("DOMContentLoaded", async () => {
-    const authenticated = await requireAdmin();
-    if (!authenticated) {
-        return;
-    }
-    await Promise.all([
-        loadBookings(),
-        loadMessages()
-    ]);
-});
 
+/* ==================================================
+   CLOSE NOTIFICATION PANEL
+================================================== */
+function closeNotificationPanel() {
+    const panel = document.getElementById("notificationPanel");
+    const button = document.getElementById("notificationButton");
+
+    if (!panel) return;
+
+    panel.hidden = true;
+
+    if (button) {
+        button.setAttribute("aria-expanded", "false");
+    }
+}
+
+/* ==================================================
+   REFRESH DASHBOARD
+================================================== */
+document
+    .getElementById("refreshDashboard")
+    ?.addEventListener("click", async event => {
+        const button = event.currentTarget;
+
+        if (button.disabled) return;
+
+        /* Close notifications when refreshing */
+        closeNotificationPanel();
+
+        button.disabled = true;
+
+        const originalHTML = button.innerHTML;
+
+        button.innerHTML = `
+            <i class="fa-solid fa-rotate fa-spin" aria-hidden="true"></i>
+            Refreshing...
+        `;
+
+        try {
+            await Promise.all([
+                loadBookings(),
+                loadMessages()
+            ]);
+        } catch (error) {
+            console.error("Dashboard refresh error:", error);
+        } finally {
+            button.disabled = false;
+            button.innerHTML = originalHTML;
+        }
+    });
+
+/* ==================================================
+   ADMIN LOGOUT
+================================================== */
 document
     .getElementById("adminLogout")
     ?.addEventListener("click", async () => {
         const { error } = await supabaseClient.auth.signOut();
+
         if (error) {
             console.error("Logout error:", error);
             alert("Could not log out.");
             return;
         }
+
         window.location.href = "admin-login.html";
     });
+
 /* ==================================================
    HELPERS
 ================================================== */
@@ -391,6 +502,7 @@ function statusOptions(currentStatus) {
         "completed",
         "cancelled"
     ];
+
     return statuses.map(status => `
         <option
             value="${status}"
@@ -400,12 +512,14 @@ function statusOptions(currentStatus) {
         </option>
     `).join("");
 }
+
 function messageStatusOptions(currentStatus) {
     const statuses = [
         "unread",
         "read",
         "replied"
     ];
+
     return statuses.map(status => `
         <option
             value="${status}"
@@ -415,18 +529,23 @@ function messageStatusOptions(currentStatus) {
         </option>
     `).join("");
 }
+
 function formatDate(dateString) {
     if (!dateString) return "—";
+
     const date = new Date(dateString);
+
     if (Number.isNaN(date.getTime())) {
         return dateString;
     }
+
     return new Intl.DateTimeFormat("en-NG", {
         day: "numeric",
         month: "short",
         year: "numeric"
     }).format(date);
 }
+
 function escapeHTML(value) {
     return String(value ?? "")
         .replaceAll("&", "&amp;")
@@ -435,13 +554,21 @@ function escapeHTML(value) {
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
 }
+
 function escapeAttribute(value) {
     return escapeHTML(value);
 }
+
 /* ==================================================
    INITIALISE
 ================================================== */
 document.addEventListener("DOMContentLoaded", async () => {
+    const authenticated = await requireAdmin();
+
+    if (!authenticated) {
+        return;
+    }
+
     await Promise.all([
         loadBookings(),
         loadMessages()

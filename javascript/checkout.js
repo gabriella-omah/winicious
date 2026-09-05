@@ -101,6 +101,90 @@ function formatNaira(amount) {
     }).format(Number(amount) || 0);
 }
 
+/* ==================================================
+   CHECKOUT INPUT VALIDATION
+================================================== */
+
+
+/* --------------------------------------------------
+   Validate customer name
+-------------------------------------------------- */
+
+function isValidCustomerName(name) {
+
+    const namePattern =
+        /^[a-zA-ZÀ-ÿ]+(?:[\s'-][a-zA-ZÀ-ÿ]+)*$/;
+
+    return (
+        name.length >= 2 &&
+        name.length <= 80 &&
+        namePattern.test(name)
+    );
+}
+
+
+/* --------------------------------------------------
+   Validate email
+-------------------------------------------------- */
+
+function isValidCustomerEmail(email) {
+
+    const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    return (
+        email.length <= 254 &&
+        emailPattern.test(email)
+    );
+}
+
+
+/* --------------------------------------------------
+   Validate Nigerian phone number
+-------------------------------------------------- */
+
+function isValidCustomerPhone(phone) {
+
+    /*
+     * Remove spaces and hyphens before checking.
+     */
+    const cleanPhone =
+        phone.replace(/[\s-]/g, "");
+
+
+    /*
+     * Accepts:
+     *
+     * 08012345678
+     * 07012345678
+     * 08112345678
+     *
+     * OR:
+     *
+     * +2348012345678
+     */
+    const phonePattern =
+        /^(?:0[789][01]\d{8}|\+234[789][01]\d{8})$/;
+
+
+    return phonePattern.test(
+        cleanPhone
+    );
+}
+
+
+/* --------------------------------------------------
+   Validate delivery address
+-------------------------------------------------- */
+
+function isValidDeliveryAddress(address) {
+
+    return (
+        address.length >= 10 &&
+        address.length <= 300
+    );
+}
+
 
 /* --------------------------------------------------
    Escape HTML

@@ -164,7 +164,9 @@
                                     type="text"
                                     id="contactName"
                                     name="name"
-                                    placeholder="Your name"
+                                    placeholder="Your full name"
+                                    minlength="2"
+                                    maxlength="80"
                                     autocomplete="name"
                                     required
                                 >
@@ -172,27 +174,30 @@
 
                             <div class="contact-form__field">
                                 <label for="contactEmail">Email</label>
-                                <input
-                                    type="email"
-                                    id="contactEmail"
-                                    name="email"
-                                    placeholder="you@example.com"
-                                    autocomplete="email"
-                                    required
-                                >
+<input
+    type="email"
+    id="contactEmail"
+    name="email"
+    placeholder="you@example.com"
+    maxlength="254"
+    autocomplete="email"
+    required
+>
                             </div>
                         </div>
 
                         <div class="contact-form__row">
                             <div class="contact-form__field">
                                 <label for="contactPhone">Phone</label>
-                                <input
-                                    type="tel"
-                                    id="contactPhone"
-                                    name="phone"
-                                    placeholder="+234"
-                                    autocomplete="tel"
-                                >
+<input
+    type="tel"
+    id="contactPhone"
+    name="phone"
+    placeholder="+234 801 234 5678"
+    maxlength="16"
+    inputmode="tel"
+    autocomplete="tel"
+>
                             </div>
 
                             <div class="contact-form__field">
@@ -211,13 +216,15 @@
 
                         <div class="contact-form__field">
                             <label for="contactMessage">Message</label>
-                            <textarea
-                                id="contactMessage"
-                                name="message"
-                                rows="5"
-                                placeholder="Tell us a little about what you need…"
-                                required
-                            ></textarea>
+<textarea
+    id="contactMessage"
+    name="message"
+    rows="5"
+    minlength="10"
+    maxlength="2000"
+    placeholder="Tell us a little about what you need…"
+    required
+></textarea>
                         </div>
 
                         <div class="contact-form__actions">

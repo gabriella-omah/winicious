@@ -38,6 +38,11 @@ const markNotificationsRead =
         "markNotificationsRead"
     );
 
+const closeNotifications =
+    document.getElementById(
+        "closeNotifications"
+    );
+
 
 /* ==================================================
    NOTIFICATION DATA
@@ -274,10 +279,6 @@ function showNotificationToast(
     notification
 ) {
 
-    /* ----------------------------------------------
-       Remove an existing toast
-    ---------------------------------------------- */
-
     const existingToast =
         document.querySelector(
             ".notification-toast"
@@ -288,10 +289,6 @@ function showNotificationToast(
         existingToast.remove();
     }
 
-
-    /* ----------------------------------------------
-       Create toast
-    ---------------------------------------------- */
 
     const toast =
         document.createElement(
@@ -345,10 +342,6 @@ function showNotificationToast(
     );
 
 
-    /* ----------------------------------------------
-       Close button
-    ---------------------------------------------- */
-
     const closeButton =
         toast.querySelector(
             ".notification-toast__close"
@@ -364,10 +357,6 @@ function showNotificationToast(
         }
     );
 
-
-    /* ----------------------------------------------
-       Automatically disappear
-    ---------------------------------------------- */
 
     setTimeout(() => {
 
@@ -414,6 +403,7 @@ function playNotificationSound() {
         );
 
     }
+
 }
 
 
@@ -441,18 +431,10 @@ const notificationChannel =
                 );
 
 
-                /* ----------------------------------
-                   Add new notification to beginning
-                ---------------------------------- */
-
                 notifications.unshift(
                     payload.new
                 );
 
-
-                /* ----------------------------------
-                   Keep only newest 30
-                ---------------------------------- */
 
                 notifications =
                     notifications.slice(
@@ -461,25 +443,13 @@ const notificationChannel =
                     );
 
 
-                /* ----------------------------------
-                   Update dashboard
-                ---------------------------------- */
-
                 renderNotifications();
 
-
-                /* ----------------------------------
-                   Show popup
-                ---------------------------------- */
 
                 showNotificationToast(
                     payload.new
                 );
 
-
-                /* ----------------------------------
-                   Play sound
-                ---------------------------------- */
 
                 playNotificationSound();
 
@@ -509,12 +479,46 @@ const notificationChannel =
 
 
 /* ==================================================
-   OPEN / CLOSE NOTIFICATIONS
+   OPEN NOTIFICATIONS
 ================================================== */
 
 notificationButton?.addEventListener(
     "click",
-    () => {
+    (event) => {
+
+        event.stopPropagation();
+
+        if (!notificationPanel) {
+            return;
+        }
+
+
+        const shouldOpen =
+            notificationPanel.hidden;
+
+
+        notificationPanel.hidden =
+            !shouldOpen;
+
+
+        notificationButton.setAttribute(
+            "aria-expanded",
+            String(shouldOpen)
+        );
+
+    }
+);
+
+
+/* ==================================================
+   CLOSE NOTIFICATIONS
+================================================== */
+
+closeNotifications?.addEventListener(
+    "click",
+    (event) => {
+
+        event.stopPropagation();
 
         if (!notificationPanel) {
             return;
@@ -522,7 +526,58 @@ notificationButton?.addEventListener(
 
 
         notificationPanel.hidden =
-            !notificationPanel.hidden;
+            true;
+
+
+        notificationButton?.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+);
+
+
+/* ==================================================
+   CLOSE WHEN CLICKING OUTSIDE
+================================================== */
+
+document.addEventListener(
+    "click",
+    (event) => {
+
+        if (!notificationPanel) {
+            return;
+        }
+
+
+        if (
+            notificationPanel.hidden
+        ) {
+            return;
+        }
+
+
+        const clickedInsideNotifications =
+            event.target.closest(
+                ".admin-notifications"
+            );
+
+
+        if (
+            !clickedInsideNotifications
+        ) {
+
+            notificationPanel.hidden =
+                true;
+
+
+            notificationButton?.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
 
     }
 );
