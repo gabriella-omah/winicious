@@ -404,7 +404,7 @@ function updateMessageStats() {
     if (unread) {
         unread.textContent =
             allMessages.filter(
-                message => message.status === "unread"
+                message => message.status === "new"
             ).length;
     }
 }
@@ -412,6 +412,34 @@ function updateMessageStats() {
 /* ==================================================
    FILTERS & SORTING
 ================================================== */
+/* ==================================================
+   STATUS CHANGE LISTENERS
+================================================== */
+
+document.addEventListener("change", event => {
+    const bookingSelect = event.target.closest(
+        "[data-booking-status]"
+    );
+
+    if (bookingSelect) {
+        const id = bookingSelect.dataset.bookingStatus;
+        const status = bookingSelect.value;
+
+        updateBookingStatus(id, status);
+        return;
+    }
+
+    const messageSelect = event.target.closest(
+        "[data-message-status]"
+    );
+
+    if (messageSelect) {
+        const id = messageSelect.dataset.messageStatus;
+        const status = messageSelect.value;
+
+        updateMessageStatus(id, status);
+    }
+});
 
 document
     .getElementById("bookingFilter")
@@ -573,9 +601,10 @@ function statusOptions(currentStatus) {
 
 function messageStatusOptions(currentStatus) {
     const statuses = [
-        "unread",
-        "read",
-        "replied"
+        "new",
+"read",
+"replied",
+"closed"
     ];
 
     return statuses.map(status => `

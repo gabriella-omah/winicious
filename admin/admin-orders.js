@@ -713,111 +713,141 @@ document.addEventListener("DOMContentLoaded", async () => {
     // VIEW ORDER
     // --------------------------------------------------
 
-    async function viewOrder(orderId) {
+  // --------------------------------------------------
+// VIEW ORDER
+// --------------------------------------------------
 
-        const {
-            data: order,
-            error: orderError
-        } = await supabaseClient
-            .from("orders")
-            .select("*")
-            .eq("id", orderId)
-            .single();
+async function viewOrder(orderId) {
 
-
-        if (orderError) {
-
-            console.error(
-                "Order error:",
-                orderError
-            );
-
-            alert(
-                "Could not load this order."
-            );
-
-            return;
-        }
+    const {
+        data: order,
+        error: orderError
+    } = await supabaseClient
+        .from("orders")
+        .select("*")
+        .eq("id", orderId)
+        .single();
 
 
-        const {
-            data: items,
-            error: itemsError
-        } = await supabaseClient
-            .from("order_items")
-            .select("*")
-            .eq("order_id", orderId)
-            .order("created_at", {
-                ascending: true
-            });
+    if (orderError) {
+
+        console.error(
+            "Order error:",
+            orderError
+        );
+
+        alert(
+            "Could not load this order."
+        );
+
+        return;
+    }
 
 
-        if (itemsError) {
-
-            console.error(
-                "Order items error:",
-                itemsError
-            );
-
-            alert(
-                "Could not load order items."
-            );
-
-            return;
-        }
+    const {
+        data: items,
+        error: itemsError
+    } = await supabaseClient
+        .from("order_items")
+        .select("*")
+        .eq("order_id", orderId)
+        .order("created_at", {
+            ascending: true
+        });
 
 
-        orderDetails.innerHTML = `
+    if (itemsError) {
 
-            <div class="order-section">
+        console.error(
+            "Order items error:",
+            itemsError
+        );
 
-                <h3>Customer</h3>
+        alert(
+            "Could not load order items."
+        );
+
+        return;
+    }
+
+
+    const orderItems = items || [];
+
+
+    orderDetails.innerHTML = `
+
+        <!-- ==========================================
+             ORDER INFORMATION
+        =========================================== -->
+
+        <div class="order-section">
+
+            <h3>Customer</h3>
+
+            <div class="order-detail-grid">
 
                 <p>
-                    <strong>Name:</strong>
-                    ${escapeHTML(
-                        order.customer_name
-                    )}
+                    <strong>Name</strong>
+                    <span>
+                        ${escapeHTML(
+                            order.customer_name
+                        )}
+                    </span>
                 </p>
 
                 <p>
-                    <strong>Email:</strong>
-                    ${escapeHTML(
-                        order.customer_email
-                    )}
+                    <strong>Email</strong>
+                    <span>
+                        ${escapeHTML(
+                            order.customer_email
+                        )}
+                    </span>
                 </p>
 
                 <p>
-                    <strong>Phone:</strong>
-                    ${escapeHTML(
-                        order.customer_phone
-                    )}
+                    <strong>Phone</strong>
+                    <span>
+                        ${escapeHTML(
+                            order.customer_phone
+                        )}
+                    </span>
                 </p>
 
                 <p>
-                    <strong>Delivery Address:</strong><br>
-                    ${escapeHTML(
-                        order.delivery_address ||
-                        "Not provided"
-                    )}
+                    <strong>Delivery Address</strong>
+                    <span>
+                        ${escapeHTML(
+                            order.delivery_address ||
+                            "Not provided"
+                        )}
+                    </span>
                 </p>
 
             </div>
 
+        </div>
 
-            <div class="order-section">
 
-                <h3>Order Items</h3>
+        <!-- ==========================================
+             ITEMS PURCHASED
+        =========================================== -->
 
-                <div class="order-items">
+        <div class="order-section">
 
-                    ${
-                        items.length
-                            ? items.map(item => `
+            <h3>
+                Items Purchased
+            </h3>
+
+            ${
+                orderItems.length
+                    ? `
+                        <div class="order-items">
+
+                            ${orderItems.map(item => `
 
                                 <div class="order-item">
 
-                                    <div>
+                                    <div class="order-item__info">
 
                                         <strong>
                                             ${escapeHTML(
@@ -825,163 +855,263 @@ document.addEventListener("DOMContentLoaded", async () => {
                                             )}
                                         </strong>
 
-                                        <br>
-
                                         <small>
-                                            ${item.quantity}
-                                            ×
-                                            ${formatNaira(
-                                                item.unit_price
+                                            Product ID:
+                                            ${escapeHTML(
+                                                item.product_id
                                             )}
                                         </small>
 
                                     </div>
 
-                                    <strong>
-                                        ${formatNaira(
-                                            item.total_price
-                                        )}
-                                    </strong>
+
+                                    <div class="order-item__quantity">
+
+                                        <span>
+                                            Qty
+                                        </span>
+
+                                        <strong>
+                                            ${Number(
+                                                item.quantity
+                                            ) || 0}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="order-item__price">
+
+                                        <span>
+                                            Unit price
+                                        </span>
+
+                                        <strong>
+                                            ${formatNaira(
+                                                item.unit_price
+                                            )}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="order-item__total">
+
+                                        <span>
+                                            Total
+                                        </span>
+
+                                        <strong>
+                                            ${formatNaira(
+                                                item.total_price
+                                            )}
+                                        </strong>
+
+                                    </div>
 
                                 </div>
 
-                            `).join("")
+                            `).join("")}
 
-                            : "<p>No order items found.</p>"
-                    }
+                        </div>
+                    `
+                    : `
+                        <div class="order-items-empty">
+                            <p>
+                                No order items found for this order.
+                            </p>
+                        </div>
+                    `
+            }
 
-                </div>
-
-            </div>
+        </div>
 
 
-            <div class="order-section">
+        <!-- ==========================================
+             ORDER TOTALS
+        =========================================== -->
 
-                <p>
-                    <strong>Subtotal:</strong>
+        <div class="order-section order-summary">
+
+            <div class="order-summary__row">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong>
                     ${formatNaira(
                         order.subtotal
                     )}
-                </p>
+                </strong>
 
-                <p>
-                    <strong>Delivery:</strong>
+            </div>
+
+
+            <div class="order-summary__row">
+
+                <span>
+                    Delivery
+                </span>
+
+                <strong>
                     ${formatNaira(
                         order.delivery_fee
                     )}
-                </p>
+                </strong>
 
-                <div class="order-total">
+            </div>
 
-                    <span>Total</span>
 
+            <div class="order-total">
+
+                <span>
+                    Total
+                </span>
+
+                <strong>
+                    ${formatNaira(
+                        order.total
+                    )}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             PAYMENT
+        =========================================== -->
+
+        <div class="order-section">
+
+            <h3>
+                Payment
+            </h3>
+
+            <div class="order-detail-grid">
+
+                <p>
+                    <strong>Method</strong>
                     <span>
-                        ${formatNaira(
-                            order.total
+                        ${escapeHTML(
+                            order.payment_method ||
+                            "Not selected"
                         )}
                     </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="order-section">
-
-                <h3>Payment</h3>
-
-                <p>
-                    <strong>Method:</strong>
-                    ${escapeHTML(
-                        order.payment_method ||
-                        "Not selected"
-                    )}
                 </p>
 
                 <p>
-                    <strong>Status:</strong>
-                    ${escapeHTML(
-                        order.payment_status
-                    )}
+                    <strong>Status</strong>
+                    <span>
+                        ${escapeHTML(
+                            order.payment_status
+                        )}
+                    </span>
                 </p>
 
                 <p>
-                    <strong>Reference:</strong>
-                    ${escapeHTML(
-                        order.payment_reference ||
-                        "Not available"
-                    )}
+                    <strong>Reference</strong>
+                    <span>
+                        ${escapeHTML(
+                            order.payment_reference ||
+                            "Not available"
+                        )}
+                    </span>
+                </p>
+
+                <p>
+                    <strong>Order Date</strong>
+                    <span>
+                        ${formatDate(
+                            order.created_at
+                        )}
+                    </span>
                 </p>
 
             </div>
 
+        </div>
 
-            <div class="order-section">
 
-                <h3>Order Status</h3>
+        <!-- ==========================================
+             ORDER STATUS
+        =========================================== -->
 
-                <select
-                    id="modalOrderStatus"
-                    data-order-id="${escapeHTML(
-                        order.id
-                    )}"
+        <div class="order-section">
+
+            <h3>
+                Order Status
+            </h3>
+
+            <select
+                id="modalOrderStatus"
+                data-order-id="${escapeHTML(
+                    order.id
+                )}"
+            >
+
+                <option
+                    value="pending"
+                    ${order.order_status === "pending"
+                        ? "selected"
+                        : ""}
                 >
+                    Pending
+                </option>
 
-                    <option
-                        value="pending"
-                        ${order.order_status === "pending"
-                            ? "selected"
-                            : ""}
-                    >
-                        Pending
-                    </option>
+                <option
+                    value="processing"
+                    ${order.order_status === "processing"
+                        ? "selected"
+                        : ""}
+                >
+                    Processing
+                </option>
 
-                    <option
-                        value="processing"
-                        ${order.order_status === "processing"
-                            ? "selected"
-                            : ""}
-                    >
-                        Processing
-                    </option>
+                <option
+                    value="shipped"
+                    ${order.order_status === "shipped"
+                        ? "selected"
+                        : ""}
+                >
+                    Shipped
+                </option>
 
-                    <option
-                        value="shipped"
-                        ${order.order_status === "shipped"
-                            ? "selected"
-                            : ""}
-                    >
-                        Shipped
-                    </option>
+                <option
+                    value="delivered"
+                    ${order.order_status === "delivered"
+                        ? "selected"
+                        : ""}
+                >
+                    Delivered
+                </option>
 
-                    <option
-                        value="delivered"
-                        ${order.order_status === "delivered"
-                            ? "selected"
-                            : ""}
-                    >
-                        Delivered
-                    </option>
+                <option
+                    value="cancelled"
+                    ${order.order_status === "cancelled"
+                        ? "selected"
+                        : ""}
+                >
+                    Cancelled
+                </option>
 
-                    <option
-                        value="cancelled"
-                        ${order.order_status === "cancelled"
-                            ? "selected"
-                            : ""}
-                    >
-                        Cancelled
-                    </option>
+            </select>
 
-                </select>
+        </div>
 
-            </div>
+    `;
 
-        `;
 
-        orderModal.classList.add(
-            "is-open"
-        );
-    }
+    // Show modal
+
+    orderModal.hidden = false;
+
+    orderModal.classList.add(
+        "is-open"
+    );
+}
 
 
     // --------------------------------------------------
@@ -1211,31 +1341,36 @@ document.addEventListener("DOMContentLoaded", async () => {
     // --------------------------------------------------
 
     closeOrderModal.addEventListener(
-        "click",
-        () => {
-            orderModal.classList.remove(
-                "is-open"
-            );
-        }
-    );
+    "click",
+    () => {
+        orderModal.classList.remove(
+            "is-open"
+        );
+
+        orderModal.hidden = true;
+    }
+);
 
 
     orderModal.addEventListener(
-        "click",
-        event => {
+    "click",
+    event => {
 
-            if (
-                event.target === orderModal ||
-                event.target.id ===
-                "orderModalBackdrop"
-            ) {
-                orderModal.classList.remove(
-                    "is-open"
-                );
-            }
+        if (
+            event.target === orderModal ||
+            event.target.id ===
+            "orderModalBackdrop"
+        ) {
 
+            orderModal.classList.remove(
+                "is-open"
+            );
+
+            orderModal.hidden = true;
         }
-    );
+
+    }
+);
 
 
     // --------------------------------------------------
