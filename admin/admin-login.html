@@ -3,54 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Winicious admin login.">
     <title>Admin Login | Winicious</title>
+
     <link rel="stylesheet" href="../style/style.css">
-    <link rel="stylesheet" href="admin.css">
+    <link rel="stylesheet" href="admin-login.css">
 </head>
 <body>
+
 <main class="admin-page">
-    <section class="admin-login">
-        <p class="eyebrow">Winicious</p>
-        <h1>Admin Login</h1>
-        <p>
-            Sign in to access the Winicious admin dashboard.
-        </p>
-        <form id="adminLoginForm">
+    <section class="admin-login" aria-labelledby="adminLoginTitle">
+        <div class="admin-login__card">
+            <p class="eyebrow">Winicious</p>
+            <h1 id="adminLoginTitle">Admin Login</h1>
+            <p class="admin-login__intro">
+                Sign in to access the Winicious admin dashboard.
+            </p>
+
+            <form id="adminLoginForm" class="admin-login__form">
+                <div class="admin-field">
+                    <label for="adminEmail">Email</label>
+                    <input
+                        type="email"
+                        id="adminEmail"
+                        name="email"
+                        placeholder="admin@winicious.com"
+                        required
+                        autocomplete="email"
+                    >
+                </div>
+
+                <div class="admin-field">
+                    <label for="adminPassword">Password</label>
+                    <input
+                        type="password"
+                        id="adminPassword"
+                        name="password"
+                        placeholder="••••••••"
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <p id="loginError" class="admin-login__error" role="alert"></p>
+
+                <button type="submit" class="btn btn--primary admin-login__submit">
+                    Login
+                </button>
+            </form>
+
             <button
-    type="button"
-    id="adminLogout"
-    class="admin-logout"
->
-    Logout
-</button>
-            <div>
-                <label for="adminEmail">Email</label>
-                <input
-                    type="email"
-                    id="adminEmail"
-                    required
-                    autocomplete="email"
-                >
-            </div>
-            <div>
-                <label for="adminPassword">Password</label>
-                <input
-                    type="password"
-                    id="adminPassword"
-                    required
-                    autocomplete="current-password"
-                >
-            </div>
-            <button type="submit">
-                Login
+                type="button"
+                id="adminLogout"
+                class="admin-logout"
+                hidden
+            >
+                Logout
             </button>
-            <p id="loginError" role="alert"></p>
-            
-        </form>
+
+            <a href="../index.html" class="admin-login__back">
+                ← Back to site
+            </a>
+        </div>
     </section>
 </main>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../javascript/supabase.js"></script>
 <script src="admin-login.js"></script>
+
 </body>
 </html>

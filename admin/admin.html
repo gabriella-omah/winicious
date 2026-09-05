@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta
-        name="description"
-        content="Winicious Admin Dashboard"
-    >
+    <meta name="description" content="Winicious Admin Dashboard">
+    <meta name="robots" content="noindex, nofollow">
     <title>Admin Dashboard | Winicious</title>
+
     <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -16,85 +15,77 @@
     <link rel="stylesheet" href="admin.css">
 </head>
 <body>
+
 <main class="admin-page">
+
     <!-- HEADER -->
     <header class="admin-header">
-        <div class="admin-notifications">
-
-    <button
-        type="button"
-        id="notificationButton"
-        class="notification-button"
-        aria-label="Notifications"
-    >
-        🔔
-
-        <span
-            id="notificationBadge"
-            class="notification-badge"
-            hidden
-        >
-            0
-        </span>
-    </button>
-
-
-    <div
-        id="notificationPanel"
-        class="notification-panel"
-        hidden
-    >
-
-        <div class="notification-panel__header">
-
-            <h3>
-                Notifications
-            </h3>
-
-            <button
-                type="button"
-                id="markNotificationsRead"
-            >
-                Mark all as read
-            </button>
-
-        </div>
-
-
-        <div
-            id="notificationList"
-            class="notification-list"
-        >
-
-            <p class="notification-empty">
-                No notifications yet.
-            </p>
-
-        </div>
-
-    </div>
-
-</div>
-        <div>
+        <div class="admin-header__main">
             <p class="eyebrow">Winicious</p>
             <h1>Admin Dashboard</h1>
             <p class="admin-header__text">
-                Manage bookings and customer enquiries.
+                Manage bookings, orders, and customer enquiries.
             </p>
         </div>
-        <button
-            type="button"
-            class="admin-refresh"
-            id="refreshDashboard"
-        >
-            <i class="fa-solid fa-rotate"></i>
-            Refresh
-        </button>
+
+        <div class="admin-header__actions">
+            <!-- Notifications -->
+            <div class="admin-notifications">
+                <button
+                    type="button"
+                    id="notificationButton"
+                    class="notification-button"
+                    aria-label="Notifications"
+                    aria-expanded="false"
+                    aria-controls="notificationPanel"
+                >
+                    <i class="fa-regular fa-bell" aria-hidden="true"></i>
+                    <span
+                        id="notificationBadge"
+                        class="notification-badge"
+                        hidden
+                    >0</span>
+                </button>
+
+                <div
+                    id="notificationPanel"
+                    class="notification-panel"
+                    hidden
+                >
+                    <div class="notification-panel__header">
+                        <h3>Notifications</h3>
+                        <button type="button" id="markNotificationsRead">
+                            Mark all as read
+                        </button>
+                    </div>
+                    <div id="notificationList" class="notification-list">
+                        <p class="notification-empty">
+                            No notifications yet.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <a href="admin-orders.html" class="admin-nav-link">
+                <i class="fa-solid fa-bag-shopping" aria-hidden="true"></i>
+                Orders
+            </a>
+
+            <button
+                type="button"
+                class="admin-refresh"
+                id="refreshDashboard"
+            >
+                <i class="fa-solid fa-rotate" aria-hidden="true"></i>
+                Refresh
+            </button>
+        </div>
     </header>
+
     <!-- STATS -->
-    <section class="admin-stats">
+    <section class="admin-stats" aria-label="Overview stats">
         <article class="admin-stat">
-            <span class="admin-stat__icon">
+            <span class="admin-stat__icon" aria-hidden="true">
                 <i class="fa-regular fa-calendar"></i>
             </span>
             <div>
@@ -102,11 +93,9 @@
                 <strong id="totalBookings">0</strong>
             </div>
         </article>
-        <a href="admin-orders.html">
-    Orders
-</a>
+
         <article class="admin-stat">
-            <span class="admin-stat__icon">
+            <span class="admin-stat__icon" aria-hidden="true">
                 <i class="fa-regular fa-clock"></i>
             </span>
             <div>
@@ -114,8 +103,9 @@
                 <strong id="pendingBookings">0</strong>
             </div>
         </article>
+
         <article class="admin-stat">
-            <span class="admin-stat__icon">
+            <span class="admin-stat__icon" aria-hidden="true">
                 <i class="fa-regular fa-envelope"></i>
             </span>
             <div>
@@ -123,9 +113,10 @@
                 <strong id="totalMessages">0</strong>
             </div>
         </article>
+
         <article class="admin-stat">
-            <span class="admin-stat__icon">
-                <i class="fa-solid fa-envelope"></i>
+            <span class="admin-stat__icon" aria-hidden="true">
+                <i class="fa-solid fa-envelope-open"></i>
             </span>
             <div>
                 <p>Unread messages</p>
@@ -133,6 +124,7 @@
             </div>
         </article>
     </section>
+
     <!-- BOOKINGS -->
     <section class="admin-section">
         <div class="admin-section__heading">
@@ -140,7 +132,7 @@
                 <p class="eyebrow">Appointments</p>
                 <h2>Bookings</h2>
             </div>
-            <select id="bookingFilter">
+            <select id="bookingFilter" aria-label="Filter bookings">
                 <option value="all">All bookings</option>
                 <option value="pending">Pending</option>
                 <option value="confirmed">Confirmed</option>
@@ -148,6 +140,7 @@
                 <option value="cancelled">Cancelled</option>
             </select>
         </div>
+
         <div class="admin-table-wrapper">
             <table class="admin-table">
                 <thead>
@@ -170,20 +163,22 @@
             </table>
         </div>
     </section>
-    <!-- CONTACT MESSAGES -->
+
+    <!-- MESSAGES -->
     <section class="admin-section">
         <div class="admin-section__heading">
             <div>
                 <p class="eyebrow">Customer enquiries</p>
                 <h2>Contact Messages</h2>
             </div>
-            <select id="messageFilter">
+            <select id="messageFilter" aria-label="Filter messages">
                 <option value="all">All messages</option>
                 <option value="unread">Unread</option>
                 <option value="read">Read</option>
                 <option value="replied">Replied</option>
             </select>
         </div>
+
         <div class="admin-table-wrapper">
             <table class="admin-table">
                 <thead>
@@ -206,11 +201,13 @@
             </table>
         </div>
     </section>
+
 </main>
-<!-- SUPABASE -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="../javascript/supabase.js"></script>
 <script src="admin.js"></script>
 <script src="admin-notification.js"></script>
+
 </body>
 </html>

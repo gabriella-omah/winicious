@@ -1,0 +1,153 @@
+/* =========================================================
+   WINICIOUS — PAYMENT STATUS
+   PREMIUM • EDITORIAL • GLOBAL-ALIGNED
+   IDs for JS: #paymentTitle #paymentMessage
+   #paymentDetails #continueShopping
+========================================================= */
+
+.payment-result {
+    min-height: calc(100svh - 200px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-block: clamp(100px, 14vw, 140px) clamp(64px, 10vw, 100px);
+    background: var(--color-ivory);
+    color: var(--color-chocolate);
+}
+
+.payment-result__container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.payment-result__card {
+    width: min(520px, 100%);
+    padding: clamp(2rem, 5vw, 3rem);
+    background: var(--color-white);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-soft);
+    text-align: center;
+}
+
+.payment-result__icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 1.5rem;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border-medium);
+    border-radius: 50%;
+    color: var(--color-rose-dark);
+    font-size: 1.25rem;
+}
+
+/* Optional states your JS can toggle on the icon wrapper */
+.payment-result__icon.is-success {
+    border-color: rgba(60, 120, 80, 0.35);
+    background: rgba(60, 120, 80, 0.08);
+    color: #2d5a3d;
+}
+
+.payment-result__icon.is-error {
+    border-color: rgba(160, 50, 50, 0.3);
+    background: rgba(160, 50, 50, 0.08);
+    color: #7a2a2a;
+}
+
+.payment-result__icon.is-pending {
+    border-color: var(--border-medium);
+    color: var(--color-taupe);
+}
+
+.payment-result .eyebrow {
+    margin-bottom: 12px;
+    color: var(--color-rose-dark);
+}
+
+.payment-result h1 {
+    margin: 0 0 14px;
+    font-family: var(--font-heading);
+    font-size: clamp(1.85rem, 4vw, 2.5rem);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.025em;
+    color: var(--color-chocolate);
+}
+
+#paymentMessage {
+    max-width: 380px;
+    margin: 0 auto;
+    color: var(--color-taupe);
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.payment-result__details {
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-light);
+    text-align: left;
+}
+
+.payment-result__details p,
+.payment-result__details div {
+    margin: 0 0 0.65rem;
+    color: var(--color-taupe);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.payment-result__details strong {
+    color: var(--color-chocolate);
+    font-weight: 600;
+}
+
+.payment-result__actions {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.payment-result__actions .btn {
+    min-width: 200px;
+}
+
+.payment-result__home {
+    font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .payment-result {
+        padding-block: 100px 72px;
+        min-height: auto;
+    }
+
+    .payment-result__card {
+        padding: 1.75rem 1.35rem;
+    }
+
+    .payment-result__actions .btn {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+@media (max-width: 400px) {
+    .payment-result__card {
+        padding: 1.5rem 1.15rem;
+    }
+
+    .payment-result h1 {
+        font-size: 1.7rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .payment-result__icon .fa-spin {
+        animation: none;
+    }
+}

@@ -1,0 +1,390 @@
+/* =========================================================
+   WINICIOUS — ADMIN ORDERS
+   Works with admin.css + global style.css
+========================================================= */
+
+.orders-page {
+    max-width: 1400px;
+    margin-inline: auto;
+}
+
+.orders-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+}
+
+.orders-header .eyebrow {
+    margin-bottom: 10px;
+    color: var(--color-rose-dark);
+}
+
+.orders-header h1 {
+    margin: 0 0 10px;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--color-chocolate);
+}
+
+.orders-header__text {
+    margin: 0;
+    max-width: 420px;
+    color: var(--color-taupe);
+    font-size: 14px;
+    line-height: 1.65;
+}
+
+.orders-header__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.orders-content {
+    width: 100%;
+}
+
+
+/* =========================================================
+   TABLE (when JS injects .orders-table)
+========================================================= */
+
+.orders-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    background: var(--color-white);
+    border: 1px solid var(--border-light);
+}
+
+.orders-table {
+    width: 100%;
+    min-width: 900px;
+    border-collapse: collapse;
+    background: var(--color-white);
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: top;
+}
+
+.orders-table th {
+    background: var(--color-cream);
+    color: var(--color-taupe);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.orders-table td {
+    font-size: 13.5px;
+    color: var(--color-chocolate);
+}
+
+.orders-table tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+
+/* =========================================================
+   STATUS + PAYMENT
+========================================================= */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 88px;
+    padding: 5px 10px;
+    border: 1px solid var(--border-medium);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: capitalize;
+    border-radius: 0;
+}
+
+.status--pending {
+    background: rgba(200, 168, 120, 0.2);
+    border-color: rgba(200, 168, 120, 0.45);
+    color: #7a5c2e;
+}
+
+.status--processing {
+    background: rgba(201, 154, 166, 0.18);
+    border-color: rgba(201, 154, 166, 0.4);
+    color: var(--color-rose-dark);
+}
+
+.status--shipped {
+    background: rgba(59, 41, 38, 0.06);
+    border-color: var(--border-medium);
+    color: var(--color-chocolate);
+}
+
+.status--delivered {
+    background: rgba(60, 120, 80, 0.1);
+    border-color: rgba(60, 120, 80, 0.25);
+    color: #2d5a3d;
+}
+
+.status--cancelled {
+    background: rgba(160, 50, 50, 0.08);
+    border-color: rgba(160, 50, 50, 0.22);
+    color: #7a2a2a;
+}
+
+.payment-paid {
+    color: #2d5a3d;
+    font-weight: 600;
+}
+
+.payment-pending {
+    color: #7a5c2e;
+    font-weight: 600;
+}
+
+.payment-failed {
+    color: #7a2a2a;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.order-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.order-actions button,
+.order-actions select {
+    min-height: 34px;
+    padding: 6px 10px;
+    border: 1px solid var(--border-medium);
+    background: var(--color-white);
+    color: var(--color-chocolate);
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color var(--transition-fast),
+        border-color var(--transition-fast);
+}
+
+.order-actions button:hover,
+.order-actions select:hover {
+    border-color: var(--color-chocolate);
+    background: var(--color-cream);
+}
+
+
+/* =========================================================
+   EMPTY / LOADING
+========================================================= */
+
+.empty-orders,
+.loading-orders {
+    padding: 48px 20px;
+    text-align: center;
+    color: var(--color-taupe);
+    font-size: 14px;
+    background: var(--color-white);
+    border: 1px solid var(--border-light);
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.order-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.order-modal.is-open,
+.order-modal:not([hidden]) {
+    display: flex;
+}
+
+/* Prefer .is-open if your JS uses classList */
+.order-modal[hidden] {
+    display: none !important;
+}
+
+.order-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(36, 26, 24, 0.45);
+}
+
+.order-modal-content {
+    position: relative;
+    z-index: 1;
+    width: min(700px, 100%);
+    max-height: min(90vh, 900px);
+    overflow-y: auto;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    background: var(--color-white);
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-large);
+    color: var(--color-chocolate);
+}
+
+.order-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.order-modal-header h2 {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(1.4rem, 3vw, 1.85rem);
+    font-weight: 500;
+}
+
+.close-modal {
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: var(--color-chocolate);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.close-modal:hover {
+    color: var(--color-rose-dark);
+}
+
+.order-section {
+    margin-bottom: 1.5rem;
+}
+
+.order-section h3 {
+    margin: 0 0 12px;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--color-chocolate);
+}
+
+.order-section p {
+    margin: 0 0 6px;
+    color: var(--color-taupe);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.order-section strong {
+    color: var(--color-chocolate);
+}
+
+.order-items {
+    border-top: 1px solid var(--border-light);
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14px;
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border-medium);
+    color: var(--color-chocolate);
+    font-size: 1.05rem;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 768px) {
+    .orders-header {
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 28px;
+    }
+
+    .orders-header__actions {
+        width: 100%;
+    }
+
+    .orders-header__actions .admin-nav-link {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 600px) {
+    .order-modal {
+        padding: 12px;
+        align-items: flex-end;
+    }
+
+    .order-modal-content {
+        max-height: 92vh;
+        padding: 1.25rem;
+    }
+
+    .order-item {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .order-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .order-actions button,
+    .order-actions select {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .order-actions button,
+    .close-modal {
+        transition: none;
+    }
+}

@@ -2,24 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Payment status for your Winicious order.">
+    <meta name="robots" content="noindex, nofollow">
     <title>Payment Status | Winicious</title>
 
-    <link
-        rel="stylesheet"
-        href="style/style.css"
-    >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/payment-successs.css">
 </head>
+<body class="nav__dark">
 
-<body>
+<div id="navbar-placeholder"></div>
 
-    <main class="payment-result">
-
+<main class="payment-result">
+    <div class="container payment-result__container">
         <div class="payment-result__card">
+
+            <div class="payment-result__icon" id="paymentIcon" aria-hidden="true">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+            </div>
+
+            <p class="eyebrow" id="paymentEyebrow">Payment</p>
 
             <h1 id="paymentTitle">
                 Checking Payment...
@@ -30,33 +34,40 @@
             </p>
 
             <div
+                class="payment-result__details"
                 id="paymentDetails"
                 hidden
-            >
+            ></div>
+
+            <div class="payment-result__actions">
+                <a
+                    href="shop.html"
+                    id="continueShopping"
+                    class="btn btn--primary"
+                    hidden
+                >
+                    Continue shopping
+                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                </a>
+
+                <a
+                    href="index.html"
+                    class="text-link payment-result__home"
+                >
+                    Back to home
+                </a>
             </div>
 
-            <a
-                href="shop.html"
-                id="continueShopping"
-                class="btn btn--primary"
-                hidden
-            >
-                Continue Shopping
-            </a>
-
         </div>
+    </div>
+</main>
 
-    </main>
+<div id="footer-placeholder"></div>
 
-
-    <!-- Supabase -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-    <!-- Your Supabase configuration -->
-    <script src="javascript/supabase.js"></script>
-
-    <!-- Payment result logic -->
-    <script src="javascript/payment-success.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="javascript/supabase.js"></script>
+<script src="javascript/script.js"></script>
+<script src="javascript/payment-success.js"></script>
 
 </body>
 </html>
